@@ -28,8 +28,9 @@ function Navbar() {
           <Image
             src="/logo_vit.svg"
             alt="Kristina Collén logotyp"
+            layout="intrinsic"
             width={160}
-            height={50}
+            height={160 / 3.53}
             priority
           />
         </Link>

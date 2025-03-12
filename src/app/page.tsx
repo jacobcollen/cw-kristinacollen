@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { db } from "~/server/db";
 
+export const dynamic = "force-dynamic";
+
 type Post = {
-  id: string;
+  id: string; 
   title: string;
   content: string;
   imageUrl?: string;
