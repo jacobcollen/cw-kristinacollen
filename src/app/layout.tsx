@@ -2,6 +2,8 @@ import "~/styles/globals.css";
 import Link from "next/link";
 import TopNav from "./topNav";
 
+export const dynamic = "force-dynamic";
+
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
