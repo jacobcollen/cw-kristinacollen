@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-function TopNav() {
+function Navbar() {
   const pathname = usePathname();
 
   // Definiera färger för varje sida
@@ -56,4 +56,4 @@ function TopNav() {
   );
 }
 
-export default TopNav;
+export default Navbar;

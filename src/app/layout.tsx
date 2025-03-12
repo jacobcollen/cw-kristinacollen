@@ -1,6 +1,6 @@
 import "~/styles/globals.css";
 import Link from "next/link";
-import TopNav from "./topNav";
+import Navbar from "./components/Navbar";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
-        <TopNav />
+        <Navbar />
         {children}
       </body>
     </html>
