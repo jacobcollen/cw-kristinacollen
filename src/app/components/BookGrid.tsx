@@ -5,7 +5,6 @@ interface Book {
   id: number;
   title: string;
   imgUrl: string;
-  category: string;
 }
 
 interface BookGridProps {
@@ -14,7 +13,7 @@ interface BookGridProps {
 
 export default function BookGrid({ books }: BookGridProps) {
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-16 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
       {books.map((book) => (
         <div
           key={book.id}
@@ -25,13 +24,13 @@ export default function BookGrid({ books }: BookGridProps) {
             alt={book.title}
             width={300}
             height={400}
-            className="h-48 w-full object-cover"
+            className="h-8/10 w-full object-cover"
           />
           <div className="p-4">
-            <h2 className="text-xl font-semibold">{book.title}</h2>
+            <h2 className="text-xl pb-5 font-semibold">{book.title}</h2>
             <Link
               href={`/bocker/${book.id}`}
-              className="mt-2 inline-block rounded bg-purple-700 px-4 py-2 text-white hover:bg-purple-800"
+              className="inline-block rounded bg-purple-700 px-4 py-2 text-white hover:bg-purple-800"
             >
               Läs mer
             </Link>

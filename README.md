@@ -9,7 +9,7 @@
 - [x] Add a news feed
 - [x] Add a book page
 - [x] Add dropdown to Navbar
-- [ ] Add a category page
+- [x] Add a book category pages
 - [ ] Add authentication (w/ clerk)
 - [ ] "taint" (server-only)
 - [ ] Use Next

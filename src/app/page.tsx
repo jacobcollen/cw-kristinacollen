@@ -12,8 +12,8 @@ export default async function HomePage() {
   return (
     <main className="bg-gradient-to-b from-[#2e026d] to-[#2e026d] text-white">
       {/* Hero */}
-      <section className="flex min-h-screen items-center justify-center">
-        <div className="container grid max-w-5xl grid-cols-1 items-center gap-8 px-6 py-16 md:grid-cols-2">
+      <section className="flex h-svh items-center justify-center">
+        <div className="container grid max-w-6xl grid-cols-1 items-center gap-8 px-6 py-16 md:grid-cols-2">
           {/* Text */}
           <div className="flex flex-col justify-center">
             <h1 className="text-6xl font-bold tracking-tight">
@@ -37,7 +37,7 @@ export default async function HomePage() {
       </section>
 
       {/* Nyhetssektion */}
-      <section className="container mx-auto max-w-5xl px-6 py-16">
+      <section className="container mx-auto max-w-6xl px-6 py-16">
         <h2 className="mb-8 text-left text-4xl font-bold">Nyheter</h2>
         {news.length > 0 ? (
           news.map((news, index) => (
