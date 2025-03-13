@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 type Post = {
   id: string; 
   title: string;
-  content: string;
+  text: string;
   imageUrl?: string;
   link?: string;
 };
@@ -70,8 +70,8 @@ export default async function HomePage() {
               <div className="flex w-1/2 flex-col">
                 <h3 className="text-2xl font-semibold">{post.title}</h3>
                 <p className="mt-2 text-gray-700">
-                  {post.content
-                    ? post.content.substring(0, 100) + "..."
+                  {post.text
+                    ? post.text.substring(0, 100) + "..."
                     : "Ingen beskrivning tillgänglig."}
                 </p>
                 {post.link && (
