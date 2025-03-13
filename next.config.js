@@ -1,7 +1,3 @@
-/**
- * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
- * for Docker builds.
- */
 import { type } from "os";
 import "./src/env.js";
 
@@ -13,8 +9,9 @@ const config = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ["yeuzbow9sg.ufs.sh"],
+  },
 };
 
 export default config;
-
-    

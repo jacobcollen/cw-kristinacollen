@@ -6,6 +6,10 @@
 - [x] Set up a database (vercel postgres)
 - [x] Attach database to UI
 - [x] Build Schema
+- [x] Add a news feed
+- [x] Add a book page
+- [x] Add dropdown to Navbar
+- [ ] Add a category page
 - [ ] Add authentication (w/ clerk)
 - [ ] "taint" (server-only)
 - [ ] Use Next

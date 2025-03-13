@@ -3,20 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useState } from "react";
 
 function Navbar() {
   const pathname = usePathname();
+  const [showBooksDropdown, setShowBooksDropdown] = useState(false);
 
-  // Definiera färger för varje sida
   const pageColors: Record<string, string> = {
     "/": "bg-gradient-to-b from-[#2e026d] to-[#2e026d]",
-    "/böcker": "bg-blue-700",
-    "/föreläsningar": "bg-green-700",
+    "/bocker": "bg-[#2e026d]",
+    "/forelasningar": "bg-green-700",
     "/ALMA": "bg-red-700",
     "/kontakt": "bg-purple-700",
   };
 
-  // Standardfärg om sidan inte matchar
   const navBgColor = pageColors[pathname] || "bg-gray-900";
 
   return (
@@ -38,19 +38,45 @@ function Navbar() {
 
       <div className="flex items-center gap-7">
         {[
-          { href: "/böcker", label: "Böcker" },
+          { href: "/", label: "Hem" },
+          { href: "/bocker", label: "Böcker" },
           { href: "/ALMA", label: "ALMA" },
-          { href: "/föreläsningar", label: "Föreläsningar" },
-          { href: "/om-mig", label: "Om mig" },
+          { href: "/forelasningar", label: "Föreläsningar" },
           { href: "/kontakt", label: "Kontakt" },
         ].map(({ href, label }) => (
-          <Link
+          <div
             key={href}
-            href={href}
-            className="relative text-xl text-white after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+            onMouseEnter={() =>
+              label === "Böcker" && setShowBooksDropdown(true)
+            }
+            onMouseLeave={() =>
+              label === "Böcker" && setShowBooksDropdown(false)
+            }
+            className="relative"
           >
-            {label}
-          </Link>
+            <Link
+              href={href}
+              className="relative text-xl text-white after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+            >
+              {label}
+            </Link>
+            {label === "Böcker" && showBooksDropdown && (
+              <div className="absolute left-0 top-full mt-2 rounded-lg bg-white shadow-lg">
+                <Link
+                  href="/bocker/vuxna"
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                >
+                  Böcker för vuxna
+                </Link>
+                <Link
+                  href="/bocker/barn"
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                >
+                  Böcker för barn
+                </Link>
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </nav>
