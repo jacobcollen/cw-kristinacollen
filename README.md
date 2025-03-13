@@ -15,7 +15,6 @@
 - [ ] Use Next
 - [ ] Error management (w/ Sentry)
 - [ ] Routing (parallel route)
-- [ ] Update upload button to be less cringe
 - [ ] Analytics (posthog)
 - [ ] Delete button (w/ Server Actions)
 - [ ] Ratelimiting (upstash)
