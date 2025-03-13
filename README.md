@@ -4,9 +4,9 @@
 - [x] Scaffold basic ui with image data
 - [x] Tidy up build process
 - [x] Set up a database (vercel postgres)
-- [ ] Attach database to UI
+- [x] Attach database to UI
+- [x] Build Schema
 - [ ] Add authentication (w/ clerk)
-- [ ] Add image upload
 - [ ] "taint" (server-only)
 - [ ] Use Next
 - [ ] Error management (w/ Sentry)
