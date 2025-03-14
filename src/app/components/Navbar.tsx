@@ -29,7 +29,7 @@ function Navbar() {
       <div className="logo">
         <Link href="/">
           <Image
-            src="/logo_vit.svg"
+            src="/logotype.svg"
             alt="Kristina Collén logotyp"
             width={150}
             height={42.5}
@@ -46,8 +46,8 @@ function Navbar() {
             href: "/bocker",
             label: "Böcker",
             dropdown: [
-              { href: "/bocker/vuxna", label: "Böcker för vuxna" },
               { href: "/bocker/barn", label: "Böcker för barn" },
+              { href: "/bocker/vuxna", label: "Böcker för vuxna" },
             ],
           },
           { href: "/ALMA", label: "ALMA" },

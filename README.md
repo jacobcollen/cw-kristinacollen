@@ -10,6 +10,7 @@
 - [x] Add a book page
 - [x] Add dropdown to Navbar
 - [x] Add a book category pages
+- [x] Add Book details page (slug)
 - [ ] Add authentication (w/ clerk)
 - [ ] "taint" (server-only)
 - [ ] Use Next
