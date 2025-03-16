@@ -7,11 +7,13 @@
 - [x] Attach database to UI
 - [x] Build Schema
 - [x] Add a news feed
-- [x] Add a book page
-- [x] Add dropdown to Navbar
-- [x] Add a book category pages
-- [x] Add Book details page (slug)
-- [ ] Add authentication (w/ clerk)
+- [x] Book page
+- [x] Dropdown to Navbar
+- [x] Book category pages
+- [x] Book details page (slug)
+- [x] placeholder pages
+- [ ] Authentication (w/ clerk)
+- [ ] Breadbrums
 - [ ] "taint" (server-only)
 - [ ] Use Next
 - [ ] Error management (w/ Sentry)

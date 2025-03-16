@@ -3,7 +3,7 @@ import BookNavbar from "../../components/BookNavbar";
 import books from "~/app/data/books";
 
 export default function BooksForChildren() {
-  // Filtrera böcker för barn baserat på kategori
+
   const childrenBooks = books.filter(
     (book) => book.category === "Böcker för barn",
   );
