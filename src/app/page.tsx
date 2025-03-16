@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { db } from "~/server/db";
+import { getNews } from "~/server/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -7,7 +6,7 @@ const imgUrl =
   "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJT0YcWu7ZCy734n05dR6P2EptfIzBFHAlLseXZ";
 
 export default async function HomePage() {
-	const news = await db.query.news.findMany();
+	const news = await getNews();
 
   return (
     <main className="bg-gradient-to-b from-[#2e026d] to-[#2e026d] text-white">

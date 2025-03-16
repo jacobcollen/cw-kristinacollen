@@ -12,9 +12,9 @@
 - [x] Book category pages
 - [x] Book details page (slug)
 - [x] placeholder pages
-- [x] upload thing API keys .env 
+- [x] upload thing API keys .env
+- [x] "taint" (server-only)
 - [ ] Breadbrums
-- [ ] "taint" (server-only)
 - [ ] Use Next
 - [ ] Error management (w/ Sentry)
 - [ ] Routing (parallel route)
