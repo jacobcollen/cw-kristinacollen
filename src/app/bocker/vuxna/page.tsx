@@ -1,9 +1,8 @@
-import BookGrid from "../../components/BookGrid";
-import BookNavbar from "../../components/BookNavbar";
+import BookGrid from "../../_components/BookGrid";
+import BookNavbar from "../../_components/BookNavbar";
 import books from "~/app/data/books";
 
 export default function BooksForAdults() {
-
   const adultBooks = books.filter(
     (book) => book.category === "Böcker för vuxna",
   );

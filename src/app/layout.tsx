@@ -1,6 +1,6 @@
 import "~/styles/globals.css";
 import Link from "next/link";
-import Navbar from "./components/Navbar";
+import Navbar from "./_components/Navbar";
 
 export const dynamic = "force-dynamic";
 

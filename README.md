@@ -12,7 +12,7 @@
 - [x] Book category pages
 - [x] Book details page (slug)
 - [x] placeholder pages
-- [ ] Authentication (w/ clerk)
+- [x] upload thing API keys .env 
 - [ ] Breadbrums
 - [ ] "taint" (server-only)
 - [ ] Use Next
