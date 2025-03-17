@@ -8,7 +8,6 @@ import {
   text,
 } from "drizzle-orm/pg-core";
 
-// Skapar tabeller med prefix "jcbcollen_" för tydlighet
 export const createTable = pgTableCreator((name) => `jcbcollen_${name}`);
 
 export const news = createTable(
