@@ -10,7 +10,7 @@ const config = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["yeuzbow9sg.ufs.sh"],
+    remotePatterns: [{ hostname: "utfs.io" }],
   },
 };
 

@@ -14,10 +14,11 @@
 - [x] placeholder pages
 - [x] upload thing API keys .env
 - [x] "taint" (server-only)
-- [ ] Breadbrums
+- [x] Update next config
 - [ ] Use Next
 - [ ] Error management (w/ Sentry)
 - [ ] Routing (parallel route)
+- [ ] Breadbrums
 - [ ] Analytics (posthog)
 - [ ] Delete button (w/ Server Actions)
 - [ ] Ratelimiting (upstash)
