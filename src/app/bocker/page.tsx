@@ -1,7 +1,7 @@
 import Link from "next/link";
 import BookGrid from "../_components/BookGrid";
 import BookNavbar from "../_components/BookNavbar";
-import books from "../data/books";
+import books from "../../data/books";
 
 export default function BooksPage() {
   return (

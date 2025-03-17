@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import books from "~/app/data/books";
+import books from "@/data/books";
 
 // Generera statiska parametrar för alla böcker
 export async function generateStaticParams() {

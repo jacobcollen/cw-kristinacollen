@@ -1,6 +1,7 @@
-import "~/styles/globals.css";
+import "@/styles/globals.css";
 import Link from "next/link";
 import Navbar from "./_components/Navbar";
+import { BreadcrumbResponsive } from "./_components/ui/BreadcrumbNav";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <Navbar />
+        <BreadcrumbResponsive />
         {children}
       </body>
     </html>

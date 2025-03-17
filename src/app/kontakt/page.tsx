@@ -1,10 +1,8 @@
-// app/alma/page.tsx
+import About from "../_components/About";
 export default function ContactPage() {
   return (
     <div className="flex h-screen items-center justify-center">
-      <h1 className="text-3xl text-gray-700">
-        Under konstruktion.
-      </h1>
+      <About />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import BookGrid from "../../_components/BookGrid";
 import BookNavbar from "../../_components/BookNavbar";
-import books from "~/app/data/books";
+import books from "@/data/books";
 
 export default function BooksForAdults() {
   const adultBooks = books.filter(
