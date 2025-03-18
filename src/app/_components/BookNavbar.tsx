@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { motion } from "framer-motion";
 
 const categories = ["Alla böcker", "Böcker för barn", "Böcker för vuxna"];
 
@@ -13,25 +14,36 @@ export default function BookNavbar({ title }: { title: string }) {
   const category = searchParams.get("category");
 
   return (
-    <div className="py-2">
-      <h1 className="py-3 text-3xl font-bold">{title}</h1>
-      <Tabs defaultValue="Alla böcker" className="mb-6">
-        <TabsList>
+    <div className="flex flex-col gap-4">
+      <h1 className="text-3xl font-bold pt-4">{title}</h1>
+      <Tabs defaultValue={category || "Alla böcker"} className="pb-6 w-fit">
+        <TabsList className="grid w-full grid-cols-3">
           {categories.map((cat) => (
-            <TabsTrigger key={cat} value={cat} asChild>
-              <Link
-                href={
-                  cat === "Alla böcker"
-                    ? "/bocker"
-                    : `/bocker?category=${encodeURIComponent(cat)}`
-                }
-                className={cn(
-                  "data-[state=active]:bg-accent data-[state=active]:text-accent-foreground", // Shadcn/ui standardklasser
-                )}
+            <Link
+              key={cat}
+              href={
+                cat === "Alla böcker"
+                  ? "/bocker"
+                  : `/bocker?category=${encodeURIComponent(cat)}`
+              }
+            >
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {cat}
-              </Link>
-            </TabsTrigger>
+                <TabsTrigger
+                  value={cat}
+                  className={cn(
+                    "w-full",
+                    category === cat || (cat === "Alla böcker" && !category)
+                      ? "bg-accent/50"
+                      : "bg-transparent"
+                  )}
+                >
+                  {cat}
+                </TabsTrigger>
+              </motion.div>
+            </Link>
           ))}
         </TabsList>
       </Tabs>

@@ -1,31 +1,34 @@
-import { BreadcrumbNav } from "../_components/ui/BreadcrumbNav";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import lectures from "@/data/leacures";
 
-export default function LecturesPage() {
-  const breadcrumbItems = [
-    { label: "Hem", href: "/" },
-    { label: "Föreläsningar", href: "/forelasningar" },
-  ];
-
+export default function ForelasningarPage() {
   return (
-    <div className="container mx-auto max-w-6xl content-center p-6">
-      <BreadcrumbNav items={breadcrumbItems} />
-      <h1>Föreläsningar</h1>
-      <h2>Flicker med NPF</h2>
-      Så skapar du en inkluderande skolmiljö med förbättrat stöd och bemötande
-      På senare tid har uppmärksamheten kring flickor med NPF-diagnos ökat. En
-      viktig insikt är att de får sin diagnos betydligt senare än pojkar. Tyvärr
-      missar skolmiljön ofta att uppmärksamma flickors svårigheter relaterade
-      till NPF, vilket kan få allvarliga konsekvenser för deras
-      kunskapsutveckling, välbefinnande och rätten till en inkluderande och
-      jämlik utbildning. Genom att höja medvetenheten hos skolpersonal kan vi
-      bättre identifiera och förstå de specifika utmaningar som dessa flickor
-      står inför och sätta in adekvat stöd och anpassningar i ett tidigt skede.
-      Vilka symptom är vanligare hos flickor med NPF jämfört med pojkar och hur
-      kan vi säkerställa att flickor med NPF inte hamnar i skymundan? Vilka
-      kunskaper behöver lärare om NPF hos flickor och vilka konsekvenser får det
-      för elevernas skolgång om vi inte upptäcker det i tid? Hur kan vi
-      förbättra bemötandet, anpassa undervisningen och stötta lärandet för
-      flickor med NPF?
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-center mb-8">Föreläsningar</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {lectures.map((forelasning) => (
+          <Link key={forelasning.id} href={`/forelasningar/${forelasning.slug}`}>
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <img
+                  src={forelasning.imgUrl}
+                  alt={forelasning.title}
+                  className="w-full h-48 object-cover rounded-t-lg"
+                />
+              </CardHeader>
+              <CardContent className="p-6">
+                <CardTitle className="text-xl mb-2">{forelasning.title}</CardTitle>
+                <CardDescription className="line-clamp-3">
+                  {forelasning.description}
+                </CardDescription>
+                <Button className="mt-4 w-full">Läs mer</Button>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

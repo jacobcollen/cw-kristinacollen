@@ -3,7 +3,7 @@ import BookGrid from "../_components/BookGrid";
 import books from "@/data/books";
 import { BreadcrumbNav } from "../_components/ui/BreadcrumbNav";
 
-export default function BooksPage({
+export default async function BooksPage({
   searchParams,
 }: {
   searchParams: { category?: string };

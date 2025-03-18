@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -15,8 +16,10 @@ import {
 } from "@/components/ui/navigation-menu";
 import books from "@/data/books";
 
+// Hämta unika kategorier från böckerna
 const categories = [...new Set(books.map((book) => book.category))];
 
+// Definiera menyalternativen
 const menuItems = [
   { title: "Hem", href: "/" },
   {
@@ -24,10 +27,16 @@ const menuItems = [
     href: "/bocker",
     subItems: [
       { title: "Alla böcker", href: "/bocker" },
-      ...categories.map((category) => ({
-        title: category,
-        href: `/bocker?category=${encodeURIComponent(category)}`,
-      })),
+      ...categories
+        .sort((a, b) => {
+          if (a === "Böcker för barn") return -1;
+          if (b === "Böcker för barn") return 1;
+          return 0;
+        })
+        .map((category) => ({
+          title: category,
+          href: `/bocker?category=${encodeURIComponent(category)}`,
+        })),
     ],
   },
   { title: "ALMA", href: "/ALMA" },
@@ -39,16 +48,19 @@ export function TopNavbar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const isActive = (href: string) => {
-    // Kontrollera om länken matchar den aktuella sökvägen
-    if (href === pathname) {
+  const isActive = (href: string, category?: string) => {
+    if (href === pathname && !category) {
       return true;
     }
 
-    // Kontrollera om länken har query-parametrar och matchar den aktuella sökvägen
     if (href.includes("?")) {
       const [basePath, query] = href.split("?");
       const currentQuery = searchParams.toString();
+      const currentCategory = searchParams.get("category");
+
+      if (category && currentCategory === category) {
+        return true;
+      }
       return pathname === basePath && currentQuery === query;
     }
 
@@ -57,52 +69,68 @@ export function TopNavbar() {
 
   return (
     <NavigationMenu>
-      <NavigationMenuList>
-        {menuItems.map(({ title, href, subItems }) => (
-          <NavigationMenuItem key={title}>
-            {subItems ? (
+      <NavigationMenuList className="flex gap-2">
+        {menuItems.map((item) => (
+          <NavigationMenuItem key={item.title}>
+            {item.subItems ? (
               <>
                 <NavigationMenuTrigger
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActive(href) && "bg-accent text-accent-foreground",
+                    "bg-transparent hover:bg-accent/50",
+                    isActive(item.href) && "bg-accent/50",
                   )}
                 >
-                  {title}
+                  {item.title}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[200px] gap-3 p-4 md:w-[300px]">
-                    {subItems.map((sub) => (
-                      <li key={sub.title}>
+                  <motion.ul
+                    className="grid w-[200px] gap-1 p-2"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {item.subItems.map((subItem) => (
+                      <motion.li
+                        key={subItem.title}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
                         <NavigationMenuLink asChild>
                           <Link
-                            href={sub.href}
+                            href={subItem.href}
                             className={cn(
-                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                              isActive(sub.href) && "bg-accent text-accent-foreground",
+                              "block rounded-md px-4 py-2 hover:bg-accent/50",
+                              isActive(subItem.href, subItem.title) &&
+                                "bg-accent/50",
                             )}
                           >
-                            <div className="text-sm font-medium leading-none">
-                              {sub.title}
-                            </div>
+                            {subItem.title}
                           </Link>
                         </NavigationMenuLink>
-                      </li>
+                      </motion.li>
                     ))}
-                  </ul>
+                  </motion.ul>
                 </NavigationMenuContent>
               </>
             ) : (
-              <Link href={href} legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    isActive(href) && "bg-accent text-accent-foreground",
-                  )}
+              <NavigationMenuLink asChild>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {title}
-                </NavigationMenuLink>
-              </Link>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "bg-transparent hover:bg-accent/50",
+                      isActive(item.href) && "bg-accent/50",
+                    )}
+                  >
+                    {item.title}
+                  </Link>
+                </motion.div>
+              </NavigationMenuLink>
             )}
           </NavigationMenuItem>
         ))}
