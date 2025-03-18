@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { NavigationMenuComponent } from "./ui/Navigation-menu";
+import { TopNavbar } from "./TopNavbar";
 
 export default function Header() {
   const pathname = usePathname();
@@ -22,7 +22,7 @@ export default function Header() {
             />
           </Link>
         </div>
-        <NavigationMenuComponent />
+        <TopNavbar />
 	</div>
     </header>
   );

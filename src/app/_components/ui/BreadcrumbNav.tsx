@@ -1,9 +1,9 @@
+// components/BreadcrumbNav.tsx
 "use client";
 
-import * as React from "react";
 import Link from "next/link";
-import { useMediaQuery } from "use-media-query-react";
-import { ChevronDown, Slash } from "lucide-react";
+import { Slash } from "lucide-react";
+import { Fragment } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,53 +11,40 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { DropdownMenu } from "@/components/ui/dropdown-menu";
 
-export function BreadcrumbResponsive() {
-  const [selectedCategory, setSelectedCategory] = React.useState("Alla böcker"); // Sätt initial kategori
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
 
+interface BreadcrumbNavProps {
+  items: (BreadcrumbItem | null)[];
+}
+
+export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
   return (
-    <Breadcrumb>
+    <Breadcrumb className="mb-4">
       <BreadcrumbList>
-        {/* Hem */}
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/">Hem</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
+        {items.map((item, index) => {
+          if (!item) return null;
 
-        <BreadcrumbSeparator>
-          <Slash className="h-4 w-4 text-gray-500" />
-        </BreadcrumbSeparator>
+          return (
+            <Fragment key={item.href}>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href={item.href}>{item.label}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
 
-        {/* Böcker (förblir statiskt) */}
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/bocker">Böcker</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-
-        <BreadcrumbSeparator>
-          <Slash className="h-4 w-4 text-gray-500" />
-        </BreadcrumbSeparator>
-
-        {/* Dynamiskt val av kategori */}
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link
-              href={`/bocker/${selectedCategory.toLowerCase().replace(/\s+/g, "-")}`}
-            >
-              {selectedCategory}
-            </Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
+              {index < items.length - 1 && (
+                <BreadcrumbSeparator>
+                  <Slash className="h-4 w-4 text-gray-500" />
+                </BreadcrumbSeparator>
+              )}
+            </Fragment>
+          );
+        })}
       </BreadcrumbList>
-
-      {/* DropdownMenu i Navbar */}
-      <div className="mt-4">
-        <DropdownMenu onSelect={setSelectedCategory} />
-      </div>
     </Breadcrumb>
   );
 }

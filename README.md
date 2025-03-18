@@ -15,7 +15,7 @@
 - [x] upload thing API keys .env
 - [x] "taint" (server-only)
 - [x] Update next config
-- [ ] Setup ChadCN UI
+- [x] Setup ChadCN UI
 - [ ] Use Next
 - [ ] Error management (w/ Sentry)
 - [ ] Routing (parallel route)
@@ -23,3 +23,4 @@
 - [ ] Analytics (posthog)
 - [ ] Delete button (w/ Server Actions)
 - [ ] Ratelimiting (upstash)
+

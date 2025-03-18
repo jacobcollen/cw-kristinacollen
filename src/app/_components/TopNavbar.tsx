@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -13,6 +13,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import books from "@/data/books";
+
+const categories = [...new Set(books.map((book) => book.category))];
 
 const menuItems = [
   { title: "Hem", href: "/" },
@@ -21,8 +24,10 @@ const menuItems = [
     href: "/bocker",
     subItems: [
       { title: "Alla böcker", href: "/bocker" },
-      { title: "Böcker för barn", href: "/bocker/barn" },
-      { title: "Böcker för vuxna", href: "/bocker/vuxna" },
+      ...categories.map((category) => ({
+        title: category,
+        href: `/bocker?category=${encodeURIComponent(category)}`,
+      })),
     ],
   },
   { title: "ALMA", href: "/ALMA" },
@@ -30,14 +35,24 @@ const menuItems = [
   { title: "Kontakt", href: "/kontakt" },
 ];
 
-export function NavigationMenuComponent() {
+export function TopNavbar() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const isActive = (href: string) => {
-    if (href === "/") {
-      return pathname === "/";
+    // Kontrollera om länken matchar den aktuella sökvägen
+    if (href === pathname) {
+      return true;
     }
-    return pathname.startsWith(href);
+
+    // Kontrollera om länken har query-parametrar och matchar den aktuella sökvägen
+    if (href.includes("?")) {
+      const [basePath, query] = href.split("?");
+      const currentQuery = searchParams.toString();
+      return pathname === basePath && currentQuery === query;
+    }
+
+    return false;
   };
 
   return (
@@ -50,26 +65,26 @@ export function NavigationMenuComponent() {
                 <NavigationMenuTrigger
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    pathname.startsWith(href) &&
-                      "bg-accent text-accent-foreground",
+                    isActive(href) && "bg-accent text-accent-foreground",
                   )}
                 >
                   {title}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="w-48 space-y-2 p-4">
+                  <ul className="grid w-[200px] gap-3 p-4 md:w-[300px]">
                     {subItems.map((sub) => (
                       <li key={sub.title}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={sub.href}
                             className={cn(
-                              "hover:bg-accent hover:text-accent-foreground block rounded p-2 text-base font-medium transition-colors",
-                              pathname === sub.href &&
-                                "bg-accent text-accent-foreground",
+                              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                              isActive(sub.href) && "bg-accent text-accent-foreground",
                             )}
                           >
-                            {sub.title}
+                            <div className="text-sm font-medium leading-none">
+                              {sub.title}
+                            </div>
                           </Link>
                         </NavigationMenuLink>
                       </li>

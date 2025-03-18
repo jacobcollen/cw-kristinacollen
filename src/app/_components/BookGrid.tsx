@@ -1,4 +1,4 @@
-import { BookCard } from "./ui/BookCard";
+import { BookCard } from "./BookCard";
 
 interface Book {
   id: number;

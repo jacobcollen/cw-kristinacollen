@@ -34,7 +34,7 @@ export function BookCard({ book }: BookCardProps) {
         <CardTitle className="line-clamp-2 text-xl">{book.title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow px-4 py-2">
-        {/* Du kan lägga till beskrivning här om det behövs */}
+        {/* Ev. Description */}
       </CardContent>
       <CardFooter className="px-4 pb-4">
         <Button className="w-full bg-purple-900 hover:bg-purple-950" asChild>
