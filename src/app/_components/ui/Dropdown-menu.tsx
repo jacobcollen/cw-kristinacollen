@@ -6,13 +6,23 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export const DropdownMenuComponent = () => (
+export const DropdownMenuComponent = ({
+  onSelect,
+}: {
+  onSelect: (category: string) => void;
+}) => (
   <DropdownMenu>
     <DropdownMenuTrigger>Böcker</DropdownMenuTrigger>
     <DropdownMenuContent>
-      <DropdownMenuItem>Alla böcker</DropdownMenuItem>
-      <DropdownMenuItem>Böcker för barn</DropdownMenuItem>
-      <DropdownMenuItem>Böcker för vuxna</DropdownMenuItem>
+      <DropdownMenuItem onClick={() => onSelect("Alla böcker")}>
+        Alla böcker
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={() => onSelect("Böcker för barn")}>
+        Böcker för barn
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={() => onSelect("Böcker för vuxna")}>
+        Böcker för vuxna
+      </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
 );

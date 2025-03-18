@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 
 const links = [
   { href: "/bocker", label: "Alla Böcker" },
@@ -15,21 +16,24 @@ export default function BookNavbar({ title }: { title: string }) {
   return (
     <div className="py-2">
       <h1 className="py-3 text-3xl font-bold">{title}</h1>
-      <div className="flex gap-4 pb-6">
+      <Menubar className="mb-6">
         {links.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className={`relative text-[#2e026d] transition-colors ${
-              pathname === href
-                ? "font-semibold"
-                : "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#2e026d] after:transition-all after:duration-300 hover:after:w-full"
-            }`}
-          >
-            {label}
-          </Link>
+          <MenubarMenu key={href}>
+            <MenubarTrigger asChild>
+              <Link
+                href={href}
+                className={`px-3 py-1 text-sm font-medium transition-colors ${
+                  pathname === href
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-primary"
+                }`}
+              >
+                {label}
+              </Link>
+            </MenubarTrigger>
+          </MenubarMenu>
         ))}
-      </div>
+      </Menubar>
     </div>
   );
 }
