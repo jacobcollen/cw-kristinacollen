@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import {
   Form,
   FormControl,
@@ -14,26 +13,39 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { contactFormSchema } from "@/lib/schemas/formSchemas";
+import { z } from "zod";
 
-const formSchema = z.object({
-  name: z.string().min(1, "Namn är obligatoriskt"),
-  email: z.string().email("Ogiltig e-postadress"),
-  message: z.string().min(1, "Meddelande är obligatoriskt"),
-});
-
-interface ContactFormProps {
-  onSubmit: (data: z.infer<typeof formSchema>) => void;
-}
-
-export function ContactForm({ onSubmit }: ContactFormProps) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+export function ContactForm() {
+  const form = useForm<z.infer<typeof contactFormSchema>>({
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: "",
       email: "",
       message: "",
     },
   });
+
+  const onSubmit = async (data: z.infer<typeof contactFormSchema>) => {
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert("Tack för ditt meddelande! Det har skickats till Kristina.");
+      } else {
+        alert("Något gick fel. Försök igen senare.");
+      }
+    } catch (error) {
+      console.error("Fel vid skickande av formulär:", error);
+      alert("Något gick fel. Försök igen senare.");
+    }
+  };
 
   return (
     <Form {...form}>

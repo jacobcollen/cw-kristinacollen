@@ -1,5 +1,5 @@
 import { AboutCard } from "@/app/_components/AboutCard";
-import { ContactForm } from "@/app/_components/ContactForm";
+import { ContactForm } from "../_components/ContactForm";
 import { images } from "@/_data/images";
 
 export default function ContactPage() {
