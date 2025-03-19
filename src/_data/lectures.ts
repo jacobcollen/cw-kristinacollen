@@ -11,7 +11,7 @@ const lectures = [
   {
     id: 2,
     title: "Flickor med ADHD och autism och deras sårbarhet för psykisk ohälsa",
-    slug: "flickor-med-adhd-och-autism-och-deras-sårbarhet-för-psykisk-ohälsa",
+    slug: "flickor-med-adhd-och-autism-och-deras-sarbarhet-for-psykisk-ohalsa",
     imgUrl:
       "https://cdn.pixabay.com/photo/2023/09/16/21/31/girl-8257551_1280.jpg",
     description:
@@ -21,7 +21,7 @@ const lectures = [
     id: 3,
     title:
       "Almamodellen. Utveckling av förskolan och skolan utifrån flickor med NPF",
-    slug: "almamodellen-utveckling-av-förskolan-och-skolan-utifrån-flickor-med-npf",
+    slug: "almamodellen-utveckling-av-forskolan-och-skolan-utifran-flickor-med-npf",
     imgUrl:
       "https://cdn.pixabay.com/photo/2023/09/16/21/31/girl-8257551_1280.jpg",
     description:
@@ -39,7 +39,7 @@ const lectures = [
   {
     id: 5,
     title: "Krisberedskap och bemötande vid svåra händelser",
-    slug: "krisberedskap-och-bemötande-vid-svåra-händelser",
+    slug: "krisberedskap-och-bemotande-vid-svara-handelser",
     imgUrl:
       "https://cdn.pixabay.com/photo/2023/09/16/21/31/girl-8257551_1280.jpg",
     description:

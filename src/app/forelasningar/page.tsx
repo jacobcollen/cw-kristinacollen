@@ -1,15 +1,15 @@
 "use client";
 
+import lectures from "@/_data/lectures";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import lectures from "@/_data/lectures";
 import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Image from "next/image";
 
-export default function LecturesPage() {
-  // Breadcrumb-items
+export default function ForelasningarPage() {
+
   const breadcrumbItems = [
     { label: "Hem", href: "/" },
     { label: "Föreläsningar", href: "/forelasningar" },
@@ -25,9 +25,9 @@ export default function LecturesPage() {
         {lectures.map((lecture) => (
           <Link key={lecture.id} href={`/forelasningar/${lecture.slug}`}>
             <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
-              <Card className="h-full flex flex-col">
+              <Card className="flex h-full flex-col">
                 <CardHeader>
-                  <div className="relative w-full aspect-[3/4]">
+                  <div className="relative aspect-[3/4] w-full">
                     <Image
                       src={lecture.imgUrl}
                       alt={lecture.title}
@@ -37,7 +37,7 @@ export default function LecturesPage() {
                     />
                   </div>
                 </CardHeader>
-                <CardContent className="flex-1 flex flex-col p-6">
+                <CardContent className="flex flex-1 flex-col p-6">
                   {/* Titel */}
                   <CardTitle className="mb-2 flex-none text-xl">
                     {lecture.title}

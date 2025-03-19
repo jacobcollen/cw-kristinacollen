@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import lectures from "@/_data/lectures";
@@ -7,11 +5,9 @@ import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import BookingDrawer from "@/app/_components/BookingDrawer";
-import React from "react";
 
-export default function LecturePage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
-
+export default async function LecturePage({ params }: { params: Promise<{ slug: string }>}) {
+  const { slug } = await params;
   const lecture = lectures.find((lecture) => lecture.slug === slug);
 
   if (!lecture) return notFound();

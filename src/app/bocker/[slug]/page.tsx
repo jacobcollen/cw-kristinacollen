@@ -9,8 +9,9 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ContactFormPopover } from "@/app/_components/ContactFormPopover";
 
-export default function BookPage({ params }: { params: { slug: string } }) {
-  const book = books.find((book) => book.slug === params.slug);
+export default async function BookPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const book = books.find((book) => book.slug === slug);
 
   if (!book) return notFound();
 
