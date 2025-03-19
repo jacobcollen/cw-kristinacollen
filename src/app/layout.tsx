@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import Header from "./_components/Header";
-import { BreadcrumbResponsive } from "./_components/ui/BreadcrumbNav";
+import { BreadcrumbResponsive } from "./_components/BreadcrumbNav";
 
 export const dynamic = "force-dynamic";
 

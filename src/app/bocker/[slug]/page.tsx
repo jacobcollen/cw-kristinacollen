@@ -1,23 +1,16 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ExternalLink } from "lucide-react";
-import books from "@/data/books";
-import { BreadcrumbNav } from "@/app/_components/ui/BreadcrumbNav";
+import books from "@/_data/books";
+import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { ContactFormPopover } from "@/app/_components/ContactFormPopover";
 
-export async function generateStaticParams() {
-  return books.map(({ slug }) => ({ slug }));
-}
-
-export default async function BookDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const book = books.find(({ slug }) => slug === params.slug);
+export default function BookPage({ params }: { params: { slug: string } }) {
+  const book = books.find((book) => book.slug === params.slug);
 
   if (!book) return notFound();
 
@@ -37,8 +30,8 @@ export default async function BookDetailPage({
       <Card className="border-0 bg-transparent py-8 shadow-none">
         <CardContent className="p-0">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-10">
-            {/* Img */}
-            <div className="relative mx-auto h-fit w-full max-w-md overflow-hidden rounded-md shadow-lg">
+            {/* Bild */}
+            <div className="relative mx-auto h-fit w-full max-w-md overflow-hidden rounded-md">
               <Image
                 src={book.imgUrl}
                 alt={book.title}
@@ -50,24 +43,29 @@ export default async function BookDetailPage({
                 style={{ width: "100%", height: "auto" }}
               />
             </div>
-            {/* Content */}
+
+            {/* Innehåll */}
             <div className="flex flex-col space-y-6">
+              {/* Titel och metadata */}
               <div>
                 <h1 className="mb-3 text-3xl font-bold tracking-tight sm:text-4xl">
                   {book.title}
                 </h1>
-                <div className="flex flex-wrap gap-2 text-muted-foreground">
-                  {[book.year, book.publisher, book.category].map((item) => (
-                    <Badge key={item} variant="outline" className="px-3 py-1">
+                <div className="flex flex-wrap gap-2">
+                  {[book.year, book.publisher].map((item) => (
+                    <Badge key={item} variant="outline">
                       {item}
                     </Badge>
                   ))}
                 </div>
               </div>
+
               <Separator />
+
+              {/* Desc */}
               <div className="space-y-4">
                 <h2 className="text-xl font-semibold">Om boken</h2>
-                <div className="leading-relaxed text-muted-foreground">
+                <div className="text-muted-foreground">
                   {Array.isArray(book.description) ? (
                     book.description.map((paragraph, index) => (
                       <p key={index} className="mb-4">
@@ -79,30 +77,41 @@ export default async function BookDetailPage({
                   )}
                 </div>
               </div>
+
+              {/* Review */}
               {book.review && (
                 <div className="space-y-4">
                   <h2 className="text-xl font-semibold">Från en läsare</h2>
                   <div className="rounded-lg bg-muted p-4">
-                    <p className="italic leading-relaxed text-muted-foreground">
+                    <p className="italic text-muted-foreground">
                       {book.review}
                     </p>
                   </div>
                 </div>
               )}
+
+              {/* Buy btn or contact form */}
               <div className="mt-auto pt-4">
-                <Button
-                  className="w-full bg-purple-900 hover:bg-purple-950 sm:w-auto"
-                  size="lg"
-                  asChild
-                >
-                  <a
-                    href={book.purchaseLink || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Köp boken <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
+                {book.purchaseLink ? (
+                  <Button className="w-full sm:w-auto" size="lg" asChild>
+                    <a
+                      href={book.purchaseLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Köp boken <ExternalLink className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                ) : (
+                  <div className="space-y-4">
+                    <p className="text-muted-foreground">
+                      Denna bok går tyvärr inte att köpa på internet! Tips,
+                      kontakta Kristina. Det finns kanske möjlighet att köpa den
+                      direkt från henne.
+                    </p>
+                    <ContactFormPopover />
+                  </div>
+                )}
               </div>
             </div>
           </div>

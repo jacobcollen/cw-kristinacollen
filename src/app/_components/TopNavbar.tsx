@@ -14,7 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import books from "@/data/books";
+import books from "@/_data/books";
 
 // Hämta unika kategorier från böckerna
 const categories = [...new Set(books.map((book) => book.category))];
