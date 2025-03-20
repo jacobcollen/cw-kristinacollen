@@ -1,11 +1,16 @@
 "use client";
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import books from "@/_data/books";
+import books from "@/app/_data/books";
 import { useSearchParams } from "next/navigation";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import BookNavbar from "../_components/BookNavbar";
 import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
 import { motion } from "framer-motion";
@@ -22,7 +27,12 @@ export default function BooksPage() {
     { label: "Hem", href: "/" },
     { label: "Böcker", href: "/bocker" },
     ...(category
-      ? [{ label: category, href: `/bocker?category=${encodeURIComponent(category)}` }]
+      ? [
+          {
+            label: category,
+            href: `/bocker?category=${encodeURIComponent(category)}`,
+          },
+        ]
       : []),
   ];
 
@@ -35,17 +45,15 @@ export default function BooksPage() {
         {filteredBooks.map((book) => (
           <Link key={book.id} href={`/bocker/${book.slug}`}>
             <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
-              <Card className="h-full flex flex-col">
+              <Card className="flex h-full flex-col">
                 <CardHeader>
-                  <AspectRatio ratio={3 / 4}>
-                    <img
-                      src={book.imgUrl}
-                      alt={book.title}
-                      className="h-full w-full rounded-t-lg object-cover"
-                    />
-                  </AspectRatio>
+                  <img
+                    src={book.imgUrl}
+                    alt={book.title}
+                    className="h-48 w-full rounded-t-lg object-cover"
+                  />
                 </CardHeader>
-                <CardContent className="flex-1 flex flex-col p-6">
+                <CardContent className="flex flex-1 flex-col p-6">
                   {/* Title */}
                   <CardTitle className="mb-2 flex-none text-xl">
                     {book.title}

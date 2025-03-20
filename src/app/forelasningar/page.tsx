@@ -1,15 +1,19 @@
 "use client";
 
-import lectures from "@/_data/lectures";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import lectures from "@/app/_data/lectures";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function ForelasningarPage() {
-
   const breadcrumbItems = [
     { label: "Hem", href: "/" },
     { label: "Föreläsningar", href: "/forelasningar" },
@@ -19,23 +23,18 @@ export default function ForelasningarPage() {
     <div className="container mx-auto px-4 py-8">
       {/* Breadcrumbs */}
       <BreadcrumbNav items={breadcrumbItems} />
-
-      {/* Grid med föreläsningar */}
+      {/* Grid*/}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {lectures.map((lecture) => (
           <Link key={lecture.id} href={`/forelasningar/${lecture.slug}`}>
             <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
               <Card className="flex h-full flex-col">
-                <CardHeader>
-                  <div className="relative aspect-[3/4] w-full">
-                    <Image
-                      src={lecture.imgUrl}
-                      alt={lecture.title}
-                      fill
-                      className="rounded-t-lg object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                  </div>
+                <CardHeader className="p-0">
+                  <img
+                    src={lecture.imgUrl}
+                    alt={lecture.title}
+                    className="h-48 w-full rounded-t-lg object-cover"
+                  />
                 </CardHeader>
                 <CardContent className="flex flex-1 flex-col p-6">
                   {/* Titel */}

@@ -1,15 +1,19 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ExternalLink } from "lucide-react";
-import books from "@/_data/books";
+import books from "@/app/_data/books";
 import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ContactFormPopover } from "@/app/_components/Popover";
+import FormDrawer from "@/app/_components/FormDrawer";
 
-export default async function BookPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BookPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const book = books.find((book) => book.slug === slug);
 
@@ -31,7 +35,7 @@ export default async function BookPage({ params }: { params: Promise<{ slug: str
       <Card className="border-0 bg-transparent py-8 shadow-none">
         <CardContent className="p-0">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-10">
-            {/* Bild */}
+            {/* Img */}
             <div className="relative mx-auto h-fit w-full max-w-md overflow-hidden rounded-md">
               <Image
                 src={book.imgUrl}
@@ -45,9 +49,9 @@ export default async function BookPage({ params }: { params: Promise<{ slug: str
               />
             </div>
 
-            {/* Innehåll */}
+            {/* Content */}
             <div className="flex flex-col space-y-6">
-              {/* Titel och metadata */}
+              {/* Title */}
               <div>
                 <h1 className="mb-3 text-3xl font-bold tracking-tight sm:text-4xl">
                   {book.title}
@@ -91,10 +95,10 @@ export default async function BookPage({ params }: { params: Promise<{ slug: str
                 </div>
               )}
 
-              {/* Buy btn or contact form */}
+              {/* Buy btn or form drawer */}
               <div className="mt-auto pt-4">
                 {book.purchaseLink ? (
-                  <Button className="w-full sm:w-auto" size="lg" asChild>
+                  <Button asChild>
                     <a
                       href={book.purchaseLink}
                       target="_blank"
@@ -110,7 +114,11 @@ export default async function BookPage({ params }: { params: Promise<{ slug: str
                       kontakta Kristina. Det finns kanske möjlighet att köpa den
                       direkt från henne.
                     </p>
-                    <ContactFormPopover />
+                    <FormDrawer
+                      title="Köp boken"
+                      description="Denna bok går tyvärr inte att köpa på internet! Tips, kontakta Kristina. Det finns kanske möjlighet att köpa den från henne."
+                      triggerText="Köp boken"
+                    />
                   </div>
                 )}
               </div>

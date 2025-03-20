@@ -4,7 +4,7 @@ const lectures = [
     title: "Flickor och unga tjejer med adhd",
     slug: "flickor-och-unga-tjejer-med-adhd",
     imgUrl:
-      "https://cdn.pixabay.com/photo/2023/09/16/21/31/girl-8257551_1280.jpg",
+      "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTsTtOA65aQdrUILXw2geG89vc7KBZ0nHEAfml",
     description:
       "Flickor och unga tjejer med Adhd. Vad är skiljer sig mot pojkarna? Vad säger den senaste forskningen? Vad kan vi göra för att minska riskerna för psykisk ohälsa?",
   },
@@ -13,7 +13,7 @@ const lectures = [
     title: "Flickor med ADHD och autism och deras sårbarhet för psykisk ohälsa",
     slug: "flickor-med-adhd-och-autism-och-deras-sarbarhet-for-psykisk-ohalsa",
     imgUrl:
-      "https://cdn.pixabay.com/photo/2023/09/16/21/31/girl-8257551_1280.jpg",
+      "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTQ2WAKTI1MHAK2Z0UdYzvjxCsLrmuD7tk65gB",
     description:
       "Hur kan vi lägga upp ett förebyggande och hälsofrämjande stöd tillsammans, i skolan och i vuxenlivet?",
   },
@@ -23,7 +23,7 @@ const lectures = [
       "Almamodellen. Utveckling av förskolan och skolan utifrån flickor med NPF",
     slug: "almamodellen-utveckling-av-forskolan-och-skolan-utifran-flickor-med-npf",
     imgUrl:
-      "https://cdn.pixabay.com/photo/2023/09/16/21/31/girl-8257551_1280.jpg",
+      "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTaeYMmMLTiUJYmXzVFBn7ly4vu2DfetKscoR0",
     description:
       "Föreläsningen fokuserar på flickornas specifika problematik och hur vi tillsammans kan arbeta för en hållbar förskole- och skolsituation för dem i syfte att stärka deras psykiska hälsa.",
   },
@@ -41,7 +41,7 @@ const lectures = [
     title: "Krisberedskap och bemötande vid svåra händelser",
     slug: "krisberedskap-och-bemotande-vid-svara-handelser",
     imgUrl:
-      "https://cdn.pixabay.com/photo/2023/09/16/21/31/girl-8257551_1280.jpg",
+      "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTwy6WHIkBwyHsRvC6S04gN3xcKbrufUdkFLE7",
     description:
       "Kriser och krisreaktioner. Krisreaktioner hos barn och andra sårbara grupper. Trauma. Bemötande vid svåra händelser. Samordnande krisstöd",
   },

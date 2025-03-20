@@ -10,7 +10,6 @@ interface AboutCardProps {
 
 export function AboutCard({ imageUrl, title, description }: AboutCardProps) {
   return (
-    <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
       <Card className="overflow-hidden">
         <div className="relative h-64 w-full">
           <Image
@@ -26,6 +25,5 @@ export function AboutCard({ imageUrl, title, description }: AboutCardProps) {
           <CardDescription className="text-lg">{description}</CardDescription>
         </CardHeader>
       </Card>
-    </motion.div>
   );
 }

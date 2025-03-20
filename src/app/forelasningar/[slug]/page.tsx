@@ -1,12 +1,16 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import lectures from "@/_data/lectures";
+import lectures from "@/app/_data/lectures";
 import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import BookingDrawer from "@/app/_components/BookingDrawer";
+import FormDrawer from "@/app/_components/FormDrawer";
 
-export default async function LecturePage({ params }: { params: Promise<{ slug: string }>}) {
+export default async function LecturePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const lecture = lectures.find((lecture) => lecture.slug === slug);
 
@@ -67,7 +71,11 @@ export default async function LecturePage({ params }: { params: Promise<{ slug: 
 
               {/* Bokningsknapp */}
               <div className="mt-auto pt-4">
-                <BookingDrawer lectureTitle={lecture.title} />
+                <FormDrawer
+                  title={`Boka ${lecture.title}`}
+                  description="Fyll i formuläret så återkommer vi till dig."
+                  triggerText="Boka föreläsning"
+                />
               </div>
             </div>
           </div>
