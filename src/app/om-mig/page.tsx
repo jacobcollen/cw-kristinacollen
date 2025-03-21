@@ -7,14 +7,14 @@ import { images } from "@/app/_data/images";
 export default function AboutMe() {
   return (
     <section className="container mx-auto max-w-6xl py-16">
-      <Card className="flex flex-col gap-8 border-none bg-transparent shadow-none md:flex-row">
+      <Card className="flex flex-col items-start gap-8 bg-transparent p-6 shadow-none border-none md:flex-row">
         <div className="w-full flex-shrink-0 md:w-1/3">
           <Image
             src={images.about}
             alt="Profilbild"
             width={400}
             height={600}
-            className="h-auto w-full rounded-lg object-cover"
+            className="h-auto w-full rounded-md object-cover"
           />
         </div>
         <CardContent className="w-full md:w-2/3">
