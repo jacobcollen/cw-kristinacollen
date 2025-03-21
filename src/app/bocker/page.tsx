@@ -6,6 +6,7 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
+  CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -27,49 +28,60 @@ export default function BooksPage() {
     { label: "Hem", href: "/" },
     { label: "Böcker", href: "/bocker" },
     ...(category
-      ? [
-          {
-            label: category,
-            href: `/bocker?category=${encodeURIComponent(category)}`,
-          },
-        ]
+      ? [{ label: category, href: `/bocker?category=${encodeURIComponent(category)}` }]
       : []),
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto max-w-6xl px-4 py-8">
       <BreadcrumbNav items={breadcrumbItems} />
       <BookNavbar title={category ? `Böcker: ${category}` : "Alla böcker"} />
-      {/* Grid */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredBooks.map((book) => (
-          <Link key={book.id} href={`/bocker/${book.slug}`}>
-            <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
-              <Card className="flex h-full flex-col">
-                <CardHeader>
+          <motion.div 
+            key={book.id}
+            whileHover={{ scale: 1.008 }} 
+            whileTap={{ scale: 0.985 }}
+            transition={{ type: "spring", stiffness: 250, damping: 15 }}
+            className="h-full"
+          >
+            <Link href={`/bocker/${book.slug}`} className="group block h-full">
+              <Card className="flex h-full flex-col hover:cursor-pointer">
+                <CardHeader className="p-6">
                   <img
                     src={book.imgUrl}
                     alt={book.title}
-                    className="h-48 w-full rounded-t-lg object-cover"
+                    className="w-full rounded-sm object-contain"
+                    style={{ aspectRatio: "3/4" }}
                   />
                 </CardHeader>
-                <CardContent className="flex flex-1 flex-col p-6">
-                  {/* Title */}
-                  <CardTitle className="mb-2 flex-none text-xl">
-                    {book.title}
-                  </CardTitle>
-                  {/* Desc */}
-                  <CardDescription className="line-clamp-3 flex-1">
-                    {Array.isArray(book.description)
-                      ? book.description.join(" ")
-                      : book.description}
-                  </CardDescription>
-                  {/* Btn */}
-                  <Button className="mt-4 w-full">Läs mer</Button>
+                <CardContent className="flex-grow p-6 pt-0">
+                  <div className="flex h-full flex-col">
+                    <CardTitle className="mb-2 text-xl leading-tight [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">
+                      {book.title}
+                    </CardTitle>
+
+                    <CardDescription 
+                      className="overflow-hidden text-ellipsis 
+                                [display:-webkit-box] [-webkit-box-orient:vertical] 
+                                [-webkit-line-clamp:var(--desc-lines,2)]"
+                      style={{
+                        "--desc-lines": book.title.length > 50 ? 1 : book.title.length > 30 ? 2 : 3,
+                        "maxHeight": book.title.length > 50 ? "1.5rem" : book.title.length > 30 ? "3rem" : "4.5rem"
+                      } as React.CSSProperties}
+                    >
+                      {Array.isArray(book.description)
+                        ? book.description.join(" ")
+                        : book.description}
+                    </CardDescription>
+                  </div>
                 </CardContent>
+                <CardFooter className="mt-auto p-6 pt-0">
+                  <Button className="w-full">Läs mer</Button>
+                </CardFooter>
               </Card>
-            </motion.div>
-          </Link>
+            </Link>
+          </motion.div>
         ))}
       </div>
     </div>

@@ -49,17 +49,21 @@ export default function FormDrawer({
   });
 
 const onSubmit = async (data: z.infer<typeof contactFormSchema>) => {
-  const res = await fetch("/api/sendEmail", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
 
-  if (res.ok) {
-    alert("Meddelandet har skickats!");
+    if (!res.ok) throw new Error("Något gick fel vid e-postutskick.");
+
+    alert("Tack! Ditt meddelande har skickats.");
     form.reset();
-  } else {
-    alert("Något gick fel, försök igen.");
+
+  } catch (error) {
+    console.error("Fel vid skickning:", error);
+    alert("Kunde inte skicka meddelandet, försök igen senare.");
   }
 };
 
