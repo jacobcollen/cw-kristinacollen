@@ -4,13 +4,10 @@ import lectures from "@/app/_data/lectures";
 import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 import FormDrawer from "@/app/_components/FormDrawer";
 
-export default async function LecturePage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function LecturePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const lecture = lectures.find((lecture) => lecture.slug === slug);
 
@@ -25,58 +22,41 @@ export default async function LecturePage({
   return (
     <div className="container mx-auto max-w-6xl p-4 sm:p-6">
       <BreadcrumbNav items={breadcrumbItems} />
-      <Card className="border-0 bg-transparent py-8 shadow-none">
+      <Card className="border-0 bg-transparent shadow-none">
         <CardContent className="p-0">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-10">
-            {/* Bild */}
-            <div className="relative mx-auto h-fit w-full max-w-md overflow-hidden rounded-sm">
-              <Image
-                src={lecture.imgUrl}
-                alt={lecture.title}
-                className="rounded-sm"
-                priority
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: "100%", height: "auto" }}
-              />
-            </div>
+          <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden rounded-md">
+            <Image
+              src={lecture.imgUrl}
+              alt={lecture.title}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-md"
+              priority
+            />
+          </div>
 
-            {/* Innehåll */}
-            <div className="flex flex-col space-y-6">
-              {/* Titel */}
-              <div>
-                <h1 className="mb-3 text-3xl font-bold tracking-tight sm:text-4xl">
-                  {lecture.title}
-                </h1>
-              </div>
+          <div className="p-6 space-y-6">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              {lecture.title}
+            </h1>
 
-              <Separator />
-
-              {/* Beskrivning */}
-              <div className="space-y-4">
-                <h2 className="text-xl font-semibold">Om föreläsningen</h2>
-                <div className="text-muted-foreground">
-                  {Array.isArray(lecture.description) ? (
-                    lecture.description.map((paragraph, index) => (
-                      <p key={index} className="mb-4">
-                        {paragraph}
-                      </p>
-                    ))
-                  ) : (
-                    <p>{lecture.description}</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Bokningsknapp */}
-              <div className="mt-auto pt-4">
+            <div className="flex flex-wrap items-center gap-4">
+              <Badge variant="secondary">{lecture.forWho}</Badge>
+              <Badge variant="outline">{lecture.length}</Badge>
+              <div className="ml-auto">
                 <FormDrawer
                   title={`Boka ${lecture.title}`}
                   description="Fyll i formuläret så återkommer vi till dig."
                   triggerText="Bokningsförfrågan"
                 />
               </div>
+            </div>
+
+            <Separator />
+
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold">Om föreläsningen</h2>
+              <p className="text-muted-foreground">{lecture.description}</p>
             </div>
           </div>
         </CardContent>
