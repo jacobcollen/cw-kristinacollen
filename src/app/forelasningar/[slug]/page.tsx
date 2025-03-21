@@ -74,7 +74,7 @@ export default async function LecturePage({
                 <FormDrawer
                   title={`Boka ${lecture.title}`}
                   description="Fyll i formuläret så återkommer vi till dig."
-                  triggerText="Boka föreläsning"
+                  triggerText="Bokningsförfrågan"
                 />
               </div>
             </div>

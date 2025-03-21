@@ -15,7 +15,6 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import books from "@/app/_data/books";
-import { Button } from "@/components/ui/button";
 import FormDrawer from "@/app/_components/FormDrawer";
 
 // Hämta unika kategorier från böckerna
