@@ -61,7 +61,7 @@ const lectures = [
     title: "Workshop i kreativt skrivande",
     slug: "workshop-i-kreativt-skrivande",
     imgUrl:
-      "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTwy6WHIkBwyHsRvC6S04gN3xcKbrufUdkFLE7",
+      "https://cdn.pixabay.com/photo/2015/01/09/11/08/startup-594090_1280.jpg",
     description:
       "Workshopen kommer att behandla barnboken i samhället, kön och kultur i barnboksvärlden, kreativt skrivande samt det speciella med att skriva för och med barn. Vi genomför skrivövningar som öppnar upp för fantasi som sedan kan appliceras på barngrupper.",
     forWho:

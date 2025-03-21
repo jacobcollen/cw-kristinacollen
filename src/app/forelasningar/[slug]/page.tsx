@@ -20,7 +20,7 @@ export default async function LecturePage({ params }: { params: Promise<{ slug: 
   ];
 
   return (
-    <div className="container mx-auto max-w-6xl p-4 sm:p-6">
+    <div className="container mx-auto max-w-5xl p-4 sm:p-6">
       <BreadcrumbNav items={breadcrumbItems} />
       <Card className="border-0 bg-transparent shadow-none">
         <CardContent className="p-0">
