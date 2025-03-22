@@ -49,18 +49,17 @@ export default function ForelasningarPage() {
                     <CardTitle className="mb-2 flex-none text-xl leading-tight [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">
                       {lecture.title}
                     </CardTitle>
-                    <CardDescription
-                      className="overflow-hidden text-ellipsis flex-1 
-                                 [display:-webkit-box] [-webkit-box-orient:vertical] 
-                                 [-webkit-line-clamp:var(--desc-lines)]"
-                      style={{
-                        "--desc-lines": descLines,
-                      } as React.CSSProperties}
-                    >
-                      {Array.isArray(lecture.description)
-                        ? lecture.description.join(" ")
-                        : lecture.description}
-                    </CardDescription>
+						<CardDescription
+						className="overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:var(--desc-lines)]"
+						style={{
+							"--desc-lines": lecture.title.length > 40 ? 3 : lecture.title.length > 25 ? 4 : 5,
+							maxHeight: lecture.title.length > 40 ? "4.5rem" : "7.5rem",
+						} as React.CSSProperties}
+						>
+						{Array.isArray(lecture.description)
+							? lecture.description.join(" ")
+							: lecture.description}
+						</CardDescription>
                     <div className="mt-auto pt-4">
                       <Button className="w-full">Läs mer</Button>
                     </div>
