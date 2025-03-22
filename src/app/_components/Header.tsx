@@ -9,7 +9,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full p-4 border-b-2 border-accent">
+    <header className="w-full p-4 border-b-2 border-slate-200">
       <div className="flex items-center justify-between">
         <div className="logo">
           <Link href="/">

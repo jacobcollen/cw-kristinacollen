@@ -73,8 +73,8 @@ export function Footer() {
   }
 
   return (
-    <footer className="w-full bg-black text-white mt-0">
-	  <div className={cn("container", "px-4", "py-12", "mx-auto",)}>
+    <footer className="w-full bg-gray-950 text-white mt-0">
+		<div className="container px-4 py-12 mx-auto">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {/* Col 1 about */}
           <div className="space-y-4">
@@ -144,7 +144,7 @@ export function Footer() {
             <h3 className="text-lg font-semibold">Prenumerera på nyhetsbrevet</h3>
             <Separator className="bg-gray-700" />
             <p className="text-gray-300 text-sm">
-              Få uppdateringar om nya böcker, föreläsningar och andra aktiviteter direkt till din inbox. 🥰
+              Få uppdateringar om nya böcker, föreläsningar och andra aktiviteter direkt till din inbox 🥰
             </p>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
