@@ -5,6 +5,8 @@ export const dynamic = "force-dynamic";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import { Footer } from "./_components/Footer";
+import { ToastProvider } from "@/components/ui/toast";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -20,6 +22,9 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
+        <ToastProvider>
+          <Footer />
+        </ToastProvider>
       </body>
     </html>
   );
