@@ -33,11 +33,12 @@ export default function BooksPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-6 py-8">
       <BreadcrumbNav items={breadcrumbItems} />
-      <BookNavbar title={category ? `${category}` : "Alla böcker"} />
+      <BookNavbar title={category ? category : "Alla böcker"} />
+      
       {/* Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredBooks.map((book) => (
           <motion.div
             key={book.id}

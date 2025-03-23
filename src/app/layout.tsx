@@ -1,12 +1,11 @@
 import "@/styles/globals.css";
 import Header from "./_components/Header";
-
-export const dynamic = "force-dynamic";
-
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { Footer } from "./_components/Footer";
 import { ToastProvider } from "@/components/ui/toast";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -19,9 +18,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
+      <body className="flex min-h-screen flex-col">
         <Header />
-        {children}
+        <main className="flex-grow container mx-auto max-w-6xl px-6 pt-6 pb-8">
+          {children}
+        </main>
         <ToastProvider>
           <Footer />
         </ToastProvider>

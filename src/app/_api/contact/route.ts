@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { contactFormSchema } from "@/lib/schemas/contactFormSchema";
+import { contactFormSchema } from "@/lib/db/schema/contactFormSchema";
 import * as z from "zod";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -11,7 +11,10 @@ export async function POST(req: Request) {
     const parsedData = contactFormSchema.safeParse(body);
 
     if (!parsedData.success) {
-      return NextResponse.json({ error: "Ogiltiga formulärdata" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Ogiltiga formulärdata" },
+        { status: 400 },
+      );
     }
 
     const { name, email, message } = parsedData.data;
@@ -24,9 +27,11 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ success: true }, { status: 200 });
-
   } catch (error) {
     console.error("Fel vid e-postutskick:", error);
-    return NextResponse.json({ error: "Kunde inte skicka e-post" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Kunde inte skicka e-post" },
+      { status: 500 },
+    );
   }
 }

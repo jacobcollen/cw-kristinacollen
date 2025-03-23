@@ -2,15 +2,24 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import lectures from "@/app/_data/lectures";
 import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import FormDrawer from "@/app/_components/FormDrawer";
 
-export default async function LecturePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const lecture = lectures.find((lecture) => lecture.slug === slug);
-
+export default async function LecturePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const lecture = lectures.find((l) => l.slug === params.slug);
   if (!lecture) return notFound();
 
   const breadcrumbItems = [
@@ -20,44 +29,40 @@ export default async function LecturePage({ params }: { params: Promise<{ slug: 
   ];
 
   return (
-    <div className="container mx-auto max-w-5xl p-4 sm:p-6">
+    <div className="container mx-auto max-w-4xl p-6">
       <BreadcrumbNav items={breadcrumbItems} />
-      <Card className="border-0 bg-transparent shadow-none">
-        <CardContent className="p-0">
-          <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden rounded-md">
+      <Card>
+        <CardHeader>
+          <CardTitle>{lecture.title}</CardTitle>
+          <CardDescription>{lecture.description}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="relative h-64 w-full overflow-hidden rounded-md">
             <Image
               src={lecture.imgUrl}
               alt={lecture.title}
               layout="fill"
               objectFit="cover"
-              className="rounded-md"
-              priority
             />
           </div>
 
-          <div className="p-6 space-y-6">
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              {lecture.title}
-            </h1>
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <Badge>{lecture.forWho}</Badge>
+            <Badge variant="outline">{lecture.length}</Badge>
+            <Button className="ml-auto" asChild>
+              <FormDrawer
+                title={`Boka ${lecture.title}`}
+                description="Fyll i formuläret så återkommer vi."
+                triggerText="Boka nu"
+              />
+            </Button>
+          </div>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <Badge variant="secondary">{lecture.forWho}</Badge>
-              <Badge variant="outline">{lecture.length}</Badge>
-              <div className="ml-auto">
-                <FormDrawer
-                  title={`Boka ${lecture.title}`}
-                  description="Fyll i formuläret så återkommer vi till dig."
-                  triggerText="Bokningsförfrågan"
-                />
-              </div>
-            </div>
+          <Separator className="my-6" />
 
-            <Separator />
-
-            <div className="space-y-4">
-              <h2 className="text-xl font-semibold">Om föreläsningen</h2>
-              <p className="text-muted-foreground">{lecture.description}</p>
-            </div>
+          <div className="space-y-4">
+            <h2 className="text-xl font-semibold">Om föreläsningen</h2>
+            <p className="text-muted-foreground">{lecture.description}</p>
           </div>
         </CardContent>
       </Card>

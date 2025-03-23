@@ -3,6 +3,8 @@ import {
   index,
   integer,
   pgTableCreator,
+  pgTable,
+  serial,
   timestamp,
   varchar,
   text,
@@ -29,3 +31,17 @@ export const news = createTable(
     titleIndex: index("news_title_idx").on(news.title),
   }),
 );
+
+export const newsletterSubscribers = pgTable("newsletter_subscribers", {
+  id: serial("id").primaryKey(),
+  email: text("email").unique().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(), // Viktigt att ID är definierat!
+  username: varchar("username", { length: 256 }).notNull(),
+  passwordHash: text("password_hash").notNull(),
+  role: varchar("role", { length: 50 }).notNull(),
+});
+

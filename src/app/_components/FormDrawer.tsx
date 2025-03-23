@@ -26,7 +26,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
-import { contactFormSchema } from "@/lib/schemas/contactFormSchema";
+import { contactFormSchema } from "@/lib/db/schema/contactFormSchema";
 
 export default function FormDrawer({
   title,
@@ -48,24 +48,23 @@ export default function FormDrawer({
     },
   });
 
-const onSubmit = async (data: z.infer<typeof contactFormSchema>) => {
-  try {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+  const onSubmit = async (data: z.infer<typeof contactFormSchema>) => {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
-    if (!res.ok) throw new Error("Något gick fel vid e-postutskick.");
+      if (!res.ok) throw new Error("Något gick fel vid e-postutskick.");
 
-    alert("Tack! Ditt meddelande har skickats.");
-    form.reset();
-
-  } catch (error) {
-    console.error("Fel vid skickning:", error);
-    alert("Kunde inte skicka meddelandet, försök igen senare.");
-  }
-};
+      alert("Tack! Ditt meddelande har skickats.");
+      form.reset();
+    } catch (error) {
+      console.error("Fel vid skickning:", error);
+      alert("Kunde inte skicka meddelandet, försök igen senare.");
+    }
+  };
 
   return (
     <Drawer>
@@ -83,14 +82,17 @@ const onSubmit = async (data: z.infer<typeof contactFormSchema>) => {
           </DrawerClose>
         </div>
 
-        <div className="max-w-lg mx-auto w-full">
+        <div className="mx-auto w-full max-w-lg">
           <DrawerHeader>
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-4">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-4 p-4"
+            >
               <FormField
                 control={form.control}
                 name="name"

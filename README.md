@@ -17,12 +17,13 @@
 - [x] Update next config
 - [x] Setup ChadCN UI
 - [x] Footer with newsletter
-- [ ] Add a newsletter subscription
-- [ ] Add a newsletter unsubscribe
+- [x] Add a newsletter subscription
+- [x] Drizzle schema
+- [x] Add a newsletter unsubscribe
+- [x] Admin page  
 - [ ] Add a newsletter preview
 - [ ] Add a newsletter preview page
 - [ ] Add a newsletter preview subscription
-- [ ] Add a newsletter preview unsubscribe
 - [ ] Use Next
 - [ ] Error management (w/ Sentry)
 - [ ] Routing (parallel route)
