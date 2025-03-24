@@ -132,6 +132,7 @@ export default function ContactForm({
           type="submit" 
           className="w-full" 
           disabled={isSubmitting}
+          aria-label={isSubmitting ? "Skickar meddelande..." : "Skicka meddelande"}
         >
           {isSubmitting ? "Skickar..." : "Skicka"}
         </Button>
@@ -143,11 +144,16 @@ export default function ContactForm({
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="default">
+          <Button 
+            variant="default"
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            aria-controls="contact-form-dialog"
+          >
             {triggerText}
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent id="contact-form-dialog" className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription>{description}</DialogDescription>
@@ -163,11 +169,17 @@ export default function ContactForm({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="default" className="w-full">
+        <Button 
+          variant="default" 
+          className="w-full"
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          aria-controls="contact-form-drawer"
+        >
           {triggerText}
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent id="contact-form-drawer">
         <DrawerHeader>
           <DrawerTitle>{title}</DrawerTitle>
           <DrawerDescription>{description}</DrawerDescription>
