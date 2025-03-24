@@ -36,7 +36,7 @@ export default async function LecturePage({
           <CardTitle className="text-2xl font-bold">{lecture.title}</CardTitle>
         </CardHeader>
         <CardContent>
-          {/* Bildsektion */}
+
           <div className="relative h-64 w-full overflow-hidden rounded-md">
             <Image
               src={lecture.imgUrl}
@@ -46,7 +46,6 @@ export default async function LecturePage({
             />
           </div>
 
-          {/* Badges och knapp */}
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
             <div className="flex flex-wrap gap-2">
               {lecture.forWho.map((audience, index) => (
@@ -67,7 +66,6 @@ export default async function LecturePage({
 
           <Separator className="my-6" />
 
-          {/* Beskrivning och bulletpoints */}
           <div className="space-y-6">
             <div>
               <h2 className="text-xl font-semibold">Om föreläsningen</h2>
@@ -85,6 +83,7 @@ export default async function LecturePage({
               </ul>
             </div>
           </div>
+		  
         </CardContent>
       </Card>
     </div>

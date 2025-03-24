@@ -17,10 +17,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${GeistSans.variable} min-h-screen`} suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
+    <html
+      lang="sv"
+      className={`${GeistSans.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="flex h-full flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -28,14 +34,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="flex-grow">
-            <div className="container mx-auto max-w-6xl px-6 py-8">
-              {children}
-            </div>
-          </main>
-          <ToastProvider>
-            <Footer />
-          </ToastProvider>
+          <div className="flex-1">
+            <main className="flex-1" style={{ minHeight: 'calc(100vh - 6rem)' }}>{children}</main>
+            <ToastProvider>
+              <Footer />
+            </ToastProvider>
+          </div>
         </ThemeProvider>
       </body>
     </html>
