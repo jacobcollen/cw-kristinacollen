@@ -1,35 +1,50 @@
+// server/actions/contact.ts
 "use server";
 
 import { Resend } from "resend";
 import { z } from "zod";
+import { contactFormSchema } from "@/server/db/contactFormSchema";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Valideringsschema
-const contactFormSchema = z.object({
-  name: z.string().min(2, "Namnet måste vara minst 2 tecken."),
-  email: z.string().email("Ogiltig e-postadress."),
-  message: z.string().min(10, "Meddelandet måste vara minst 10 tecken."),
-});
-
 export async function sendContactEmail(formData: unknown) {
   const result = contactFormSchema.safeParse(formData);
+  
   if (!result.success) {
-    return { error: result.error.flatten().fieldErrors };
+    return { 
+      error: "Ogiltig formulärdata",
+      details: result.error.flatten() 
+    };
   }
 
+  const { name, email, message } = result.data;
+
   try {
-    await resend.emails.send({
-      from: "kontakt@kristinacollen.se",
+    const data = await resend.emails.send({
+      from: "Kontaktformulär <kontakt@kristinacollen.se>",
       to: "jcbcollen@icloud.com",
-      subject: `Nytt meddelande från ${result.data.name}`,
-      replyTo: result.data.email,
-      text: `Meddelande:\n${result.data.message}`,
+      subject: `Nytt meddelande från ${name}`,
+      replyTo: email,
+      text: `Namn: ${name}\nE-post: ${email}\n\nMeddelande:\n${message}`,
+      html: `
+        <h1>Nytt meddelande från kontaktformulär</h1>
+        <p><strong>Namn:</strong> ${name}</p>
+        <p><strong>E-post:</strong> ${email}</p>
+        <p><strong>Meddelande:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `,
     });
+
+    if (data.error) {
+      throw new Error(data.error.message);
+    }
 
     return { success: true };
   } catch (error) {
-    console.error("Fel vid skickning:", error);
-    return { error: "Kunde inte skicka meddelandet, försök igen senare." };
+    console.error("Resend error:", error);
+    return { 
+      error: "Kunde inte skicka meddelandet",
+      details: error instanceof Error ? error.message : String(error)
+    };
   }
 }

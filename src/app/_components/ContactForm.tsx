@@ -7,6 +7,7 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ContactFormProps } from "../_types/contact";
 import {
   Form,
   FormField,
@@ -34,16 +35,6 @@ import {
 } from "@/components/ui/drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils";
-
-interface ContactFormProps {
-  title: string;
-  description: string;
-  triggerText: string;
-  triggerClassName?: string;
-  triggerVariant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
-  onSuccess?: () => void;
-}
 
 export default function ContactForm({
   title,
@@ -56,7 +47,7 @@ export default function ContactForm({
   const [open, setOpen] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  
+
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -71,11 +62,34 @@ export default function ContactForm({
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
       });
 
-      if (!res.ok) throw new Error("Något gick fel vid e-postutskick.");
+      const result = await res.json();
+
+      if (!res.ok) {
+        let errorMessage = "Något gick fel vid e-postutskick.";
+
+        if (result.details?.fieldErrors) {
+          const errors = Object.entries(result.details.fieldErrors)
+            .map(([field, messages]) => {
+              if (Array.isArray(messages)) {
+                return `${field}: ${messages.join(", ")}`;
+              } else {
+                return `${field}: ${messages}`;
+              }
+            })
+            .join("\n");
+          errorMessage = `Ogiltig inmatning:\n${errors}`;
+        } else if (result.error) {
+          errorMessage = result.error;
+        }
+
+        throw new Error(errorMessage);
+      }
 
       toast.success("Tack! Ditt meddelande har skickats.");
       form.reset();
@@ -83,7 +97,9 @@ export default function ContactForm({
       onSuccess?.();
     } catch (error) {
       console.error("Fel vid skickning:", error);
-      toast.error("Kunde inte skicka meddelandet, försök igen senare.");
+      toast.error(
+        error instanceof Error ? error.message : "Något gick fel vid skickning",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -125,21 +141,23 @@ export default function ContactForm({
             <FormItem>
               <FormLabel>Meddelande</FormLabel>
               <FormControl>
-                <Textarea 
-                  placeholder="Ditt meddelande" 
-                  className="min-h-32" 
-                  {...field} 
+                <Textarea
+                  placeholder="Ditt meddelande"
+                  className="min-h-32"
+                  {...field}
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button 
-          type="submit" 
-          className="w-full" 
+        <Button
+          type="submit"
+          className="w-full"
           disabled={isSubmitting}
-          aria-label={isSubmitting ? "Skickar meddelande..." : "Skicka meddelande"}
+          aria-label={
+            isSubmitting ? "Skickar meddelande..." : "Skicka meddelande"
+          }
         >
           {isSubmitting ? "Skickar..." : "Skicka"}
         </Button>
@@ -148,14 +166,13 @@ export default function ContactForm({
   );
 
   const TriggerButton = (
-    <Button 
+    <Button
       variant={triggerVariant}
       className={triggerClassName}
       aria-haspopup="dialog"
       aria-expanded={open}
       aria-controls={isDesktop ? "contact-form-dialog" : "contact-form-drawer"}
       onClick={(e) => {
-        // Prevent focus retention that causes ARIA-hidden errors
         e.currentTarget.blur();
       }}
     >
@@ -166,13 +183,13 @@ export default function ContactForm({
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          {TriggerButton}
-        </DialogTrigger>
+        <DialogTrigger asChild>{TriggerButton}</DialogTrigger>
         <DialogContent id="contact-form-dialog" className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
-            {description && <DialogDescription>{description}</DialogDescription>}
+            {description && (
+              <DialogDescription>{description}</DialogDescription>
+            )}
           </DialogHeader>
           {FormContent}
         </DialogContent>
@@ -182,31 +199,25 @@ export default function ContactForm({
 
   return (
     <Drawer open={open} onOpenChange={setOpen} shouldScaleBackground={false}>
-      <DrawerTrigger asChild>
-        {TriggerButton}
-      </DrawerTrigger>
-      <DrawerContent 
+      <DrawerTrigger asChild>{TriggerButton}</DrawerTrigger>
+      <DrawerContent
         id="contact-form-drawer"
         onInteractOutside={(e) => {
-          // Prevent focus issues with nested drawers
           const target = e.target as HTMLElement;
-          if (target.closest('[data-vaul-drawer]')) {
+          if (target.closest("[data-vaul-drawer]")) {
             e.preventDefault();
           }
         }}
       >
         <DrawerHeader>
           <DrawerTitle>{title}</DrawerTitle>
-          {description && <p className="text-sm text-muted-foreground">{description}</p>}
+          {description && (
+            <p className="text-sm text-muted-foreground">{description}</p>
+          )}
         </DrawerHeader>
-        <div className="p-4">
-          {FormContent}
-        </div>
+        <div className="p-4">{FormContent}</div>
         <DrawerClose asChild className="p-4">
-          <Button 
-            variant="outline"
-            onClick={(e) => e.currentTarget.blur()}
-          >
+          <Button variant="outline" onClick={(e) => e.currentTarget.blur()}>
             Stäng
           </Button>
         </DrawerClose>
