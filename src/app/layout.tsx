@@ -9,7 +9,7 @@ import { ToastProvider } from "@/components/ui/toast";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Hemsida för Kristina COllén",
+  title: "Hemsida för Kristina Collén",
   description:
     "Kristina är författare av både barnböcker och skönlitteratur. Medlem i Sveriges Författarförbund och aktiv föreläsare inom sociala frågor och kreativt skrivande.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
@@ -19,12 +19,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${GeistSans.variable} h-full`}
-      suppressHydrationWarning
-    >
-      <body className="h-full mx-auto flex flex-col">
+    <html lang="en" className={`${GeistSans.variable} min-h-screen`} suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -32,8 +28,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="container min-h-screen mx-auto max-w-6xl flex-grow px-6">
-            {children}
+          <main className="flex-grow">
+            <div className="container mx-auto max-w-6xl px-6 py-8">
+              {children}
+            </div>
           </main>
           <ToastProvider>
             <Footer />

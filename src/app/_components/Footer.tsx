@@ -40,7 +40,7 @@ export function Footer() {
   const form = useForm();
 
   return (
-    <footer className="mt-0 w-full bg-gray-950 text-white">
+    <footer className="mt-auto w-full bg-gray-950 text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {/* Col 1 about */}
