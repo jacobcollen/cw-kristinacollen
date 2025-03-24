@@ -6,13 +6,13 @@ const lectures = [
     imgUrl: "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTaeYMmMLTiUJYmXzVFBn7ly4vu2DfetKscoR0",
     description: [
       "Föreläsningen fokuserar på flickor med autism och ADHD (NPF) och deras specifika styrkor och svårigheter och hur vi tillsammans kan arbeta för en hållbar förskole- och skolsituation för dem i syfte att stärka deras psykiska hälsa.",
-      "Föreläsningen ger ett inifrånperspektiv och ett barnperspektiv på hur det är att vara flicka och leva med NPF, utifrån böckerna om detektiv Alma (se under böcker för barn). Vi arbetar också praktiskt tillsammans för att tillgängliggöra den specifika fysiska miljön så att den bättre passar flickornas behov."
+      "Föreläsningen ger ett inifrånperspektiv och ett barnperspektiv på hur det är att vara flicka och leva med NPF, utifrån böckerna om detektiv Alma. Vi arbetar också praktiskt tillsammans för att tillgängliggöra den specifika fysiska miljön så att den bättre passar flickornas behov."
     ],
     bulletPoints: [
       "Föreläsningen ges till personal i förskola och grundskola.",
-      "Föreläsningen kan ges till pedagogerna eller till alla vuxna som möter eleverna, dvs ledningspersoner, elevhälsopersonal, elevassistenter med flera.",
+      "Föreläsningen kan ges till pedagoger eller alla vuxna som möter eleverna, såsom ledningspersoner, elevhälsopersonal och elevassistenter.",
       "Föreläsningen kan ges som en fristående inspirationsföreläsning.",
-      "Efterföljande workshops erbjuds i syfte att utveckla den specifika miljön på förskolan/skolan."
+      "Efterföljande workshops erbjuds för att utveckla den specifika miljön på förskolan/skolan."
     ],
     forWho: ["Förskola", "Grundskola"],
     length: "2-6 timmar"
@@ -23,14 +23,14 @@ const lectures = [
     slug: "sexualitet-samtycke-och-relationer-anpassad-skola",
     imgUrl: "https://cdn.pixabay.com/photo/2018/02/04/09/09/brushes-3129361_1280.jpg",
     description: [
-      "Föreläsningen tar upp flera teman som kunskap kring funktionsnedsättningar och diagnoser, sexualitet, relationer och samtycke, attityder och förhållningssätt, ungdomarnas aktivitet på internet.",
-      "Föreläsningen utgår från teorier och forskning och tillhandahåller metoder och material, både de som finns att tillgå och de som vi skapar tillsammans."
+      "Föreläsningen tar upp flera teman som kunskap kring funktionsnedsättningar och diagnoser, sexualitet, relationer och samtycke, attityder och förhållningssätt, samt ungdomarnas aktivitet på internet.",
+      "Föreläsningen utgår från teorier och forskning och tillhandahåller metoder och material, både existerande och sådana vi skapar tillsammans."
     ],
     bulletPoints: [
       "Föreläsningen ges till personal inom anpassad grundskola eller anpassat gymnasium.",
-      "Föreläsningen kan ges till pedagogerna på skolan eller så inkluderas alla vuxna på skolan som möter eleverna, dvs ledningspersoner, elevhälsopersonal, elevassistenter med flera.",
-      "Föreläsningen kan ges som en fristående inspirationsföreläsning för att komma igång med att utveckla arbetet kring ämnet sexualitet, samtycke och relationer.",
-      "För att fördjupa temat erbjuds efterföljande workshops, 2-3 ggr per termin à 2 timmar."
+      "Den kan ges till pedagogerna på skolan eller inkludera alla vuxna som möter eleverna.",
+      "Föreläsningen kan ges som en inspirationsföreläsning för att starta utvecklingsarbetet inom ämnet.",
+      "För att fördjupa temat erbjuds efterföljande workshops, 2-3 gånger per termin à 2 timmar."
     ],
     forWho: ["Anpassad grundskola", "Anpassat gymnasium"],
     length: "2-4 timmar"
@@ -41,14 +41,13 @@ const lectures = [
     slug: "flickor-och-unga-tjejer-med-adhd",
     imgUrl: "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTsTtOA65aQdrUILXw2geG89vc7KBZ0nHEAfml",
     description: [
-      "Föreläsningen fokuserar på flickor och unga tjejer med ADHD och på vilket sätt problematiken skiljer sig från pojkar och killar? Vad säger den senaste forskningen? ",
-      "Flickor och unga tjejer med ADHD riskerar i hög grad att hamna i psykisk ohälsa. Vad kan vi som finns i deras omgivning göra för att minska denna risk och öka den psykiska hälsan?"
+      "Föreläsningen fokuserar på flickor och unga tjejer med ADHD och hur deras situation skiljer sig från pojkar med samma diagnos.",
+      "Vi går igenom den senaste forskningen och diskuterar vad som kan göras för att minska risken för psykisk ohälsa hos dessa flickor."
     ],
     bulletPoints: [
-      "Föreläsningen vänder sig till er som i er vardag möter flickor och unga tjejer/kvinnor med ADHD, i skolan, vuxenutbildningen, exempelvis Folkhögskolan eller på behandlingshem.",
-      "Vi går igenom varför flickor och kvinnor är extra utsatta, förekomsten av autism och kognitiv nedsättning.",
-      "Föreläsningen syftar till att öka förståelsen för dessa flickor och kvinnor i syfte att stärka deras psykiska hälsa.",
-      "Föreläsningen kan ges som en enstaka föreläsning, ca 2 timmar, men också med efterföljande workshop där vi tillsammans resonerar utifrån den specifika verksamheten."
+      "Föreläsningen riktar sig till personer som möter flickor och unga kvinnor med ADHD i skola, vuxenutbildning eller på behandlingshem.",
+      "Vi går igenom varför flickor och kvinnor med ADHD är extra utsatta och hur autism och kognitiv nedsättning ofta förekommer samtidigt.",
+      "Föreläsningen syftar till att öka förståelsen och stärka den psykiska hälsan hos flickor och kvinnor med ADHD."
     ],
     forWho: ["Skola", "Folkhögskola", "Behandlingshem"],
     length: "2-4 timmar"
@@ -56,18 +55,16 @@ const lectures = [
   {
     id: 4,
     title: "Anhörig till en person med funktionsnedsättning",
-    slug: "anhörig-till-en-person-med-funktionsnedsättning",
+    slug: "anhorig-till-en-person-med-funktionsnedsattning",
     imgUrl: "https://cdn.pixabay.com/photo/2017/08/07/13/40/people-2603928_1280.jpg",
     description: [
-      "Att vara anhörig, förälder, syskon eller barn till en person som har kognitiva funktionsnedsättningar kan ofta innebära ett livslångt engagemang.",
-      "Föreläsningen behandlar kognition, kognitiva nedsättningar och vad som trasslar till sig i livet när man lever med en nedsättning i sina kognitioner.",
-      "Föreläsningen fokuserar på anhörigperspektivet, de specifika utmaningar det innebär men också det fina med att på nära håll få följa sin anhöriga genom livet och vara ett stöd."
+      "Att vara anhörig, förälder, syskon eller barn till en person med kognitiva funktionsnedsättningar kan innebära ett livslångt engagemang.",
+      "Föreläsningen behandlar kognition, kognitiva nedsättningar och vilka utmaningar som kan uppstå i vardagen."
     ],
     bulletPoints: [
-      "Föreläsningen vänder sig till dig som är anhörig till en person med kognitiva nedsättningar, som exempelvis intellektuell funktionsnedsättning, ADHD, autism eller psykisk sjukdom.",
-      "Föreläsningen kan följas upp med gruppdiskussioner där vi ger varandra tips och stöd i vardagssituationer.",
-      "Föreläsningen kan också anpassas till en personalgrupp som i sitt arbete möter anhöriga.",
-      "Tidsåtgång 1-3 timmar beroende på om uppföljning av gruppdiskussioner ska ingå."
+      "Föreläsningen vänder sig till anhöriga till personer med kognitiva nedsättningar, såsom intellektuell funktionsnedsättning, ADHD, autism eller psykisk sjukdom.",
+      "Föreläsningen kan följas upp med gruppdiskussioner där vi ger varandra tips och stöd.",
+      "Den kan också anpassas för personal som i sitt arbete möter anhöriga."
     ],
     forWho: ["Anhörig", "Personal"],
     length: "2-3 timmar"
@@ -78,12 +75,12 @@ const lectures = [
     slug: "krisberedskap-och-bemotande-vid-svara-handelser",
     imgUrl: "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTwy6WHIkBwyHsRvC6S04gN3xcKbrufUdkFLE7",
     description: [
-      "Föreläsningen fördjupar flera teman inom området, exempelvis olika slags kriser, krisreaktioner, sorg och sorgreaktioner. Hur reagerar barn i olika åldrar vid kriser och vilka andra sårbara grupper finns, som behöver särskild hänsynstagande? Vad skiljer kris från trauma?",
-      "Vilket bemötande är viktigt vid svåra händelser och hur kan vi skapa ett samordnat krisstöd?"
+      "Föreläsningen fördjupar flera teman inom området, exempelvis olika slags kriser, krisreaktioner, sorg och sorgreaktioner.",
+      "Hur reagerar barn i olika åldrar vid kriser och vilka andra sårbara grupper finns som behöver särskild hänsyn? Vad skiljer en kris från trauma?"
     ],
     bulletPoints: [
-      "Föreläsningen vänder sig till personal inom kommunen, exempelvis så kallade POSOM-grupper.",
-      "Föreläsningen kan anpassas till andra personalgrupper, till exempel inom frivilligorganisationer eller kyrkan - personer som möter människor i kris och sorg."
+      "Föreläsningen vänder sig till personal inom kommunen, exempelvis POSOM-grupper.",
+      "Den kan även anpassas till personal inom frivilligorganisationer eller kyrkan som möter människor i kris och sorg."
     ],
     forWho: ["Kommun", "POSOM", "Kyrka"],
     length: "2-4 timmar"
@@ -94,11 +91,11 @@ const lectures = [
     slug: "workshop-i-kreativt-skrivande",
     imgUrl: "https://cdn.pixabay.com/photo/2015/01/09/11/08/startup-594090_1280.jpg",
     description: [
-      "Workshopen kommer att behandla barnboken i samhället, kön och kultur i barnboksvärlden, kreativt skrivande samt det speciella med att skriva för och med barn.",
-      "Vi genomför skrivövningar som öppnar upp för fantasin och som sedan kan appliceras på elever och i barngrupper."
+      "Workshopen behandlar barnbokens roll i samhället, kön och kultur i barnboksvärlden samt det speciella med att skriva för och med barn.",
+      "Vi genomför skrivövningar som öppnar upp för fantasin och som sedan kan appliceras i undervisning och barnverksamhet."
     ],
     bulletPoints: [
-      "Föreläsningen ges till pedagoger i skolan men också till andra som möter barn i sin verksamhet, på fritidshem eller i fritidsverksamhet.",
+      "Föreläsningen ges till pedagoger i skolan men även till fritidshem och andra verksamheter där man arbetar med barn.",
       "Vi genomför egna kreativa skrivövningar."
     ],
     forWho: ["Pedagoger", "Fritidshem", "Fritidsverksamhet"],
