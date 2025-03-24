@@ -39,7 +39,7 @@ export const newsletterSubscribers = pgTable("newsletter_subscribers", {
 });
 
 export const users = pgTable("users", {
-  id: serial("id").primaryKey(), // Viktigt att ID är definierat!
+  id: serial("id").primaryKey(),
   username: varchar("username", { length: 256 }).notNull(),
   passwordHash: text("password_hash").notNull(),
   role: varchar("role", { length: 50 }).notNull(),

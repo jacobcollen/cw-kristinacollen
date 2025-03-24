@@ -16,18 +16,19 @@
 - [x] "taint" (server-only)
 - [x] Update next config
 - [x] Setup ChadCN UI
+- [x] Breadbrums
 - [x] Footer with newsletter
 - [x] Add a newsletter subscription
 - [x] Drizzle schema
 - [x] Add a newsletter unsubscribe
-- [x] Admin page  
-- [ ] Add a newsletter preview
-- [ ] Add a newsletter preview page
+- [x] Admin page
+- [ ] Connect Drizzle to admin
+- [ ] Newsletter ection on admin page
+- [ ] Post news section on admin page
 - [ ] Add a newsletter preview subscription
 - [ ] Use Next
 - [ ] Error management (w/ Sentry)
 - [ ] Routing (parallel route)
-- [ ] Breadbrums
 - [ ] Analytics (posthog)
 - [ ] Delete button (w/ Server Actions)
 - [ ] Ratelimiting (upstash)

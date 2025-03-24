@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ExternalLink } from "lucide-react";
-import FormDrawer from "@/app/_components/FormDrawer";
+import ContactForm from "@/app/_components/ContactForm";
 
 export default async function BookPage({ params }: { params: { slug: string } }) {
   const book = books.find((b) => b.slug === params.slug);
@@ -57,9 +57,9 @@ export default async function BookPage({ params }: { params: { slug: string } })
                   </a>
                 </Button>
               ) : (
-                <FormDrawer
-                  title="Köp boken"
-                  description="Kontakta Kristina för att köpa boken."
+                <ContactForm
+                 title={`Köp boken ${book.title}`}
+                  description="Kontakta mig för att köpa boken."
                   triggerText="Köp boken"
                 />
               )}

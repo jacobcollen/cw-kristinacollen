@@ -1,3 +1,4 @@
+import { PageThemeWrapper } from "./_components/PageThemeWrapper";
 import { getNews } from "@/server/queries";
 import { NewsFeed } from "@/app/_components/NewsFeed";
 import About from "@/app/_components/About";
@@ -8,10 +9,12 @@ export default async function HomePage() {
   const news = await getNews();
 
   return (
-    <main>
-      <About />
-      <NewsFeed news={news} />
-      <About />
-    </main>
+    <PageThemeWrapper>
+      <main>
+        <About />
+        <NewsFeed news={news} />
+        <About />
+      </main>
+    </PageThemeWrapper>
   );
 }

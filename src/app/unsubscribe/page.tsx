@@ -1,5 +1,6 @@
 "use client";
 
+import { PageThemeWrapper } from "../_components/PageThemeWrapper";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -14,8 +15,7 @@ export default function Unsubscribe() {
 
   useEffect(() => {
     if (email) {
-      // Kontrollera om email finns för att förhindra otillåten åtkomst
-      setMessage(`Bekräfta att du vill avprenumerera från vårt nyhetsbrev: ${email}`);
+      setMessage(`Bekräfta att du vill avprenumerera på nyhetsbrevet: ${email}`);
     }
   }, [email]);
   
@@ -28,7 +28,6 @@ export default function Unsubscribe() {
 
     setStatus("loading");
     try {
-      // Skicka avprenumeration till backend eller API
       const response = await fetch("/api/unsubscribe", {
         method: "POST",
         headers: {
@@ -50,6 +49,7 @@ export default function Unsubscribe() {
   }
 
   return (
+	<PageThemeWrapper>
     <Card>
       <CardHeader>
         <CardTitle>Avprenumerera</CardTitle>
@@ -71,5 +71,6 @@ export default function Unsubscribe() {
         {status === "error" && <Button onClick={handleUnsubscribe}>Försök igen</Button>}
       </CardFooter>
     </Card>
+	</PageThemeWrapper>
   );
 }

@@ -1,7 +1,8 @@
 import "@/styles/globals.css";
-import Header from "./_components/Header";
+import { ThemeProvider } from "./_components/theme-provider";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import Header from "./_components/Header";
 import { Footer } from "./_components/Footer";
 import { ToastProvider } from "@/components/ui/toast";
 
@@ -17,15 +18,22 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-grow container mx-auto max-w-6xl px-6 pt-6 pb-8">
-          {children}
-        </main>
-        <ToastProvider>
-          <Footer />
-        </ToastProvider>
+    <html lang="en" className={`${GeistSans.variable}`} suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          <main className="flex-grow container mx-auto max-w-5xl px-6 py-8">
+            {children}
+          </main>
+          <ToastProvider>
+            <Footer />
+          </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

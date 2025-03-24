@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { PageThemeWrapper } from "../_components/PageThemeWrapper";
 
 export default function ForelasningarPage() {
   const breadcrumbItems = [
@@ -20,6 +21,7 @@ export default function ForelasningarPage() {
   ];
 
   return (
+	<PageThemeWrapper>
     <div className="container mx-auto px-4 py-8">
       <BreadcrumbNav items={breadcrumbItems} />
       {/* Grid */}
@@ -71,5 +73,6 @@ export default function ForelasningarPage() {
         })}
       </div>
     </div>
+	</PageThemeWrapper>
   );
 }

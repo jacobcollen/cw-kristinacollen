@@ -12,7 +12,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import FormDrawer from "@/app/_components/FormDrawer";
+import ContactForm from "@/app/_components/ContactForm";
 
 export default async function LecturePage({
   params,
@@ -50,10 +50,10 @@ export default async function LecturePage({
             <Badge>{lecture.forWho}</Badge>
             <Badge variant="outline">{lecture.length}</Badge>
             <Button className="ml-auto" asChild>
-              <FormDrawer
-                title={`Boka ${lecture.title}`}
-                description="Fyll i formuläret så återkommer vi."
-                triggerText="Boka nu"
+              <ContactForm
+                title={`Intresseanmälan ${lecture.title}`}
+                description="Fyll i formuläret så återkommer jag till dig."
+                triggerText="Intresseanmälan"
               />
             </Button>
           </div>

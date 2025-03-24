@@ -9,10 +9,11 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { PageThemeWrapper } from "../_components/PageThemeWrapper";
 import Link from "next/link";
 import books from "@/app/_data/books";
 import { useSearchParams } from "next/navigation";
-import BookNavbar from "../_components/BookNavbar";
+import BookNavbar from "../_components/BookTabs";
 import { BreadcrumbNav } from "@/app/_components/BreadcrumbNav";
 import { motion } from "framer-motion";
 
@@ -33,6 +34,7 @@ export default function BooksPage() {
   ];
 
   return (
+	<PageThemeWrapper>
     <div className="container mx-auto px-6 py-8">
       <BreadcrumbNav items={breadcrumbItems} />
       <BookNavbar title={category ? category : "Alla böcker"} />
@@ -97,5 +99,6 @@ export default function BooksPage() {
         ))}
       </div>
     </div>
+	</PageThemeWrapper>
   );
 }
