@@ -58,52 +58,64 @@ export default function ContactForm({
   });
 
   const onSubmit = async (data: z.infer<typeof contactFormSchema>) => {
-    setIsSubmitting(true);
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+  setIsSubmitting(true);
+  
+  const toastId = toast.loading('Skickar ditt meddelande...', {
+    description: 'Var god vänta en stund'
+  });
 
-      const result = await res.json();
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-      if (!res.ok) {
-        let errorMessage = "Något gick fel vid e-postutskick.";
+    const result = await res.json();
 
-        if (result.details?.fieldErrors) {
-          const errors = Object.entries(result.details.fieldErrors)
-            .map(([field, messages]) => {
-              if (Array.isArray(messages)) {
-                return `${field}: ${messages.join(", ")}`;
-              } else {
-                return `${field}: ${messages}`;
-              }
-            })
-            .join("\n");
-          errorMessage = `Ogiltig inmatning:\n${errors}`;
-        } else if (result.error) {
-          errorMessage = result.error;
-        }
+    if (!res.ok) {
+      let errorMessage = "Något gick fel vid e-postutskick.";
 
-        throw new Error(errorMessage);
+      if (result.details?.fieldErrors) {
+        const errors = Object.entries(result.details.fieldErrors)
+          .map(([field, messages]) => {
+            if (Array.isArray(messages)) {
+              return `${field}: ${messages.join(", ")}`;
+            }
+            return `${field}: ${messages}`;
+          })
+          .join("\n");
+        errorMessage = `Ogiltig inmatning:\n${errors}`;
+      } else if (result.error) {
+        errorMessage = result.error;
       }
 
-      toast.success("Tack! Ditt meddelande har skickats.");
-      form.reset();
-      setOpen(false);
-      onSuccess?.();
-    } catch (error) {
-      console.error("Fel vid skickning:", error);
-      toast.error(
-        error instanceof Error ? error.message : "Något gick fel vid skickning",
-      );
-    } finally {
-      setIsSubmitting(false);
+      throw new Error(errorMessage);
     }
-  };
+
+    toast.success('Tack för ditt meddelande!', {
+      id: toastId,
+      description: 'Jag återkommer till dig snarast.',
+      duration: 5000,
+    });
+
+    form.reset();
+    setOpen(false);
+    onSuccess?.();
+  } catch (error) {
+    console.error("Fel vid skickning:", error);
+    
+    toast.error('Kunde inte skicka meddelandet', {
+      id: toastId,
+      description: error instanceof Error ? error.message : 'Något gick fel vid skickning',
+      duration: 5000,
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const FormContent = (
     <Form {...form}>
