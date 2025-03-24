@@ -9,13 +9,11 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
+  DrawerClose,
 } from "@/components/ui/drawer";
 import {
   Collapsible,
@@ -30,7 +28,9 @@ export function MobileNav() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [open, setOpen] = React.useState(false);
-  const [openCategories, setOpenCategories] = React.useState<Record<string, boolean>>({});
+  const [openCategories, setOpenCategories] = React.useState<
+    Record<string, boolean>
+  >({});
 
   const toggleCategory = (title: string) => {
     setOpenCategories((prev) => ({
@@ -54,100 +54,151 @@ export function MobileNav() {
 
       return false;
     },
-    [pathname, searchParams]
+    [pathname, searchParams],
   );
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={open} onOpenChange={setOpen} shouldScaleBackground={false}>
       <DrawerTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
-          <Menu className="h-6 w-6" />
-          <span className="sr-only">Toggle menu</span>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden"
+          aria-label="Öppna meny"
+          onClick={(e) => {
+            e.currentTarget.blur();
+          }}
+        >
+          <Menu className="h-6 w-6" aria-hidden="true" />
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="h-[85%]">
+      <DrawerContent
+        className="h-[85%]"
+        onInteractOutside={(e) => {
+          // Prevent focus issues with nested drawers
+          const target = e.target as HTMLElement;
+          if (target.closest("[data-vaul-drawer]")) {
+            e.preventDefault();
+          }
+        }}
+      >
         <DrawerHeader>
           <DrawerTitle className="text-xl">Meny</DrawerTitle>
         </DrawerHeader>
         <ScrollArea className="h-full p-4">
-          <div className="flex flex-col space-y-3">
-            {menuItems.map((item) => (
-              <div key={item.title} className="w-full">
-                {item.subItems ? (
-                  <Collapsible
-                    open={openCategories[item.title]}
-                    onOpenChange={() => toggleCategory(item.title)}
-                    className="w-full"
-                  >
-                    <CollapsibleTrigger asChild>
-                      <Button
-                        variant={isActive(item.href) ? "secondary" : "ghost"}
-                        className="w-full justify-between text-base font-medium"
-                      >
-                        {item.title}
-                        <ChevronDown
-                          className={cn(
-                            "h-4 w-4 transition-transform duration-200",
-                            openCategories[item.title] ? "rotate-180" : ""
-                          )}
-                        />
-                      </Button>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="mt-1">
-                      <AnimatePresence>
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="flex flex-col space-y-1 pl-4"
+          <nav aria-label="Huvudmeny">
+            <ul className="flex flex-col space-y-3">
+              {menuItems.map((item) => (
+                <li key={item.title}>
+                  {item.subItems ? (
+                    <Collapsible
+                      open={openCategories[item.title]}
+                      onOpenChange={() => toggleCategory(item.title)}
+                    >
+                      <CollapsibleTrigger asChild>
+                        <Button
+                          variant={isActive(item.href) ? "secondary" : "ghost"}
+                          className="w-full justify-between text-base font-medium"
+                          aria-expanded={openCategories[item.title]}
+                          aria-controls={`collapsible-${item.title}`}
+                          onClick={(e) => e.currentTarget.blur()}
                         >
-                          {item.subItems.map((subItem) => (
-                            <Link
-                              key={subItem.title}
-                              href={subItem.href}
-                              onClick={() => setOpen(false)}
-                              className={cn(
-                                "py-2 text-base font-medium transition-colors",
-                                isActive(subItem.href, subItem.title)
-                                  ? "text-primary"
-                                  : "text-muted-foreground hover:text-primary"
-                              )}
-                            >
-                              {subItem.title}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      </AnimatePresence>
-                    </CollapsibleContent>
-                  </Collapsible>
-                ) : (
-                  <Button
-                    asChild
-                    variant={isActive(item.href) ? "secondary" : "ghost"}
-                    className="w-full justify-start text-base font-medium"
-                  >
-                    <Link href={item.href} onClick={() => setOpen(false)}>
-                      {item.title}
-                    </Link>
-                  </Button>
-                )}
-              </div>
-            ))}
-            <div className="mt-4 pt-4 border-t">
-              <ContactForm
-                title="Kontakta oss"
-                description="Fyll i formuläret nedan så återkommer jag till dig."
-                triggerText="Kontakt"
-              />
-            </div>
-          </div>
+                          <motion.span
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {item.title}
+                          </motion.span>
+                          <ChevronDown
+                            className={cn(
+                              "h-4 w-4 transition-transform duration-200",
+                              openCategories[item.title] ? "rotate-180" : "",
+                            )}
+                            aria-hidden="true"
+                          />
+                        </Button>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent id={`collapsible-${item.title}`}>
+                        <AnimatePresence>
+                          <motion.ul
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="flex flex-col space-y-1 pl-4"
+                          >
+                            {item.subItems.map((subItem) => (
+                              <li key={subItem.title}>
+                                <Link
+                                  href={subItem.href}
+                                  onClick={() => setOpen(false)}
+                                  className={cn(
+                                    "block py-2 text-base font-medium transition-colors",
+                                    isActive(subItem.href, subItem.title)
+                                      ? "text-primary"
+                                      : "text-muted-foreground hover:text-primary",
+                                  )}
+                                  aria-current={
+                                    isActive(subItem.href, subItem.title)
+                                      ? "page"
+                                      : undefined
+                                  }
+                                >
+                                  <motion.span
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    {subItem.title}
+                                  </motion.span>
+                                </Link>
+                              </li>
+                            ))}
+                          </motion.ul>
+                        </AnimatePresence>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  ) : (
+                    <Button
+                      asChild
+                      variant={isActive(item.href) ? "secondary" : "ghost"}
+                      className="w-full justify-start text-base font-medium"
+                      onClick={(e) => {
+                        setOpen(false);
+                        e.currentTarget.blur();
+                      }}
+                    >
+                      <Link
+                        href={item.href}
+                        aria-current={isActive(item.href) ? "page" : undefined}
+                      >
+                        <motion.span
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {item.title}
+                        </motion.span>
+                      </Link>
+                    </Button>
+                  )}
+                </li>
+              ))}
+              <li className="mt-4 border-t pt-4">
+                <ContactForm
+                  title="Kontakta oss"
+                  description="Fyll i formuläret nedan så återkommer jag till dig."
+                  triggerText="Kontakt"
+                  triggerClassName="w-full justify-start text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90"
+                  onSuccess={() => setOpen(false)}
+                />
+              </li>
+            </ul>
+          </nav>
         </ScrollArea>
-        <DrawerFooter>
-          <DrawerClose asChild>
-            <Button variant="outline">Stäng</Button>
-          </DrawerClose>
-        </DrawerFooter>
+        <DrawerClose asChild className="p-4">
+          <Button variant="outline" onClick={(e) => e.currentTarget.blur()}>
+            Stäng meny
+          </Button>
+        </DrawerClose>
       </DrawerContent>
     </Drawer>
   );

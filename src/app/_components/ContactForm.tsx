@@ -23,30 +23,36 @@ import {
   DialogTitle,
   DialogDescription,
   DialogTrigger,
-  DialogFooter,
 } from "@/components/ui/dialog";
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-  DrawerDescription,
   DrawerTrigger,
-  DrawerFooter,
   DrawerClose,
 } from "@/components/ui/drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+
+interface ContactFormProps {
+  title: string;
+  description: string;
+  triggerText: string;
+  triggerClassName?: string;
+  triggerVariant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  onSuccess?: () => void;
+}
 
 export default function ContactForm({
   title,
   description,
   triggerText,
-}: {
-  title: string;
-  description: string;
-  triggerText: string;
-}) {
+  triggerClassName,
+  triggerVariant = "default",
+  onSuccess,
+}: ContactFormProps) {
   const [open, setOpen] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -74,6 +80,7 @@ export default function ContactForm({
       toast.success("Tack! Ditt meddelande har skickats.");
       form.reset();
       setOpen(false);
+      onSuccess?.();
     } catch (error) {
       console.error("Fel vid skickning:", error);
       toast.error("Kunde inte skicka meddelandet, försök igen senare.");
@@ -140,58 +147,69 @@ export default function ContactForm({
     </Form>
   );
 
+  const TriggerButton = (
+    <Button 
+      variant={triggerVariant}
+      className={triggerClassName}
+      aria-haspopup="dialog"
+      aria-expanded={open}
+      aria-controls={isDesktop ? "contact-form-dialog" : "contact-form-drawer"}
+      onClick={(e) => {
+        // Prevent focus retention that causes ARIA-hidden errors
+        e.currentTarget.blur();
+      }}
+    >
+      {triggerText}
+    </Button>
+  );
+
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button 
-            variant="default"
-            aria-haspopup="dialog"
-            aria-expanded={open}
-            aria-controls="contact-form-dialog"
-          >
-            {triggerText}
-          </Button>
+          {TriggerButton}
         </DialogTrigger>
         <DialogContent id="contact-form-dialog" className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
-            <DialogDescription>{description}</DialogDescription>
+            {description && <DialogDescription>{description}</DialogDescription>}
           </DialogHeader>
-          <div className="p-4">
-            {FormContent}
-          </div>
+          {FormContent}
         </DialogContent>
       </Dialog>
     );
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={open} onOpenChange={setOpen} shouldScaleBackground={false}>
       <DrawerTrigger asChild>
-        <Button 
-          variant="default" 
-          className="w-full"
-          aria-haspopup="dialog"
-          aria-expanded={open}
-          aria-controls="contact-form-drawer"
-        >
-          {triggerText}
-        </Button>
+        {TriggerButton}
       </DrawerTrigger>
-      <DrawerContent id="contact-form-drawer">
+      <DrawerContent 
+        id="contact-form-drawer"
+        onInteractOutside={(e) => {
+          // Prevent focus issues with nested drawers
+          const target = e.target as HTMLElement;
+          if (target.closest('[data-vaul-drawer]')) {
+            e.preventDefault();
+          }
+        }}
+      >
         <DrawerHeader>
           <DrawerTitle>{title}</DrawerTitle>
-          <DrawerDescription>{description}</DrawerDescription>
+          {description && <p className="text-sm text-muted-foreground">{description}</p>}
         </DrawerHeader>
         <div className="p-4">
           {FormContent}
         </div>
-        <DrawerFooter>
-          <DrawerClose asChild>
-            <Button variant="outline">Avbryt</Button>
-          </DrawerClose>
-        </DrawerFooter>
+        <DrawerClose asChild className="p-4">
+          <Button 
+            variant="outline"
+            onClick={(e) => e.currentTarget.blur()}
+          >
+            Stäng
+          </Button>
+        </DrawerClose>
       </DrawerContent>
     </Drawer>
   );

@@ -26,7 +26,7 @@ export default async function BookPage({ params }: { params: { slug: string } })
   ];
 
   return (
-    <div className="container mx-auto max-w-5xl">
+    <div className="container mx-auto max-w-5xl p-6">
       <BreadcrumbNav items={breadcrumbItems} />
       <Card>
         <CardHeader>

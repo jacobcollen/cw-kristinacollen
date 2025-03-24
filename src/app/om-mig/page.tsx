@@ -14,7 +14,7 @@ import { images } from "@/app/_data/images";
 
 export default function AboutMe() {
   return (
-    <div className="flex min-h-screen flex-1 items-center justify-center px-6 py-8">
+    <div className="container flex flex-1 items-center justify-center px-6 py-8">
       <Card className="w-full max-w-6xl overflow-hidden">
         <div className="flex flex-col md:flex-row">
           <div className="relative h-64 w-full md:h-auto md:w-1/3">

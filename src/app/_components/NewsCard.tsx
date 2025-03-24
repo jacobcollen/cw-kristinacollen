@@ -27,7 +27,7 @@ interface NewsCardProps {
 
 export function NewsCard({ news }: NewsCardProps) {
   return (
-      <Card className="mb-8">
+      <Card className="mb-8 white">
         <CardContent className="grid gap-6 p-6 md:grid-cols-3">
           {/* Img */}
           {news.imageUrl && (

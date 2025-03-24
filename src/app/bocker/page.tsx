@@ -35,7 +35,7 @@ export default function BooksPage() {
 
   return (
 	<PageThemeWrapper>
-    <div className="container mx-auto px-6 py-8">
+    <div className="container mx-auto">
       <BreadcrumbNav items={breadcrumbItems} />
       <BookNavbar title={category ? category : "Alla böcker"} />
       
