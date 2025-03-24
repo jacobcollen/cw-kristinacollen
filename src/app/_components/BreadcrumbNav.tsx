@@ -23,7 +23,7 @@ interface BreadcrumbNavProps {
 
 export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
   return (
-    <Breadcrumb className="mb-4">
+    <Breadcrumb className="mb-10">
       <BreadcrumbList>
         {items.map((item, index) => {
           if (!item) return null;

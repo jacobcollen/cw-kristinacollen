@@ -3,7 +3,7 @@ const imgUrl =
 
 export default function About() {
   return (
-    <section className="flex py-8 mt-16 items-center justify-center">
+    <section className="flex min-h-screen items-center justify-center">
       <div className="container grid max-w-6xl grid-cols-1 items-center gap-8 px-6 py-16 md:grid-cols-2">
         {/* Text */}
         <div className="flex flex-col justify-center">

@@ -33,10 +33,10 @@ export default async function LecturePage({
       <BreadcrumbNav items={breadcrumbItems} />
       <Card>
         <CardHeader>
-          <CardTitle>{lecture.title}</CardTitle>
-          <CardDescription>{lecture.description}</CardDescription>
+          <CardTitle className="text-2xl font-bold">{lecture.title}</CardTitle>
         </CardHeader>
         <CardContent>
+          {/* Bildsektion */}
           <div className="relative h-64 w-full overflow-hidden rounded-md">
             <Image
               src={lecture.imgUrl}
@@ -46,9 +46,16 @@ export default async function LecturePage({
             />
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-4">
-            <Badge>{lecture.forWho}</Badge>
-            <Badge variant="outline">{lecture.length}</Badge>
+          {/* Badges och knapp */}
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-2">
+              {lecture.forWho.map((audience, index) => (
+                <Badge key={index} variant="secondary">
+                  {audience}
+                </Badge>
+              ))}
+              <Badge variant="outline">{lecture.length}</Badge>
+            </div>
             <Button className="ml-auto" asChild>
               <ContactForm
                 title={`Intresseanmälan ${lecture.title}`}
@@ -60,9 +67,23 @@ export default async function LecturePage({
 
           <Separator className="my-6" />
 
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Om föreläsningen</h2>
-            <p className="text-muted-foreground">{lecture.description}</p>
+          {/* Beskrivning och bulletpoints */}
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-xl font-semibold">Om föreläsningen</h2>
+              <p className="text-muted-foreground">
+                {lecture.description.join(" ")}
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-semibold">För vem?</h2>
+              <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
+                {lecture.bulletPoints.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </CardContent>
       </Card>

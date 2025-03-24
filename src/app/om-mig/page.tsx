@@ -14,7 +14,7 @@ import { images } from "@/app/_data/images";
 
 export default function AboutMe() {
   return (
-    <section className="container mx-auto px-6 pb-12 pt-6">
+    <section className="flex flex-col items-center justify-center min-h-screen">
       <Card className="flex flex-col md:flex-row items-start">
         <div className="w-full md:w-1/3">
           <Image
