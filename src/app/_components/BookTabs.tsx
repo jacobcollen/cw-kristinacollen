@@ -15,7 +15,7 @@ export default function BookNavbar({ title }: { title: string }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-3xl font-bold pt-4">{title}</h1>
+      <h1>{title}</h1>
       <Tabs defaultValue={category || "Alla böcker"} className="pb-6 w-fit">
         <TabsList className="grid w-full grid-cols-3">
           {categories.map((cat) => (
@@ -28,13 +28,15 @@ export default function BookNavbar({ title }: { title: string }) {
               }
             >
               <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}  // Exakt samma som Navbar
+                whileTap={{ scale: 0.95 }}    // Exakt samma som Navbar
+                transition={{ duration: 0.2 }} // Exakt samma animation
               >
                 <TabsTrigger
                   value={cat}
                   className={cn(
                     "w-full",
+                    "hover:bg-accent/10",
                     category === cat || (cat === "Alla böcker" && !category)
                       ? "bg-accent/50"
                       : "bg-transparent"

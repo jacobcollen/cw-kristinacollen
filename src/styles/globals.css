@@ -72,7 +72,7 @@
   }
 
   h1 {
-    @apply scroll-m-20 text-2xl font-bold tracking-tight lg:text-3xl;
+    @apply scroll-m-20 text-3xl font-bold tracking-tight lg:text-3xl;
   }
 
   h2 {
@@ -87,8 +87,8 @@
     @apply mt-6 border-l-4 pl-4 italic;
   }
 
-  container {
-    @apply px-2 py-6 md:px-6 lg:px-12 xl:px-16;
+  .container {
+	@apply px-4 pt-2 pb-10 md:px-6 md:pb-12 lg:px-12 lg:pb-14 xl:px-16 xl:pb-16 mx-auto;
   }
 }
 
