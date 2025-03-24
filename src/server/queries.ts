@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { db } from "./db";
 import { users } from "./db/schema";
 import "server-only";
-import * as bcrypt from "bcrypt";
+import * as bcryptjs from "bcryptjs";
 
 export const getNews = async () => {
   return await db.query.news.findMany();
@@ -14,12 +14,12 @@ export const getUserByUsername = async (username: string) => {
     .from(users)
     .where(eq(users.username, username))
     .limit(1);
-
+  
   return user[0] ?? null;
 };
 
 export const createAdminUser = async () => {
-  const hashedPassword = await bcrypt.hash("adminPassword", 10);
+  const hashedPassword = await bcryptjs.hash("adminPassword", 10);
   await db.insert(users).values({
     username: "mamma",
     passwordHash: hashedPassword,
