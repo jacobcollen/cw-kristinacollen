@@ -143,10 +143,6 @@
     list-style: none;
   }
 
-  li {
-    margin-bottom: 0.5rem;
-  }
-
   pre,
   code {
     @apply font-mono text-sm;

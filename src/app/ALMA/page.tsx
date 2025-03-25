@@ -41,12 +41,11 @@ export default function AlmaPage() {
           className="flex min-h-screen flex-col justify-center px-6 py-16"
         >
           <div className="container max-w-6xl">
-            {/* Title */}
+
             <h2 className="cursor-pointer text-center text-6xl font-bold tracking-tight hover:underline">
               {highlightTitle(section.title, section.highlightSpan)}
             </h2>
 
-            {/* Single image */}
             {section.image && !Array.isArray(section.image) && (
               <div className="mt-6 flex justify-center">
                 <img
@@ -57,7 +56,6 @@ export default function AlmaPage() {
               </div>
             )}
 
-            {/* Multiple images */}
             {Array.isArray(section.image) && section.image.length > 0 && (
               <div className="mt-6 flex flex-wrap mx-auto justify-center gap-4 p-4">
                 {section.image.map((img, i) => (
@@ -71,7 +69,6 @@ export default function AlmaPage() {
               </div>
             )}
 
-            {/* Video (center) */}
             {section.videoEmbedUrl && (
               <div className="mt-6 flex justify-center items-center">
                 <div className="max-w-3xl mx-auto">

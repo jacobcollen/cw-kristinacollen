@@ -6,14 +6,13 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
-
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
@@ -50,86 +49,91 @@ function isMainNavActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(href + "/");
 }
 
-function isDropdownActive(searchParams: URLSearchParams, dropdownTitle: string) {
-  const cat = searchParams.get("category");
-  if (!cat || cat === "Alla böcker") return dropdownTitle === "Alla böcker";
-  return cat === dropdownTitle;
-}
-
 export function Navbar() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const isDesktop = useMediaQuery("(min-width: 768px)");
-
-  const renderNavItems = () => {
-    return menuItems.map((item) => {
-      const mainActive = isMainNavActive(pathname, item.href);
-
-      if (item.subItems) {
-        return (
-          <NavigationMenuItem key={item.title}>
-            <NavigationMenuTrigger
-              className={cn(
-                navigationMenuTriggerStyle(),
-                "bg-transparent text-black dark:text-white",
-                "hover:bg-[hsl(var(--secondary))] hover:text-black dark:hover:text-white",
-                mainActive &&
-                  "bg-[hsl(var(--secondary))] text-black dark:text-white"
-              )}
-            >
-              <motion.span whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
-                {item.title}
-              </motion.span>
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[250px] gap-1 p-2">
-                {item.subItems.map((subItem) => (
-                  <ListItem
-                    key={subItem.title}
-                    href={subItem.href}
-                    title={subItem.title}
-                    active={isDropdownActive(searchParams, subItem.title)}
-                  />
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        );
-      } else {
-
-        return (
-          <NavigationMenuItem key={item.title}>
-            <Link href={item.href} legacyBehavior passHref>
-              <NavigationMenuLink
-                className={cn(
-                  navigationMenuTriggerStyle(),
-                  "bg-transparent text-black dark:text-white",
-                  "hover:bg-[hsl(var(--secondary))] hover:text-black dark:hover:text-white",
-                  mainActive && "bg-[hsl(var(--secondary))] text-black dark:text-white"
-                )}
-                active={mainActive}
-              >
-                <motion.span whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
-                  {item.title}
-                </motion.span>
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        );
-      }
-    });
-  };
+  const searchParams = useSearchParams();
 
   if (!isDesktop) {
     return <MobileNav />;
   }
 
   return (
-    <NavigationMenu>
-      <NavigationMenuList className="gap-1">
-        {renderNavItems()}
-        <NavigationMenuItem>
+    <NavigationMenu className="flex items-center gap-4 w-full">
+      <NavigationMenuList>
+        {menuItems.map((item) => {
+          const mainActive = isMainNavActive(pathname, item.href);
 
+          // Om ingen subItems => vanlig länk
+          if (!item.subItems) {
+            return (
+              <NavigationMenuItem key={item.title}>
+                <Link href={item.href} legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "bg-transparent text-black dark:text-white",
+                      "hover:bg-[hsl(var(--secondary))] hover:text-black dark:hover:text-white",
+                      mainActive && "bg-[hsl(var(--secondary))] text-black dark:text-white"
+                    )}
+                  >
+                    <motion.span whileHover={{ scale: 1.05 }}>
+                      {item.title}
+                    </motion.span>
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            );
+          } else {
+
+            return (
+              <NavigationMenuItem key={item.title}>
+                <NavigationMenuTrigger
+                  className={cn(
+                    "group",
+                    navigationMenuTriggerStyle(),
+                    "bg-transparent text-black dark:text-white",
+                    "hover:bg-[hsl(var(--secondary))] dark:hover:text-white",
+                    mainActive && "bg-[hsl(var(--secondary))] text-black dark:text-white"
+                  )}
+                >
+                  <motion.span whileHover={{ scale: 1.05 }}>
+                    {item.title}
+                  </motion.span>
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+
+                  <ul className="p-2 w-48 flex flex-col gap-1">
+                    {item.subItems.map((subItem) => {
+                      const currentCategory = searchParams.get("category") || "Alla böcker";
+                      const subActive =
+                        subItem.title === currentCategory ||
+                        (subItem.title === "Alla böcker" && pathname === "/bocker" && !currentCategory);
+                      return (
+                        <li key={subItem.title}>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              href={subItem.href}
+                              className={cn(
+                                "block px-3 py-2 text-sm rounded-md hover:bg-muted hover:text-foreground",
+                                subActive &&
+                                  "bg-[hsl(var(--secondary))] text-black dark:text-white"
+                              )}
+                            >
+                              {subItem.title}
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            );
+          }
+        })}
+
+        <NavigationMenuItem>
           <ContactForm
             title="Kontakta oss"
             description="Fyll i formuläret nedan så återkommer jag till dig."
@@ -145,38 +149,3 @@ export function Navbar() {
     </NavigationMenu>
   );
 }
-
-type ListItemProps = {
-  title: string;
-  active?: boolean;
-} & React.ComponentPropsWithoutRef<"a">;
-
-const ListItem = React.forwardRef<React.ElementRef<"a">, ListItemProps>(
-  ({ className, title, children, active, ...props }, ref) => {
-    return (
-      <li>
-        <NavigationMenuLink asChild>
-          <a
-            ref={ref}
-            className={cn(
-              "block select-none space-y-1 rounded-md p-3 leading-none no-underline transition-colors",
-              "bg-transparent text-black dark:text-white",
-              "hover:bg-[hsl(var(--secondary))] hover:text-black dark:hover:text-white",
-              active && "bg-[hsl(var(--secondary))] text-black dark:text-white",
-              className
-            )}
-            {...props}
-          >
-            <div className="text-sm font-medium leading-none">{title}</div>
-            {children && (
-              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                {children}
-              </p>
-            )}
-          </a>
-        </NavigationMenuLink>
-      </li>
-    );
-  }
-);
-ListItem.displayName = "ListItem";

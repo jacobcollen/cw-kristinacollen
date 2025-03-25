@@ -82,7 +82,7 @@ export default function LecturesPage() {
   return (
     <PageThemeWrapper>
       <div className="container max-w-7xl">
-        <h1 className="py-6">Föreläsningar</h1>
+        <h1 className="py-6 text-3xl font-bold">Föreläsningar</h1>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {lectures.map((lecture) => (
             <LectureCard key={lecture.id} lecture={lecture} />
