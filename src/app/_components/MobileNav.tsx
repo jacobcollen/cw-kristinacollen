@@ -28,9 +28,7 @@ export function MobileNav() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [open, setOpen] = React.useState(false);
-  const [openCategories, setOpenCategories] = React.useState<
-    Record<string, boolean>
-  >({});
+  const [openCategories, setOpenCategories] = React.useState<Record<string, boolean>>({});
 
   const toggleCategory = (title: string) => {
     setOpenCategories((prev) => ({
@@ -42,16 +40,13 @@ export function MobileNav() {
   const isActive = React.useCallback(
     (href: string, category?: string) => {
       if (href === pathname && !category) return true;
-
       if (href.includes("?")) {
         const [basePath, query] = href.split("?");
         const currentQuery = searchParams.toString();
         const currentCategory = searchParams.get("category");
-
         if (category && currentCategory === category) return true;
         return pathname === basePath && currentQuery === query;
       }
-
       return false;
     },
     [pathname, searchParams],
@@ -75,7 +70,6 @@ export function MobileNav() {
       <DrawerContent
         className="h-[85%]"
         onInteractOutside={(e) => {
-          // Prevent focus issues with nested drawers
           const target = e.target as HTMLElement;
           if (target.closest("[data-vaul-drawer]")) {
             e.preventDefault();
@@ -91,77 +85,76 @@ export function MobileNav() {
               {menuItems.map((item) => (
                 <li key={item.title}>
                   {item.subItems ? (
-                    <Collapsible
-                      open={openCategories[item.title]}
-                      onOpenChange={() => toggleCategory(item.title)}
-                    >
-                      <CollapsibleTrigger asChild>
-                        <Button
-                          variant={isActive(item.href) ? "secondary" : "ghost"}
-                          className="w-full justify-between text-base font-medium"
-                          aria-expanded={openCategories[item.title]}
-                          aria-controls={`collapsible-${item.title}`}
-                          onClick={(e) => e.currentTarget.blur()}
+                    <div>
+                      <Button
+                        variant={isActive(item.href) ? "secondary" : "ghost"}
+                        className={cn(
+                          "w-full justify-between text-base font-medium bg-transparent text-foreground no-underline",
+                        )}
+                        onClick={() => toggleCategory(item.title)}
+                        aria-expanded={openCategories[item.title]}
+                        aria-controls={`collapsible-${item.title}`}
+                      >
+                        <motion.span
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ duration: 0.2 }}
                         >
-                          <motion.span
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            {item.title}
-                          </motion.span>
-                          <ChevronDown
-                            className={cn(
-                              "h-4 w-4 transition-transform duration-200",
-                              openCategories[item.title] ? "rotate-180" : "",
-                            )}
-                            aria-hidden="true"
-                          />
-                        </Button>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent id={`collapsible-${item.title}`}>
-                        <AnimatePresence>
-                          <motion.ul
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="flex flex-col space-y-1 pl-4"
-                          >
-                            {item.subItems.map((subItem) => (
-                              <li key={subItem.title}>
-                                <Link
-                                  href={subItem.href}
-                                  onClick={() => setOpen(false)}
-                                  className={cn(
-                                    "block py-2 text-base font-medium transition-colors",
-                                    isActive(subItem.href, subItem.title)
-                                      ? "text-primary"
-                                      : "text-muted-foreground hover:text-primary",
-                                  )}
-                                  aria-current={
-                                    isActive(subItem.href, subItem.title)
-                                      ? "page"
-                                      : undefined
-                                  }
-                                >
-                                  <motion.span
-                                    whileHover={{ scale: 1.05 }}
-                                    transition={{ duration: 0.2 }}
+                          {item.title}
+                        </motion.span>
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 transition-transform duration-200",
+                            openCategories[item.title] ? "rotate-180" : "",
+                          )}
+                          aria-hidden="true"
+                        />
+                      </Button>
+                      <Collapsible open={openCategories[item.title]}>
+                        <CollapsibleContent id={`collapsible-${item.title}`}>
+                          <AnimatePresence>
+                            <motion.ul
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="flex flex-col space-y-1 pl-4"
+                            >
+                              {item.subItems.map((subItem) => (
+                                <li key={subItem.title}>
+                                  <Link
+                                    href={subItem.href}
+                                    onClick={() => setOpen(false)}
+                                    className={cn(
+                                      "block py-2 text-base font-medium no-underline",
+                                      isActive(subItem.href, subItem.title)
+                                        ? "text-foreground"
+                                        : "text-muted-foreground hover:text-foreground",
+                                    )}
+                                    aria-current={
+                                      isActive(subItem.href, subItem.title)
+                                        ? "page"
+                                        : undefined
+                                    }
                                   >
-                                    {subItem.title}
-                                  </motion.span>
-                                </Link>
-                              </li>
-                            ))}
-                          </motion.ul>
-                        </AnimatePresence>
-                      </CollapsibleContent>
-                    </Collapsible>
+                                    <motion.span
+                                      whileHover={{ scale: 1.05 }}
+                                      transition={{ duration: 0.2 }}
+                                    >
+                                      {subItem.title}
+                                    </motion.span>
+                                  </Link>
+                                </li>
+                              ))}
+                            </motion.ul>
+                          </AnimatePresence>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </div>
                   ) : (
                     <Button
                       asChild
                       variant={isActive(item.href) ? "secondary" : "ghost"}
-                      className="w-full justify-start text-base font-medium"
+                      className="w-full justify-start text-base font-medium bg-transparent text-foreground no-underline"
                       onClick={(e) => {
                         setOpen(false);
                         e.currentTarget.blur();
@@ -187,7 +180,7 @@ export function MobileNav() {
                   title="Kontakta oss"
                   description="Fyll i formuläret nedan så återkommer jag till dig."
                   triggerText="Kontakt"
-                  triggerClassName="w-full justify-start text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90"
+                  triggerClassName="w-full justify-start text-base font-medium bg-transparent text-foreground hover:bg-gray-200 dark:hover:bg-gray-700"
                   onSuccess={() => setOpen(false)}
                 />
               </li>

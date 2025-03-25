@@ -159,13 +159,13 @@ export function Footer() {
             <div className="flex space-x-4">
               <Link
                 href="/integritetspolicy"
-                className="transition-colors hover:text-white"
+                className="text-gray-300 transition-colors hover:text-white"
               >
                 Integritetspolicy
               </Link>
               <Link
                 href="/cookies"
-                className="transition-colors hover:text-white"
+                className="text-gray-300 transition-colors hover:text-white"
               >
                 Cookies
               </Link>

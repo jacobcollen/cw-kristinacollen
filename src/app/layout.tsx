@@ -21,25 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="sv"
-      className={`${GeistSans.variable}`}
-      suppressHydrationWarning
-    >
-      <body className="flex h-full flex-col">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+    <html lang="sv" className={`${GeistSans.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />
-          <div className="flex-1">
-            <main className="flex-1" style={{ minHeight: 'calc(100vh - 6rem)' }}>{children}</main>
-            <ToastProvider>
-              <Footer />
-            </ToastProvider>
-          </div>
+          <main className="flex-1">{children}</main>
+          <ToastProvider>
+            <Footer />
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

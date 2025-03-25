@@ -7,10 +7,10 @@ export default function About() {
       <div className="container grid max-w-6xl grid-cols-1 items-center gap-8 px-6 py-16 md:grid-cols-2">
 
         <div className="flex flex-col justify-center">
-          <h1 className="text-6xl font-bold tracking-tight text-gray-500">
+          <h1 className="text-6xl font-bold tracking-tight text-gray-200">
             Kristina <span className="text-[hsl(280,100%,70%)]">Collén</span>
           </h1>
-          <p className="mt-4 text-lg text-gray-500">
+          <p className="mt-4 text-lg text-gray-300">
             Kristina Collén är en passionerad författare och föreläsare som
             brinner för att inspirera och dela kunskap.
           </p>
