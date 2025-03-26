@@ -42,7 +42,7 @@ export default function AlmaPage() {
         >
           <div className="container max-w-6xl">
 
-            <h2 className="text-center text-6xl font-bold mb-8 tracking-tight">
+            <h2 className="text-center text-7xl font-bold mb-8 tracking-tight">
               {highlightTitle(section.title, section.highlightSpan)}
             </h2>
 

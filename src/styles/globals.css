@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* Light mode (ChadCN standard) */
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
     --card: 0 0% 100%;
@@ -27,68 +28,62 @@
   }
 
   .dark {
-    --background: 263 45% 5%;
-    --foreground: 210 15% 95%;
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+    /*
+      Dark mode – anpassat för en lila gradientbakgrund.
+      Här vill vi att kort (cards) och popovers ska vara ljusa (nästan vita) med mörk text,
+      medan navigationslänkarna får behålla en lila (primär/sekundär) styling.
+    */
+
+    /* Bakgrund för dark mode: En lila gradient, men här styrs det ofta av din övergripande layout */
+    --background: 263 50% 10%; /* lite mörk lila */
+
+    /* Textfärg i dark mode (används om inget annat anges) */
+    --foreground: 210 20% 98%; /* Nästan vit */
+
+    /* Kort- och popover-bakgrunder vi vill att de ska vara ljusa (vitaktiga) */
+    --card: 0 0% 100%; /* Vit */
+    --card-foreground: 224 71.4% 4.1%; /* Mörk text */
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
-    --primary: 262.1 83.3% 57.8%;
-    --primary-foreground: 210 20% 98%;
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --accent: 263 30% 20%;
-    --accent-foreground: 210 20% 98%;
-    --destructive: 0 70% 45%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 263 25% 50%;
-    --input: 263 25% 20%;
 
-    /* 
-      Focusring - lila 
-      (kan göra den ljusare om du vill att den ska sticka ut)
-    */
-    --ring: 262.1 83.3% 57.8%;
+    /* Primär, sekundär, accent – vi låter dem vara lila enligt dina ursprungliga inställningar */
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 263 40% 20%;
+    --secondary-foreground: 210 20% 98%;
+    --accent: 263 40% 18%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+
+    /* Borders och inputs – vi vill ha dem subtila och inte helt vita */
+    --border: 263 25% 22%; /* Mjukare kant */
+    --input: 263 25% 22%;
+    --ring: 263.4 70% 50.4%;
   }
 
-  /*
-    ============ 
-    Resterande basregler
-    ============ 
-  */
-
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     box-sizing: border-box;
   }
 
-  html,
-  body {
+  html, body {
     height: 100%;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
-  /* Ljus-läge gradient */
   body:not(.dark) {
     background: linear-gradient(to bottom, #ffffff, #f8f8f8);
     background-attachment: fixed;
   }
-
-  /* Mörk-läge lila gradient */
   .dark body {
     background: linear-gradient(to bottom, #3f127a, #2e026d);
     background-attachment: fixed;
   }
 
-  /* Rubriker */
   h1 {
     @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4;
   }
@@ -103,17 +98,6 @@
     @apply text-base leading-7;
   }
 
-  a {
-    @apply transition-colors;
-  }
-  a:hover {
-    @apply hover:opacity-80;
-  }
-
-  /*
-    Ta bort focus ring på musclick,
-    men behåll för tangentbord (focus-visible).
-  */
   *:focus:not(:focus-visible) {
     outline: none !important;
     box-shadow: none !important;
@@ -123,20 +107,17 @@
     box-shadow: 0 0 0 2px hsl(var(--ring));
   }
 
-  /* Citat */
   blockquote {
     @apply mt-6 border-l-4 pl-4 italic text-muted-foreground;
   }
 
-  ul,
-  ol {
+  ul, ol {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  pre,
-  code {
+  pre, code {
     @apply font-mono text-sm;
   }
 
@@ -144,16 +125,12 @@
     @apply px-4 pt-2 pb-10 md:px-6 md:pb-12 lg:px-12 lg:pb-14 xl:px-16 xl:pb-16 mx-auto;
   }
 
-  /* 
-    Next.js Root
-  */
-  #__next,
-  #root,
-  div[data-nextjs-root] {
+  #__next, #root, div[data-nextjs-root] {
     @apply h-full flex flex-col;
   }
 
   html {
     @apply scroll-smooth;
   }
+ 
 }

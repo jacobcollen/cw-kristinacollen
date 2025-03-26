@@ -9,27 +9,13 @@ import {
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
-
-interface NewsItem {
-  id: number;
-  title: string;
-  text: string;
-  imageUrl: string | null;
-  link: string | null;
-  createdAt: Date;
-  updatedAt: Date | null;
-}
-
-interface NewsCardProps {
-  news: NewsItem;
-}
+import type { NewsCardProps } from "@/app/_types/newscard";
 
 export function NewsCard({ news }: NewsCardProps) {
   return (
       <Card className="mb-8 white">
         <CardContent className="grid gap-6 p-6 md:grid-cols-3">
-          {/* Img */}
+
           {news.imageUrl && (
             <div className="relative aspect-[4/3] overflow-hidden rounded-lg md:col-start-3 md:row-start-1">
               <Image
@@ -41,7 +27,7 @@ export function NewsCard({ news }: NewsCardProps) {
               />
             </div>
           )}
-          {/* Text */}
+
           <div className="flex flex-col justify-between md:col-span-2">
             <CardHeader className="space-y-2 p-0">
               <CardTitle className="text-xl md:text-2xl">
@@ -51,7 +37,7 @@ export function NewsCard({ news }: NewsCardProps) {
                 {news.text}
               </CardDescription>
             </CardHeader>
-            {/* Btn */}
+
             {news.link && (
               <CardFooter className="p-0 pt-4">
                 <Button asChild>

@@ -35,14 +35,22 @@ export default function AboutMe() {
                 <CardTitle className="text-3xl font-bold">
                   Kristina Collén
                 </CardTitle>
-                <CardDescription>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    <Badge variant="outline">Socionom</Badge>
-                    <Badge variant="outline">Lärare</Badge>
-                    <Badge variant="outline">Forskare</Badge>
-                    <Badge variant="outline">Författare</Badge>
-                  </div>
-                </CardDescription>
+				<CardDescription>
+				<div className="mt-2 flex flex-wrap gap-2">
+					<Badge variant="outline" className="border-gray-600 text-gray-600">
+					Socionom
+					</Badge>
+					<Badge variant="outline" className="border-gray-600 text-gray-600">
+					Lärare
+					</Badge>
+					<Badge variant="outline" className="border-gray-600 text-gray-600">
+					Forskare
+					</Badge>
+					<Badge variant="outline" className="border-gray-600 text-gray-600">
+					Författare
+					</Badge>
+				</div>
+			  </CardDescription>
               </CardHeader>
 
               <Separator className="my-4" />
