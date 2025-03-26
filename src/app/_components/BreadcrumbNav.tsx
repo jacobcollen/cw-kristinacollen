@@ -17,11 +17,9 @@ export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Visa endast breadcrumbs på detaljsidor: /forelasningar/[slug] eller /bocker/[slug]
   const isDetailPage = /^\/(forelasningar|bocker)\/[^/]+\/?$/.test(pathname);
   if (!isDetailPage || items.length < 2) return null;
 
-  // Säkerställ att backTarget har giltiga värden
   const backTarget = items[items.length - 2] || { label: "Okänt", href: "#" };
   const fromAllBooks = searchParams.get("from") === "alla-bocker";
   const backLabel =
@@ -31,7 +29,7 @@ export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
 
   return (
     <div className="mt-8 mx-8 mb-4">
-      {/* Mobile: Visa tillbakaknapp med text */}
+
       <div className="md:hidden">
         <Link
           href={backTarget.href || "#"}
@@ -42,7 +40,6 @@ export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
         </Link>
       </div>
 
-      {/* Desktop: Visa breadcrumbs */}
       <div className="hidden md:block">
         <Breadcrumb>
           <BreadcrumbList>

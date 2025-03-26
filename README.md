@@ -21,3 +21,32 @@ Project is built with [Create T3 App](https://create.t3.gg/) using `pnpm`.
    ```
 
 App should now be running at [http://localhost:3000](http://localhost:3000).
+
+## Additional Information
+
+- The domain for live site is [kristinacollen.se](https://kristinacollen.se).
+- Note: The admin dashboard is not yet complete. You can view a preview at [kristinacollen.se/admin](https://kristinacollen.se/admin).
+
+## Drizzle Studio
+
+To open Drizzle Studio, run:
+
+```bash
+pnpm run db:studio
+```
+
+## Tech Stack
+
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Drizzle ORM
+- Resend (transactional emails)
+- Vercel (deployment)
+- shadcn/ui (component library)
+
+## Features
+
+- The contact form is fully functional and sends emails using Resend.
+- Newsletter subscription is active and stores emails via Drizzle ORM. News items displayed on the homepage are also posted using Drizzle ORM.

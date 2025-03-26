@@ -4,7 +4,6 @@
 
 @layer base {
   :root {
-    /* Light mode (ChadCN standard) */
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
     --card: 0 0% 100%;
@@ -28,25 +27,12 @@
   }
 
   .dark {
-    /*
-      Dark mode – anpassat för en lila gradientbakgrund.
-      Här vill vi att kort (cards) och popovers ska vara ljusa (nästan vita) med mörk text,
-      medan navigationslänkarna får behålla en lila (primär/sekundär) styling.
-    */
-
-    /* Bakgrund för dark mode: En lila gradient, men här styrs det ofta av din övergripande layout */
-    --background: 263 50% 10%; /* lite mörk lila */
-
-    /* Textfärg i dark mode (används om inget annat anges) */
-    --foreground: 210 20% 98%; /* Nästan vit */
-
-    /* Kort- och popover-bakgrunder vi vill att de ska vara ljusa (vitaktiga) */
-    --card: 0 0% 100%; /* Vit */
-    --card-foreground: 224 71.4% 4.1%; /* Mörk text */
+    --background: 263 50% 10%;
+    --foreground: 210 20% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
-
-    /* Primär, sekundär, accent – vi låter dem vara lila enligt dina ursprungliga inställningar */
     --primary: 263.4 70% 50.4%;
     --primary-foreground: 210 20% 98%;
     --secondary: 263 40% 20%;
@@ -55,9 +41,7 @@
     --accent-foreground: 210 20% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 20% 98%;
-
-    /* Borders och inputs – vi vill ha dem subtila och inte helt vita */
-    --border: 263 25% 22%; /* Mjukare kant */
+    --border: 263 25% 22%;
     --input: 263 25% 22%;
     --ring: 263.4 70% 50.4%;
   }

@@ -1,4 +1,3 @@
-// server/actions/contact.ts
 "use server";
 
 import { Resend } from "resend";

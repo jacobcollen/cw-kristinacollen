@@ -8,7 +8,7 @@ export function Hero({ hero, title, description }: HeroProps) {
     <section className="flex items-center justify-center bg-transparent py-16">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[1fr_auto]">
-          {/* Textinnehåll */}
+
           <div className="flex flex-col justify-center text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-200 leading-tight break-words">
               {title}
@@ -23,7 +23,6 @@ export function Hero({ hero, title, description }: HeroProps) {
             </div>
           </div>
 
-          {/* Bild */}
           <div className="flex justify-center md:justify-end">
             <Image
               src={hero}

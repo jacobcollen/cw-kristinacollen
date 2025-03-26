@@ -16,7 +16,6 @@ export default async function LecturePage({
   const lecture = lectures.find((l) => l.slug === params.slug);
   if (!lecture) return notFound();
 
-  // Breadcrumbs utan "Hem"
   const breadcrumbItems = [
     { label: "Föreläsningar", href: "/forelasningar" },
     { label: lecture.title, href: `/forelasningar/${lecture.slug}` },
