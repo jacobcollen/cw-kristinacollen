@@ -29,35 +29,37 @@ export default function BookTabs({ title }: BookTabProps) {
   return (
     <div className="py-6">
       <h1 className="mb-4 text-3xl font-bold">{currentCategory}</h1>
-      <Tabs
-        value={currentCategory}
-        onValueChange={handleChange}
-        className="relative rounded-sm overflow-x-scroll bg-muted"
-      >
-        <TabsList className="flex w-fit gap-1">
-          {availableCategories.map((cat) => (
-            <TabsTrigger
-              key={cat}
-              value={cat}
-              className={cn(
-                "rounded-md py-1 transition-colors",
-                currentCategory === cat
-                  ? "bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]"
-                  : "hover:bg-[hsl(var(--secondary))] hover:text-[hsl(var(--secondary-foreground))]",
-              )}
-            >
-              <motion.span
-                whileHover={
-                  currentCategory === cat ? undefined : { scale: 1.05 }
-                }
-                transition={{ duration: 0.2 }}
+      <div className="w-full overflow-x-scroll rounded-lg bg-muted">
+        <Tabs
+          value={currentCategory}
+          onValueChange={handleChange}
+          className="w-fit"
+        >
+          <TabsList className="flex w-fit gap-1">
+            {availableCategories.map((cat) => (
+              <TabsTrigger
+                key={cat}
+                value={cat}
+                className={cn(
+                  "rounded-md py-1 transition-colors",
+                  currentCategory === cat
+                    ? "bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]"
+                    : "hover:bg-[hsl(var(--secondary))] hover:text-[hsl(var(--secondary-foreground))]",
+                )}
               >
-                {cat}
-              </motion.span>
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
+                <motion.span
+                  whileHover={
+                    currentCategory === cat ? undefined : { scale: 1.05 }
+                  }
+                  transition={{ duration: 0.2 }}
+                >
+                  {cat}
+                </motion.span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+      </div>
     </div>
   );
 }
