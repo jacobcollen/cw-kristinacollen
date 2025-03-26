@@ -38,15 +38,15 @@ export default function AlmaPage() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
           variants={sectionVariants}
-          className="flex min-h-screen flex-col justify-center px-6 py-16"
+          className="flex min-h-screen flex-col justify-center py-8 my-8"
         >
           <div className="container max-w-6xl">
-            <h2 className="text-center text-5xl sm:text-6xl md:text-7xl font-bold mb-8 tracking-tight">
+            <h2 className="mb-8 break-words text-center text-5xl font-bold tracking-tight sm:text-5xl md:text-7xl">
               {highlightTitle(section.title, section.highlightSpan)}
             </h2>
 
             <div className="mx-auto mt-6 max-w-2xl px-2 sm:px-0">
-              <p className="whitespace-pre-line text-base break-words leading-relaxed">
+              <p className="whitespace-pre-line break-words text-sm leading-relaxed sm:text-base">
                 {section.content}
               </p>
 
@@ -78,7 +78,7 @@ export default function AlmaPage() {
             )}
 
             {Array.isArray(section.image) && section.image.length > 0 && (
-              <div className="mt-6 flex flex-wrap mx-auto justify-center gap-4 p-4">
+              <div className="mx-auto mt-6 flex flex-wrap justify-center gap-4 p-4">
                 {section.image.map((img, i) => (
                   <img
                     key={i}
@@ -91,13 +91,13 @@ export default function AlmaPage() {
             )}
 
             {section.videoEmbedUrl && (
-              <div className="mt-6 flex justify-center items-center">
-                <div className="max-w-3xl mx-auto">
+              <div className="mt-6 flex items-center justify-center">
+                <div className="mx-auto max-w-3xl">
                   <div
                     dangerouslySetInnerHTML={{
                       __html: section.videoEmbedUrl.replace(
-                        '<iframe ',
-                        "<iframe style='display:block;margin:0 auto;' "
+                        "<iframe ",
+                        "<iframe style='display:block;margin:0 auto;' ",
                       ),
                     }}
                   />

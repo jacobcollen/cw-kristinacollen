@@ -7,7 +7,11 @@ import { BookTabProps } from "../_types/booktab";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const availableCategories = ["Alla böcker", "Böcker för barn", "Böcker för vuxna"];
+const availableCategories = [
+  "Alla böcker",
+  "Böcker för barn",
+  "Böcker för vuxna",
+];
 
 export default function BookTabs({ title }: BookTabProps) {
   const searchParams = useSearchParams();
@@ -24,22 +28,28 @@ export default function BookTabs({ title }: BookTabProps) {
 
   return (
     <div className="py-6">
-      <h1 className="text-3xl font-bold mb-4">{currentCategory}</h1>
-      <Tabs value={currentCategory} onValueChange={handleChange} className="w-fit">
-        <TabsList className="flex gap-4">
+      <h1 className="mb-4 text-3xl font-bold">{currentCategory}</h1>
+      <Tabs
+        value={currentCategory}
+        onValueChange={handleChange}
+        className="w-fit"
+      >
+        <TabsList className="flex w-full flex-wrap gap-1">
           {availableCategories.map((cat) => (
             <TabsTrigger
               key={cat}
               value={cat}
               className={cn(
-                "rounded-md px-3 py-1 transition-colors",
+                "rounded-md py-1 transition-colors",
                 currentCategory === cat
                   ? "bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]"
-                  : "hover:bg-[hsl(var(--secondary))] hover:text-[hsl(var(--secondary-foreground))]"
+                  : "hover:bg-[hsl(var(--secondary))] hover:text-[hsl(var(--secondary-foreground))]",
               )}
             >
               <motion.span
-                whileHover={currentCategory === cat ? undefined : { scale: 1.05 }}
+                whileHover={
+                  currentCategory === cat ? undefined : { scale: 1.05 }
+                }
                 transition={{ duration: 0.2 }}
               >
                 {cat}

@@ -214,6 +214,7 @@ export default function ContactForm({
       <DrawerTrigger asChild>{TriggerButton}</DrawerTrigger>
       <DrawerContent
         id="contact-form-drawer"
+        className="pb-8"
         onInteractOutside={(e) => {
           const target = e.target as HTMLElement;
           if (target.closest("[data-vaul-drawer]")) {
@@ -228,7 +229,7 @@ export default function ContactForm({
           )}
         </DrawerHeader>
         <div className="p-4">{FormContent}</div>
-        <DrawerClose asChild className="p-4">
+        <DrawerClose asChild className="p-4 mt-8 mx-4">
           <Button variant="outline" onClick={(e) => e.currentTarget.blur()}>
             Stäng
           </Button>

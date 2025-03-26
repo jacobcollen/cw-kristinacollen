@@ -15,7 +15,7 @@ import { images } from "@/app/_data/images";
 export default function AboutMe() {
   return (
     <section
-      className="flex items-center justify-center"
+      className="flex items-center justify-center mt-4"
       style={{ minHeight: "calc(100vh - 6rem)" }}
     >
       <div className="container flex items-center justify-center">
