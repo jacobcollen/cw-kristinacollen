@@ -41,10 +41,31 @@ export default function AlmaPage() {
           className="flex min-h-screen flex-col justify-center px-6 py-16"
         >
           <div className="container max-w-6xl">
-
-            <h2 className="text-center text-7xl font-bold mb-8 tracking-tight">
+            <h2 className="text-center text-5xl sm:text-6xl md:text-7xl font-bold mb-8 tracking-tight">
               {highlightTitle(section.title, section.highlightSpan)}
             </h2>
+
+            <div className="mx-auto mt-6 max-w-2xl px-2 sm:px-0">
+              <p className="whitespace-pre-line text-base break-words leading-relaxed">
+                {section.content}
+              </p>
+
+              {section.links && section.links.length > 0 && (
+                <div className="mt-4 flex flex-wrap justify-center gap-4">
+                  {section.links.map((link, i) => (
+                    <Button key={i} asChild>
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {link.label}
+                      </a>
+                    </Button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {section.image && !Array.isArray(section.image) && (
               <div className="mt-6 flex justify-center">
@@ -83,28 +104,6 @@ export default function AlmaPage() {
                 </div>
               </div>
             )}
-
-            <div className="mx-auto mt-6 max-w-2xl">
-              <p className="whitespace-pre-line text-base leading-relaxed">
-                {section.content}
-              </p>
-
-              {section.links && section.links.length > 0 && (
-                <div className="mt-4 flex flex-wrap justify-center gap-4">
-                  {section.links.map((link, i) => (
-                    <Button key={i} asChild>
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {link.label}
-                      </a>
-                    </Button>
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
         </motion.section>
       ))}
