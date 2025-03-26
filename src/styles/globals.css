@@ -4,8 +4,6 @@
 
 @layer base {
   :root {
-    /* Ljus-läge */
-    /* Dessa är ChadCN standard (EU-ljus layout) – justera fritt om du vill */
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
     --card: 0 0% 100%;
@@ -29,77 +27,23 @@
   }
 
   .dark {
-    /*
-      MÖRKT LILA-LÄGE
-      Nedan är anpassade färgvärden för en lila gradient-bakgrund.
-      Du kan justera HSL-värden efter behov.
-      Jag har gjort dem lite dovare, så att inte borders och text blir för ljusa.
-    */
-
-    /* Bakgrunden i dark mode */
-    --background: 263 45% 9%; /* lila-svart ton */
-
-    /*
-      Textfärg. Ligger nära vit,
-      men inte helt #fff för lite mjukare kontrast.
-    */
+    --background: 263 45% 5%;
     --foreground: 210 15% 95%;
-
-    /*
-      Kort-bakgrund:
-      En aning ljusare än --background för att synas, men ändå dov.
-    */
-    --card: 263 40% 12%;
-    --card-foreground: 210 20% 95%;
-
-    /* Popover/drawer-bakgrund (dropdowns, menyrader etc.) */
-    --popover: 263 40% 12%;
-    --popover-foreground: 210 20% 95%;
-
-    /*
-      Primärfärg = Lila knappar etc. 
-      Samma som i ljust läge, om du vill. 
-      Här har jag bara klistrat in ChadCN-samma:
-    */
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
     --primary: 262.1 83.3% 57.8%;
     --primary-foreground: 210 20% 98%;
-
-    /*
-      Sekundärfärg. 
-      Låt den vara en mörkare variant av lila (för t.ex. hover, outlines).
-    */
-    --secondary: 263 30% 18%;
-    --secondary-foreground: 210 20% 98%;
-
-    /*
-      Muted = extra bakgrund/svärta
-      T.ex. om du vill ha block som är ännu mörkare 
-      eller för en diskret textfärg.
-    */
-    --muted: 263 25% 16%;
-    --muted-foreground: 210 15% 80%;
-
-    /*
-      Accent = en tredje variant av lila 
-      (ibland använt av ChadCN-komponenter),
-      om du vill. Du kan göra den marginellt ljusare än secondary:
-    */
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
     --accent: 263 30% 20%;
     --accent-foreground: 210 20% 98%;
-
-    /*
-      Destructive = rödtonad varningsfärg
-      Justerat lite för att inte bli vit
-    */
     --destructive: 0 70% 45%;
     --destructive-foreground: 210 20% 98%;
-
-    /*
-      Borders & Input: 
-      Om du vill ha en lite ljusare kant, 
-      men inte kritvit
-    */
-    --border: 263 25% 20%;
+    --border: 263 25% 50%;
     --input: 263 25% 20%;
 
     /* 

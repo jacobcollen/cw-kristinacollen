@@ -22,9 +22,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Fel vid e-postutskick:", error);
-    return NextResponse.json(
-      { error: "Fel vid e-postutskick" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Fel vid e-postutskick" }, { status: 500 });
   }
 }

@@ -1,27 +1,39 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
 import { newsletterSubscribers } from "@/server/db/schema";
-import { Resend } from "resend";
+import * as z from "zod";
 
-const resend = new Resend(process.env.RESEND_API_KEY || "");
+const subscribeSchema = z.object({
+  email: z.string().email(),
+});
 
 export async function POST(req: Request) {
   try {
-    const { subject, message } = await req.json();
+    const body = await req.json();
+    const parsedData = subscribeSchema.safeParse(body);
 
-    const subscribers = await db.select().from(newsletterSubscribers);
-    const emails = subscribers.map((sub) => sub.email);
+    if (!parsedData.success) {
+      return NextResponse.json({ error: "Ogiltig e-postadress" }, { status: 400 });
+    }
 
-    await resend.emails.send({
-      from: "nyhetsbrev@kristinacollen.se",
-      to: emails,
-      subject,
-      text: message,
+    const { email } = parsedData.data;
+
+    const existingSubscriber = await db.query.newsletterSubscribers.findFirst({
+      where: (subs, { eq }) => eq(subs.email, email),
     });
 
-    return NextResponse.json({ success: true });
+    if (existingSubscriber) {
+      return NextResponse.json(
+        { error: "E-postadressen är redan registrerad." },
+        { status: 409 }
+      );
+    }
+
+    await db.insert(newsletterSubscribers).values({ email });
+
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error("Fel vid e-postutskick:", error);
-    return NextResponse.json({ error: "Fel vid e-postutskick" }, { status: 500 });
+    console.error("Fel vid prenumeration:", error);
+    return NextResponse.json({ error: "Serverfel" }, { status: 500 });
   }
 }
