@@ -22,7 +22,7 @@ Karaktären Alma skapades i dialog med kvinnor, flickor och föräldrar till fli
 
 I maj 2019 var Almamodellen - utveckling för en inkluderande skola, ett av flera projekt som innovationsmyndigheten Vinnova valde att satsa på i sin utlysning Att utveckla och testa en social innovation. Efter det har flera skolor och förskolor fått utbildning genom Almamodellen. Ett exempel är från år 2022, då specialpedagoger i två kommuner i Örebro län valde att göra en särskild satsning på flickorna.. Samtliga förskolor i de båda kommunerna deltog i utbildning och handledning och då myntades begreppet Almaögon, dvs tidig upptäck för att kunna förstå och ge stöd.`,
     videoEmbedUrl: `<iframe
-		src="https://www.youtube.com/embed/na5yoWt80sM"
+		src="https://www.youtube-nocookie.com/embed/na5yoWt80sM"
 		title="..."
 		frameborder="0"
 		allow="accelerometer; autoplay; ..."
@@ -49,8 +49,8 @@ I maj 2019 var Almamodellen - utveckling för en inkluderande skola, ett av fler
     highlightSpan: " Alma ",
     content: `Barnföreställningen Alma och papegojmysteriet hade urpremiär i Västerås i oktober 2019. Det är teatergruppen Awake Projects som skapat pjäsen fritt från den första boken i serien om detektiv Alma. Pjäsen har spelats runt om i Västmanlands län och även i Örebro.`,
     image: [
-      "https://awakeprojects.com/wp-content/uploads/2019/10/IMG_4690-981_fotograf_Henrik_Mill_sRGB-768x1152.jpg",
-      "https://awakeprojects.com/wp-content/uploads/2019/10/Alma_premia%CC%88r_Foto_Kerstin_Helsing-9-1024x683.jpg",
+      "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTEp4e3gzIXHUVACiNK6gFyqBzEOQx5M0jGunb",
+      "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTwyRVOAWBwyHsRvC6S04gN3xcKbrufUdkFLE7",
     ],
     links: [
       {

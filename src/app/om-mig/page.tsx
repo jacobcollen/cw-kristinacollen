@@ -16,7 +16,7 @@ export default function AboutMe() {
   return (
     <section
       className="flex items-center justify-center"
-      style={{ minHeight: "calc(100vh - 12rem)" }}
+      style={{ minHeight: "calc(100vh - 6rem)" }}
     >
       <div className="container flex items-center justify-center">
         <Card className="w-full max-w-6xl overflow-hidden">

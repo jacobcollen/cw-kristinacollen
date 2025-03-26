@@ -22,7 +22,10 @@ export default async function BookPage({ params }: { params: { slug: string } })
   return (
     <>
       <BreadcrumbNav items={breadcrumbItems} />
-      <div className="container mx-auto max-w-5xl p-6">
+      <div
+        className="container mx-auto mb-8 min-h-screen max-w-5xl"
+        style={{ minHeight: "calc(100vh - 12rem)" }}
+      >
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl font-bold">{book.title}</CardTitle>
@@ -81,7 +84,9 @@ export default async function BookPage({ params }: { params: { slug: string } })
                   {book.review && (
                     <div>
                       <h2 className="text-xl font-semibold">Från en läsare</h2>
-                      <blockquote className="mt-2 text-muted-foreground">{book.review}</blockquote>
+                      <blockquote className="mt-2 text-muted-foreground">
+                        {book.review}
+                      </blockquote>
                     </div>
                   )}
                 </div>

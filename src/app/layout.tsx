@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 import Header from "./_components/Header";
 import { Footer } from "./_components/Footer";
 import { ToastProvider } from "@/components/ui/toast";
+import { Toaster } from "sonner";
 
 export const dynamic = "force-dynamic";
 
@@ -21,13 +22,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="sv" className={`${GeistSans.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Header />
-          <main className="flex-1">{children}</main>
+    <html
+      lang="sv"
+      className={`${GeistSans.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="flex min-h-screen flex-col">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <ToastProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
             <Footer />
+            <Toaster />
           </ToastProvider>
         </ThemeProvider>
       </body>

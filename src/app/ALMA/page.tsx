@@ -42,7 +42,7 @@ export default function AlmaPage() {
         >
           <div className="container max-w-6xl">
 
-            <h2 className="cursor-pointer text-center text-6xl font-bold tracking-tight hover:underline">
+            <h2 className="text-center text-6xl font-bold mb-8 tracking-tight">
               {highlightTitle(section.title, section.highlightSpan)}
             </h2>
 
@@ -84,7 +84,6 @@ export default function AlmaPage() {
               </div>
             )}
 
-            {/* Text & Buttons */}
             <div className="mx-auto mt-6 max-w-2xl">
               <p className="whitespace-pre-line text-base leading-relaxed">
                 {section.content}

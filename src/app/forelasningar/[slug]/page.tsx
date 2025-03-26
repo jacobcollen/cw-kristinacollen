@@ -25,10 +25,15 @@ export default async function LecturePage({
   return (
     <>
       <BreadcrumbNav items={breadcrumbItems} />
-      <div className="container mx-auto max-w-4xl mb-8">
+      <div
+        className="container mx-auto mb-8 min-h-screen max-w-5xl"
+        style={{ minHeight: "calc(100vh - 12rem)" }}
+      >
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl font-bold">{lecture.title}</CardTitle>
+            <CardTitle className="text-2xl font-bold">
+              {lecture.title}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="relative h-64 w-full overflow-hidden rounded-md">
@@ -39,7 +44,7 @@ export default async function LecturePage({
                 objectFit="cover"
               />
             </div>
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+            <div className="mt-6 flex flex-wrap justify-between gap-y-8">
               <div className="flex flex-wrap gap-2">
                 {lecture.forWho.map((audience, index) => (
                   <Badge key={index} variant="secondary">
@@ -48,13 +53,15 @@ export default async function LecturePage({
                 ))}
                 <Badge variant="outline">{lecture.length}</Badge>
               </div>
-              <Button className="ml-auto" asChild>
-                <ContactForm
-                  title={`Intresseanmälan ${lecture.title}`}
-                  description="Fyll i formuläret så återkommer jag till dig."
-                  triggerText="Intresseanmälan"
-                />
-              </Button>
+              <div className="w-full sm:w-auto">
+                <Button className="ml-auto" asChild>
+                  <ContactForm
+                    title={`Intresseanmälan ${lecture.title}`}
+                    description="Fyll i formuläret så återkommer jag till dig."
+                    triggerText="Intresseanmälan"
+                  />
+                </Button>
+              </div>
             </div>
             <Separator className="my-6" />
             <div className="space-y-6">

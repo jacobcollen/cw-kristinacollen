@@ -59,22 +59,22 @@ export function Navbar() {
   }
 
   return (
-    <NavigationMenu className="flex items-center gap-4 w-full">
+    <NavigationMenu className="flex w-full items-center gap-4">
       <NavigationMenuList>
         {menuItems.map((item) => {
           const mainActive = isMainNavActive(pathname, item.href);
 
-          // Om ingen subItems => vanlig länk
           if (!item.subItems) {
+
             return (
               <NavigationMenuItem key={item.title}>
                 <Link href={item.href} legacyBehavior passHref>
                   <NavigationMenuLink
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      "bg-transparent text-black dark:text-white",
-                      "hover:bg-[hsl(var(--secondary))] hover:text-black dark:hover:text-white",
-                      mainActive && "bg-[hsl(var(--secondary))] text-black dark:text-white"
+                      "bg-transparent text-foreground",
+                      "hover:bg-secondary/90 hover:text-secondary-foreground",
+                      mainActive && "bg-secondary text-secondary-foreground",
                     )}
                   >
                     <motion.span whileHover={{ scale: 1.05 }}>
@@ -92,9 +92,9 @@ export function Navbar() {
                   className={cn(
                     "group",
                     navigationMenuTriggerStyle(),
-                    "bg-transparent text-black dark:text-white",
-                    "hover:bg-[hsl(var(--secondary))] dark:hover:text-white",
-                    mainActive && "bg-[hsl(var(--secondary))] text-black dark:text-white"
+                    "bg-transparent text-foreground",
+                    "hover:bg-secondary/90 hover:text-secondary-foreground",
+                    mainActive && "bg-secondary text-secondary-foreground",
                   )}
                 >
                   <motion.span whileHover={{ scale: 1.05 }}>
@@ -102,22 +102,25 @@ export function Navbar() {
                   </motion.span>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-
-                  <ul className="p-2 w-48 flex flex-col gap-1">
+                  <ul className="flex w-48 flex-col gap-1 p-2">
                     {item.subItems.map((subItem) => {
-                      const currentCategory = searchParams.get("category") || "Alla böcker";
+                      const currentCategory =
+                        searchParams.get("category") || "Alla böcker";
                       const subActive =
                         subItem.title === currentCategory ||
-                        (subItem.title === "Alla böcker" && pathname === "/bocker" && !currentCategory);
+                        (subItem.title === "Alla böcker" &&
+                          pathname === "/bocker" &&
+                          !currentCategory);
+
                       return (
                         <li key={subItem.title}>
                           <NavigationMenuLink asChild>
                             <Link
                               href={subItem.href}
                               className={cn(
-                                "block px-3 py-2 text-sm rounded-md hover:bg-muted hover:text-foreground",
+                                "block rounded-md px-3 py-2 text-sm hover:bg-muted hover:text-muted-foreground",
                                 subActive &&
-                                  "bg-[hsl(var(--secondary))] text-black dark:text-white"
+                                  "bg-secondary text-secondary-foreground",
                               )}
                             >
                               {subItem.title}
@@ -140,7 +143,7 @@ export function Navbar() {
             triggerText="Kontakt"
             triggerClassName={cn(
               navigationMenuTriggerStyle(),
-              "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] no-underline"
+              "bg-primary text-primary-foreground hover:bg-primary/90",
             )}
             triggerVariant="ghost"
           />

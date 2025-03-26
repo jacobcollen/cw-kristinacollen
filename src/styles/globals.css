@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    /* Ljus-läge */
+    /* Dessa är ChadCN standard (EU-ljus layout) – justera fritt om du vill */
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
     --card: 0 0% 100%;
@@ -24,39 +26,94 @@
     --input: 220 13% 91%;
     --ring: 262.1 83.3% 57.8%;
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
   }
 
   .dark {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 20% 98%;
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
-    --primary: 263.4 70% 50.4%;
+    /*
+      MÖRKT LILA-LÄGE
+      Nedan är anpassade färgvärden för en lila gradient-bakgrund.
+      Du kan justera HSL-värden efter behov.
+      Jag har gjort dem lite dovare, så att inte borders och text blir för ljusa.
+    */
+
+    /* Bakgrunden i dark mode */
+    --background: 263 45% 9%; /* lila-svart ton */
+
+    /*
+      Textfärg. Ligger nära vit,
+      men inte helt #fff för lite mjukare kontrast.
+    */
+    --foreground: 210 15% 95%;
+
+    /*
+      Kort-bakgrund:
+      En aning ljusare än --background för att synas, men ändå dov.
+    */
+    --card: 263 40% 12%;
+    --card-foreground: 210 20% 95%;
+
+    /* Popover/drawer-bakgrund (dropdowns, menyrader etc.) */
+    --popover: 263 40% 12%;
+    --popover-foreground: 210 20% 95%;
+
+    /*
+      Primärfärg = Lila knappar etc. 
+      Samma som i ljust läge, om du vill. 
+      Här har jag bara klistrat in ChadCN-samma:
+    */
+    --primary: 262.1 83.3% 57.8%;
     --primary-foreground: 210 20% 98%;
-    --secondary: 215 27.9% 16.9%;
+
+    /*
+      Sekundärfärg. 
+      Låt den vara en mörkare variant av lila (för t.ex. hover, outlines).
+    */
+    --secondary: 263 30% 18%;
     --secondary-foreground: 210 20% 98%;
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
-    --accent: 215 27.9% 16.9%;
+
+    /*
+      Muted = extra bakgrund/svärta
+      T.ex. om du vill ha block som är ännu mörkare 
+      eller för en diskret textfärg.
+    */
+    --muted: 263 25% 16%;
+    --muted-foreground: 210 15% 80%;
+
+    /*
+      Accent = en tredje variant av lila 
+      (ibland använt av ChadCN-komponenter),
+      om du vill. Du kan göra den marginellt ljusare än secondary:
+    */
+    --accent: 263 30% 20%;
     --accent-foreground: 210 20% 98%;
-    --destructive: 0 62.8% 30.6%;
+
+    /*
+      Destructive = rödtonad varningsfärg
+      Justerat lite för att inte bli vit
+    */
+    --destructive: 0 70% 45%;
     --destructive-foreground: 210 20% 98%;
-    --border: 215 27.9% 20%;
-    --input: 215 27.9% 16.9%;
-    --ring: 263.4 70% 50.4%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+
+    /*
+      Borders & Input: 
+      Om du vill ha en lite ljusare kant, 
+      men inte kritvit
+    */
+    --border: 263 25% 20%;
+    --input: 263 25% 20%;
+
+    /* 
+      Focusring - lila 
+      (kan göra den ljusare om du vill att den ska sticka ut)
+    */
+    --ring: 262.1 83.3% 57.8%;
   }
+
+  /*
+    ============ 
+    Resterande basregler
+    ============ 
+  */
 
   *,
   *::before,
@@ -71,41 +128,29 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
   }
 
+  /* Ljus-läge gradient */
   body:not(.dark) {
     background: linear-gradient(to bottom, #ffffff, #f8f8f8);
     background-attachment: fixed;
   }
 
+  /* Mörk-läge lila gradient */
   .dark body {
     background: linear-gradient(to bottom, #3f127a, #2e026d);
     background-attachment: fixed;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  figure,
-  blockquote,
-  dl,
-  dd {
-    margin: 0;
-  }
-
+  /* Rubriker */
   h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4;
   }
-
   h2 {
-    @apply scroll-m-20 text-3xl font-bold tracking-tight;
+    @apply scroll-m-20 text-3xl font-bold tracking-tight mb-4;
   }
-
   h3 {
     @apply scroll-m-20 text-2xl font-semibold tracking-tight;
   }
@@ -117,21 +162,24 @@
   a {
     @apply transition-colors;
   }
-
   a:hover {
     @apply hover:opacity-80;
   }
 
+  /*
+    Ta bort focus ring på musclick,
+    men behåll för tangentbord (focus-visible).
+  */
   *:focus:not(:focus-visible) {
     outline: none !important;
     box-shadow: none !important;
   }
-
   :focus-visible {
     outline: none;
     box-shadow: 0 0 0 2px hsl(var(--ring));
   }
 
+  /* Citat */
   blockquote {
     @apply mt-6 border-l-4 pl-4 italic text-muted-foreground;
   }
@@ -152,21 +200,16 @@
     @apply px-4 pt-2 pb-10 md:px-6 md:pb-12 lg:px-12 lg:pb-14 xl:px-16 xl:pb-16 mx-auto;
   }
 
-  button {
-    @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors;
+  /* 
+    Next.js Root
+  */
+  #__next,
+  #root,
+  div[data-nextjs-root] {
+    @apply h-full flex flex-col;
   }
 
-  button:hover {
-    @apply hover:opacity-90;
+  html {
+    @apply scroll-smooth;
   }
-}
-
-#__next,
-#root,
-div[data-nextjs-root] {
-  @apply h-full flex flex-col;
-}
-
-html {
-  @apply scroll-smooth;
 }
