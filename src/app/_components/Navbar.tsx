@@ -129,8 +129,8 @@ export function Navbar() {
                             <Link
                               href={subItem.href}
                               className={cn(
-                                "block rounded-md px-3 py-2 text-sm text-black", // Always black text
-                                "hover:bg-muted", // Only background changes on hover
+                                "block rounded-md px-3 py-2 text-sm text-black",
+                                "hover:bg-muted",
                                 subActive && "bg-secondary text-secondary-foreground"
                               )}
                             >

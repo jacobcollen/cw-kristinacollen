@@ -68,7 +68,7 @@ export function MobileNav() {
         </Button>
       </DrawerTrigger>
       <DrawerContent
-        className="h-[75%]"
+        className="max-h-[90dvh] pb-8"
         onInteractOutside={(e) => {
           const target = e.target as HTMLElement;
           if (target.closest("[data-vaul-drawer]")) {
@@ -180,14 +180,14 @@ export function MobileNav() {
                   title="Kontakta oss"
                   description="Fyll i formuläret nedan så återkommer jag till dig."
                   triggerText="Kontakt"
-                  triggerClassName="w-full justify-start text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90"
+                  triggerClassName="w-full justify-start text-base font-medium bg-primary text-primary-foreground"
                   onSuccess={() => setOpen(false)}
                 />
               </li>
             </ul>
           </nav>
         </ScrollArea>
-        <DrawerClose asChild className="p-4">
+        <DrawerClose asChild className="p-4 mt-8 mx-4">
           <Button variant="outline" onClick={(e) => e.currentTarget.blur()}>
             Stäng meny
           </Button>
