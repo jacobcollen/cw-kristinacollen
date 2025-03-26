@@ -32,9 +32,9 @@ export default function BookTabs({ title }: BookTabProps) {
       <Tabs
         value={currentCategory}
         onValueChange={handleChange}
-        className="w-fit"
+        className="relative rounded-sm overflow-x-scroll bg-muted"
       >
-        <TabsList className="flex w-full flex-wrap gap-1">
+        <TabsList className="flex w-fit gap-1">
           {availableCategories.map((cat) => (
             <TabsTrigger
               key={cat}

@@ -42,7 +42,7 @@ function BookCard({ book }: { book: any }) {
       whileHover={{ scale: 1.008 }}
       whileTap={{ scale: 0.985 }}
       transition={{ type: "spring", stiffness: 250, damping: 15 }}
-      className="h-full"
+      className="h-full space-y-4"
     >
       <Link href={`/bocker/${book.slug}`} className="group block h-full">
         <Card className="flex h-full flex-col hover:cursor-pointer">
