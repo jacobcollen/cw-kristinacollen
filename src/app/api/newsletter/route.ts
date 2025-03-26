@@ -1,23 +1,39 @@
-import { Resend } from "resend";
+import { NextResponse } from "next/server";
+import { db } from "@/server/db";
+import { newsletterSubscribers } from "@/server/db/schema";
+import * as z from "zod";
 
-const resend = new Resend(process.env.RESEND_API_KEY || "");
+const subscribeSchema = z.object({
+  email: z.string().email(),
+});
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const { email } = await request.json();
-    if (!email) {
-      return new Response(JSON.stringify({ error: "Email is required" }), { status: 400 });
+    const body = await req.json();
+    const parsedData = subscribeSchema.safeParse(body);
+
+    if (!parsedData.success) {
+      return NextResponse.json({ error: "Ogiltig e-postadress" }, { status: 400 });
     }
 
-    const data = await resend.emails.send({
-      from: "nyhetsbrev@kristinacollen.se",
-      to: email,
-      subject: "Tack för att du prenumererar! 🙂",
-      html: "<p>Tack för att du anmälde dig till mitt nyhetsbrev. Jag skickar ut nyhetsbrevet lite då och då. Mvh Kristina</p>",
+    const { email } = parsedData.data;
+
+    const existingSubscriber = await db.query.newsletterSubscribers.findFirst({
+      where: (subs, { eq }) => eq(subs.email, email),
     });
 
-    return new Response(JSON.stringify({ success: true, data }), { status: 200 });
-  } catch (error: any) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    if (existingSubscriber) {
+      return NextResponse.json(
+        { error: "E-postadressen är redan registrerad." },
+        { status: 409 }
+      );
+    }
+
+    await db.insert(newsletterSubscribers).values({ email });
+
+    return NextResponse.json({ success: true }, { status: 200 });
+  } catch (error) {
+    console.error("Fel vid prenumeration:", error);
+    return NextResponse.json({ error: "Serverfel" }, { status: 500 });
   }
 }

@@ -1,4 +1,3 @@
-// Footer.tsx
 "use client";
 
 import * as React from "react";
@@ -9,19 +8,10 @@ import {
   Linkedin,
   Book,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
 import { Separator } from "@/components/ui/separator";
-import { Input } from "@/components/ui/input";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
 import ContactForm from "./ContactForm";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { NewsletterForm } from "./NewsletterForm";
 
 const menuItems = [
   { title: "Hem", href: "/" },
@@ -31,39 +21,12 @@ const menuItems = [
   { title: "Om mig", href: "/om-mig" },
 ];
 
-const onSubmit = async (data: { email: string }, form: any) => {
-  try {
-    const response = await fetch("/api/newsletter", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: data.email }),
-    });
-    const result = await response.json();
-    if (response.ok) {
-      toast("Tack för att du prenumererar!", {
-        description: "Du är nu prenumerant på mitt nyhetsbrev.",
-      });
-      form.reset();
-    } else {
-      toast.error("Fel", {
-        description: result.error,
-      });
-    }
-  } catch (error) {
-    toast.error("Fel", {
-      description: "Något gick fel. Försök igen senare.",
-    });
-  }
-};
-
 export function Footer() {
-  const form = useForm<{ email: string }>({ defaultValues: { email: "" } });
-
   return (
     <footer className="z-50 w-full bg-gray-950 text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {/* Col 1: About */}
+
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Kristina Collén</h3>
             <Separator className="bg-gray-700" />
@@ -103,7 +66,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Col 2: Meny */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Meny</h3>
             <Separator className="bg-gray-700" />
@@ -127,44 +89,16 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Col 3: Newsletter */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">
               Prenumerera på nyhetsbrevet
             </h3>
             <Separator className="bg-gray-700" />
             <p className="text-sm text-gray-300">
-              Få uppdateringar om nya böcker, föreläsningar och andra aktiviteter
-              direkt till din inbox. 🙂
+              Få uppdateringar om nya böcker, föreläsningar och andra
+              aktiviteter direkt till din inbox. 🙂
             </p>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit((data) => onSubmit(data, form))}
-                className="space-y-3"
-              >
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <div className="flex">
-                          <Input
-                            placeholder="Din e-postadress"
-                            className="rounded-r-none border-gray-700 bg-gray-900 focus:border-gray-500"
-                            {...field}
-                          />
-                          <Button type="submit" className="rounded-l-none">
-                            Anmäl
-                          </Button>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </form>
-            </Form>
+            <NewsletterForm />
           </div>
         </div>
 

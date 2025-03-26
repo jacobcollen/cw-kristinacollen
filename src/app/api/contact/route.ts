@@ -1,4 +1,3 @@
-// app/api/contact/route.ts
 import { sendContactEmail } from "@/server/actions/contact";
 import { NextResponse } from "next/server";
 
