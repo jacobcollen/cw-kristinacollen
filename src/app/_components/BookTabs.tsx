@@ -28,7 +28,7 @@ export default function BookTabs({ title }: BookTabProps) {
 
   return (
     <div className="py-6">
-      <h1 className="mb-4 text-3xl font-bold">{currentCategory}</h1>
+      <h1 className="mb-8 text-3xl font-bold">{currentCategory}</h1>
       <div className="w-full overflow-x-scroll rounded-lg bg-muted">
         <Tabs
           value={currentCategory}
