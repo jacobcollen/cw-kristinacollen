@@ -1,3 +1,3 @@
 export default function CookiesPage() {
-  return <div>Information om cookies kommer snart.</div>;
+  return <div className="container flex items-center justify-center h-full">Cookies kommer snart.</div>;
 }
