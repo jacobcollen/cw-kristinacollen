@@ -1,11 +1,13 @@
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { db } from "./db";
 import { users } from "./db/schema";
 import "server-only";
 import * as bcryptjs from "bcryptjs";
 
 export const getNews = async () => {
-  return await db.query.news.findMany();
+  return await db.query.news.findMany({
+    orderBy: (news) => desc(news.createdAt),
+  });
 };
 
 export const getUserByUsername = async (username: string) => {
