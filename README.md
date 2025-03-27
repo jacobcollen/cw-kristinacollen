@@ -1,6 +1,8 @@
 # Kristina Collén Website
 
-Project is built with [Create T3 App](https://create.t3.gg/) using `pnpm`.
+Project is built with [Create T3 App](https://create.t3.gg/) using `pnpm`.   
+
+Domain for live site is [kristinacollen.se](https://kristinacollen.se)
 
 ## Getting Started
 
@@ -22,11 +24,6 @@ Project is built with [Create T3 App](https://create.t3.gg/) using `pnpm`.
 
 App should now be running at [http://localhost:3000](http://localhost:3000).
 
-## Additional Information
-
-- The domain for live site is [kristinacollen.se](https://kristinacollen.se).
-- Note: The admin dashboard is not yet complete. You can view a preview at [kristinacollen.se/admin](https://kristinacollen.se/admin).
-
 ## Drizzle Studio
 
 To open Drizzle Studio, run:
@@ -46,7 +43,8 @@ pnpm run db:studio
 - Vercel (deployment)
 - shadcn/ui (component library)
 
-## Features
+## Additional Information
 
 - The contact form is fully functional and sends emails using Resend.
 - Newsletter subscription is active and stores emails via Drizzle ORM. News items displayed on the homepage are also posted using Drizzle ORM.
+- Note: Ignore the folder admin in the project. The admin dashboard and admin login is not yet fully implemented.
