@@ -38,11 +38,11 @@ pnpm run db:studio
 - React 19
 - TypeScript
 - Tailwind CSS v4
-- Uploadthing (Image management) 
+- Vercel
 - Drizzle ORM
+- Shadcn/Radix
 - Resend (transactional emails)
-- Vercel (deployment)
-- shadcn/ui (component library)
+- Uploadthing (Image management) 
 
 ## Additional Information
 
