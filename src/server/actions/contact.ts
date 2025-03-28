@@ -20,8 +20,8 @@ export async function sendContactEmail(formData: unknown) {
 
   try {
     const data = await resend.emails.send({
-      from: "Kontaktformulär <kontakt@kristinacollen.se>",
-      to: "jcbcollen@icloud.com",
+      from: "Meddelande från kontaktformulär <kontakt@kristinacollen.se>",
+      to: "kickicollen@gmail.com",
       subject: `Nytt meddelande från ${name}`,
       replyTo: email,
       text: `Namn: ${name}\nE-post: ${email}\n\nMeddelande:\n${message}`,
