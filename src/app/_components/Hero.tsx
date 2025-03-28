@@ -1,38 +1,47 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { HeroProps } from "@/app/_types/hero";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-export function Hero({ hero, title, description }: HeroProps) {
+const imgUrl =
+  "https://yeuzbow9sg.ufs.sh/f/bBvqbGlWGkJTmvnXl5hw3uhJyItiYaz8xQ5dsLPMVjw2S9Ce";
+
+export default function Hero() {
   return (
-    <section className="flex items-center justify-center bg-transparent py-16">
-      <div className="container mx-auto max-w-6xl px-4">
-        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[1fr_auto]">
-
-          <div className="flex flex-col justify-center text-left">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-200 leading-tight break-words">
-              {title}
-            </h1>
-            <p className="mt-4 text-base sm:text-lg lg:text-xl text-gray-300 break-words max-w-2xl">
-              {description}
-            </p>
-            <div className="mt-6">
-              <Button asChild>
-                <Link href="/bocker/rosentradgarden">Läs mer</Link>
-              </Button>
-            </div>
+    <section className="flex min-h-[calc(100vh-5rem)] items-center justify-center">
+      <div className="container max-w-7xl">
+        <Card className="border-0 bg-transparent shadow-none">
+          <div className="flex flex-1 flex-col p-2 md:p-4">
+            <CardContent className="flex flex-col items-center gap-12 p-0 md:flex-row md:gap-8">
+              <div className="order-2 flex-1 space-y-4 md:order-1">
+                <h1 className="font-bold tracking-tight text-gray-700 dark:text-gray-200">
+                  Rosenträdgården
+                </h1>
+                <p className="mt-2 leading-7 text-muted-foreground">
+                  <span className="mr-2 text-5xl md:text-7xl font-extrabold text-purple-600">
+                    “
+                  </span>
+                  Vill du ha en stunds trevlig lättläst läsning med en klurig
+                  och spännande historia är det här boken för dej! Boken
+                  påminner om Damernas detektivbyrå och engelsk feelgood.
+                  Historien ringlar sig fram till en oväntad upplösning. Ser
+                  fram emot en fortsättning!"
+                </p>
+                <div className="mt-4">
+                  <Link href="/bocker/rosentradgarden">
+                    <Button>Läs mer</Button>
+                  </Link>
+                </div>
+              </div>
+              <div className="order-1 flex w-48 justify-center md:order-2 md:w-80">
+                <img
+                  src={imgUrl}
+                  alt="Rosenträdgården"
+                  className="w-full rounded-sm object-cover shadow-xl shadow-slate-300 drop-shadow-xl"
+                />
+              </div>
+            </CardContent>
           </div>
-
-          <div className="flex justify-center md:justify-end">
-            <Image
-              src={hero}
-              alt={title}
-              width={500}
-              height={750}
-              className="rounded-md object-cover w-full max-w-xs sm:max-w-sm md:max-w-[280px] lg:max-w-[350px]"
-            />
-          </div>
-        </div>
+        </Card>
       </div>
     </section>
   );

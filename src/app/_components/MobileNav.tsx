@@ -18,7 +18,6 @@ import {
 import {
   Collapsible,
   CollapsibleContent,
-  CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ContactForm from "./ContactForm";
@@ -58,13 +57,13 @@ export function MobileNav() {
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden"
+          className="bg-gray-200 hover:bg-gray-300 dark:bg-purple-950 dark:hover:bg-purple-900 md:hidden"
           aria-label="Öppna meny"
           onClick={(e) => {
             e.currentTarget.blur();
           }}
         >
-          <Menu className="h-6 w-6" aria-hidden="true" />
+          <Menu className="h-16 w-16" aria-hidden="true" />
         </Button>
       </DrawerTrigger>
       <DrawerContent
@@ -79,7 +78,7 @@ export function MobileNav() {
         <DrawerHeader>
           <DrawerTitle className="text-xl">Meny</DrawerTitle>
         </DrawerHeader>
-        <ScrollArea className="h-full p-4">
+        <ScrollArea className="h-full p-2">
           <nav aria-label="Huvudmeny">
             <ul className="flex flex-col space-y-3">
               {menuItems.map((item) => (
@@ -89,7 +88,7 @@ export function MobileNav() {
                       <Button
                         variant={isActive(item.href) ? "secondary" : "ghost"}
                         className={cn(
-                          "w-full justify-between text-base font-medium bg-transparent text-foreground no-underline",
+                          "w-full justify-between bg-transparent text-base font-medium text-foreground no-underline",
                         )}
                         onClick={() => toggleCategory(item.title)}
                         aria-expanded={openCategories[item.title]}
@@ -154,7 +153,7 @@ export function MobileNav() {
                     <Button
                       asChild
                       variant={isActive(item.href) ? "secondary" : "ghost"}
-                      className="w-full justify-start text-base font-medium bg-transparent text-foreground no-underline"
+                      className="w-full justify-start bg-transparent text-base font-medium text-foreground no-underline"
                       onClick={(e) => {
                         setOpen(false);
                         e.currentTarget.blur();
@@ -173,9 +172,9 @@ export function MobileNav() {
                       </Link>
                     </Button>
                   )}
-                </li>
+                </li>	
               ))}
-              <li className="mt-4 border-t pt-4">
+              <li className="mt-4 border-t px-2 pt-4">
                 <ContactForm
                   title="Kontakta oss"
                   description="Fyll i formuläret nedan så återkommer jag till dig."
@@ -187,7 +186,7 @@ export function MobileNav() {
             </ul>
           </nav>
         </ScrollArea>
-        <DrawerClose asChild className="p-4 mt-8 mx-4">
+		<DrawerClose asChild className="p-4 mt-8 mx-4">
           <Button variant="outline" onClick={(e) => e.currentTarget.blur()}>
             Stäng meny
           </Button>

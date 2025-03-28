@@ -33,6 +33,13 @@ I maj 2019 var Almamodellen - utveckling för en inkluderande skola, ett av fler
     title: "Dataspelet Almaspelet",
     highlightSpan: " Almaspelet",
     content: `Tillsammans med forskare på socialt arbete på Örebro universitet och Högskolan i Skövde samt spelutvecklare, planerar vi att skapa och designa ett dataspel som riktar sig till flickor med autism och ADHD (NPF). Dataspelet, designat som ett Serious Game, fokuserar på samspelet mellan flickan och personer i hennes närhet samt att utforska flickans utmaningar i sociala situationer. Läs mer om forskningen nedan.`,
+    videoEmbedUrl: `<iframe
+      src="https://www.youtube-nocookie.com/embed/ayDGp4LSQSU"
+      title="Almaspelet"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>`,
     links: [
       {
         label: "Flash från TV (Nyhetsklipp)",

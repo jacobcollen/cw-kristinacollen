@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Slash } from "lucide-react";
+import { ChevronLeft, Slash } from "lucide-react";
 import { Fragment } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
@@ -28,14 +28,14 @@ export function BreadcrumbNav({ items }: BreadcrumbNavProps) {
       : backTarget.label || "Okänt";
 
   return (
-    <div className="mt-8 mx-8 mb-4">
+    <div className="p-2 mb-6 md:p-8">
 
       <div className="md:hidden">
         <Link
           href={backTarget.href || "#"}
-          className="flex items-center gap-1 text-sm transition-colors hover:text-primary"
+          className="flex items-center gap-1 text-sm transition-colors hover:text-grey-100"
         >
-          <ArrowLeft size={16} />
+          <ChevronLeft size={16} />
           <span>Tillbaka till {backLabel}</span>
         </Link>
       </div>

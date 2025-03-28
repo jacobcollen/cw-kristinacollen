@@ -46,21 +46,22 @@
     --ring: 263.4 70% 50.4%;
   }
 
+    #__next, #root, div[data-nextjs-root] {
+    @apply h-full flex flex-col;
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
   }
 
   html, body {
     height: 100%;
-  }
-
-  body {
-    @apply bg-background text-foreground antialiased;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	scroll-behavior: smooth;
+  	@apply scroll-smooth antialiased text-base;
   }
 
   body:not(.dark) {
-    background: linear-gradient(to bottom, #ffffff, #f8f8f8);
+    background: linear-gradient(to bottom, #f8f8f8, #fcfbfb);
     background-attachment: fixed;
   }
   .dark body {
@@ -69,52 +70,31 @@
   }
 
   h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4;
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight flex-wrap lg:text-6xl mb-4;
   }
   h2 {
-    @apply scroll-m-20 text-3xl font-bold tracking-tight mb-4;
+    @apply scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0;
   }
   h3 {
-    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+    @apply scroll-m-20 text-2xl font-semibold flex-wrap tracking-tight;
   }
-
   p {
-    @apply text-base leading-7;
+    @apply leading-7 [&:not(:first-child)]:mt-6;
   }
-
-  *:focus:not(:focus-visible) {
-    outline: none !important;
-    box-shadow: none !important;
-  }
-  :focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
-  }
-
   blockquote {
-    @apply mt-6 border-l-4 pl-4 italic text-muted-foreground;
+    @apply mt-6 border-l-2 pl-6 italic;
   }
-
   ul, ol {
+	@apply list-disc;
     margin: 0;
     padding: 0;
     list-style: none;
   }
-
   pre, code {
     @apply font-mono text-sm;
   }
 
   .container {
-    @apply px-4 pt-2 pb-10 md:px-6 md:pb-12 lg:px-12 lg:pb-14 xl:px-16 xl:pb-16 mx-auto;
+    @apply px-2 pt-2 pb-10 md:px-6 md:pb-12 lg:px-12 lg:pb-14 xl:px-16 xl:pb-16 mx-auto;
   }
-
-  #__next, #root, div[data-nextjs-root] {
-    @apply h-full flex flex-col;
-  }
-
-  html {
-    @apply scroll-smooth;
-  }
- 
 }

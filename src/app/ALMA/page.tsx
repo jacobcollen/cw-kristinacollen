@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PageThemeWrapper } from "../_components/PageThemeWrapper";
@@ -38,75 +37,89 @@ export default function AlmaPage() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
           variants={sectionVariants}
-          className="flex min-h-screen flex-col justify-center py-8 my-8"
+          className="alma-section flex min-h-screen flex-col justify-center py-20 md:py-28"
         >
-          <div className="container max-w-6xl">
-            <h2 className="mb-8 break-words text-center text-5xl font-bold tracking-tight sm:text-5xl md:text-7xl">
+          <div className="container flex max-w-6xl flex-col space-y-8 p-2 md:space-y-12 md:p-4">
+            <h2 className="break-words text-left text-5xl font-bold tracking-tight text-gray-200 sm:text-5xl md:text-center md:text-7xl">
               {highlightTitle(section.title, section.highlightSpan)}
             </h2>
 
-            <div className="mx-auto mt-6 max-w-2xl px-2 sm:px-0">
-              <p className="whitespace-pre-line break-words text-sm leading-relaxed sm:text-base">
-                {section.content}
-              </p>
-
-              {section.links && section.links.length > 0 && (
-                <div className="mt-4 flex flex-wrap justify-center gap-4">
-                  {section.links.map((link, i) => (
-                    <Button key={i} asChild>
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {link.label}
-                      </a>
-                    </Button>
-                  ))}
-                </div>
-              )}
+            <div className="gap-8 whitespace-pre-line break-words text-base leading-relaxed text-gray-300 md:columns-2 md:text-lg">
+              {section.content}
             </div>
 
+            {section.videoEmbedUrl && (
+              <div className="mx-auto w-full max-w-3xl p-0 md:p-4">
+                <div
+                  className="relative overflow-hidden"
+                  style={{ paddingTop: "56.25%" }}
+                >
+                  <iframe
+                    src={section.videoEmbedUrl.match(/src="([^"]+)"/)?.[1]}
+                    title="Alma video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="absolute left-0 top-0 h-full w-full"
+                  />
+                </div>
+              </div>
+            )}
+
             {section.image && !Array.isArray(section.image) && (
-              <div className="mt-6 flex justify-center">
+              <div className="flex justify-center p-0 md:p-4">
                 <img
                   src={section.image}
                   alt={section.title + " image"}
-                  className="h-80 w-auto rounded-md object-cover"
+                  className="mx-auto w-full max-w-3xl rounded-md object-cover"
                 />
               </div>
             )}
 
             {Array.isArray(section.image) && section.image.length > 0 && (
-              <div className="mx-auto mt-6 flex flex-wrap justify-center gap-4 p-4">
+              <div className="mx-auto flex flex-wrap justify-center gap-4 p-0 md:p-4">
                 {section.image.map((img, i) => (
                   <img
                     key={i}
                     src={img}
                     alt={`${section.title} image ${i + 1}`}
-                    className="h-80 w-auto rounded-md object-cover"
+                    className="w-full max-w-3xl rounded-md object-cover"
                   />
                 ))}
               </div>
             )}
 
-            {section.videoEmbedUrl && (
-              <div className="mt-6 flex items-center justify-center">
-                <div className="mx-auto max-w-3xl">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: section.videoEmbedUrl.replace(
-                        "<iframe ",
-                        "<iframe style='display:block;margin:0 auto;' ",
-                      ),
-                    }}
-                  />
-                </div>
+            {section.links && section.links.length > 0 && (
+              <div className="mt-4 flex flex-wrap justify-center gap-4">
+                {section.links.map((link, i) => (
+                  <Button key={i} asChild>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.label}
+                    </a>
+                  </Button>
+                ))}
               </div>
             )}
           </div>
         </motion.section>
       ))}
+
+      <style jsx global>{`
+        .alma-section {
+          padding-top: .5rem;
+          padding-bottom: 8rem;
+        }
+
+        .alma-section {
+          margin-top: 6rem;
+          margin-bottom: 6rem;
+        }
+      `}</style>
+
     </PageThemeWrapper>
   );
 }

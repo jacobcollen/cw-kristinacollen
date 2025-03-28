@@ -46,36 +46,38 @@ function BookCard({ book }: { book: any }) {
     >
       <Link href={`/bocker/${book.slug}`} className="group block h-full">
         <Card className="flex h-full flex-col hover:cursor-pointer">
-          <CardHeader className="p-6">
-            <img
-              src={book.imgUrl}
-              alt={book.title}
-              className="w-full rounded-sm object-contain"
-              style={{ aspectRatio: "3/4" }}
-            />
-          </CardHeader>
-          <CardContent className="flex flex-1 flex-col p-6 pt-0">
-            <div className="flex flex-1 flex-col">
-              <CardTitle ref={titleRef} className="mb-2 text-xl font-bold">
-                {book.title}
-              </CardTitle>
-              <CardDescription
-                style={{
-                  display: "-webkit-box",
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                  WebkitLineClamp: clampLines,
-                }}
-              >
-                {Array.isArray(book.description)
-                  ? book.description.join(" ")
-                  : book.description}
-              </CardDescription>
-            </div>
-          </CardContent>
-          <CardFooter className="mt-auto p-6 pt-0">
-            <Button className="w-full">Läs mer</Button>
-          </CardFooter>
+          <div className="flex flex-1 flex-col space-y-4 p-2 md:p-4">
+            <CardHeader className="p-0">
+              <img
+                src={book.imgUrl}
+                alt={book.title}
+                className="w-full rounded-sm object-contain"
+                style={{ aspectRatio: "3/4" }}
+              />
+            </CardHeader>
+            <CardContent className="space-y-6 p-0 flex flex-1 flex-col">
+              <div className="flex flex-1 flex-col">
+                <CardTitle ref={titleRef} className="mb-4 text-xl font-bold">
+                  {book.title}
+                </CardTitle>
+                <CardDescription
+                  style={{
+                    display: "-webkit-box",
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    WebkitLineClamp: clampLines,
+                  }}
+                >
+                  {Array.isArray(book.description)
+                    ? book.description.join(" ")
+                    : book.description}
+                </CardDescription>
+              </div>
+            </CardContent>
+            <CardFooter className="mt-auto p-0">
+              <Button className="w-full">Läs mer</Button>
+            </CardFooter>
+          </div>
         </Card>
       </Link>
     </motion.div>

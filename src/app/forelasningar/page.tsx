@@ -41,7 +41,10 @@ function LectureCard({ lecture }: { lecture: any }) {
       transition={{ type: "spring", stiffness: 250, damping: 15 }}
       className="h-full"
     >
-      <Link href={`/forelasningar/${lecture.slug}`} className="group block h-full">
+      <Link
+        href={`/forelasningar/${lecture.slug}`}
+        className="group block h-full"
+      >
         <Card className="flex h-full flex-col hover:cursor-pointer">
           <CardHeader className="p-0">
             <img
@@ -50,28 +53,30 @@ function LectureCard({ lecture }: { lecture: any }) {
               className="h-48 w-full rounded-t-lg object-cover"
             />
           </CardHeader>
-          <CardContent className="flex flex-col flex-1 p-6">
-            <div className="flex flex-col flex-1">
-              <CardTitle ref={titleRef} className="mb-2 text-xl font-bold">
-                {lecture.title}
-              </CardTitle>
-              <CardDescription
-                style={{
-                  display: "-webkit-box",
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                  WebkitLineClamp: clampLines,
-                }}
-              >
-                {Array.isArray(lecture.description)
-                  ? lecture.description.join(" ")
-                  : lecture.description}
-              </CardDescription>
-            </div>
-            <div className="mt-auto pt-4">
-              <Button className="w-full">Läs mer</Button>
-            </div>
-          </CardContent>
+          <div className="flex flex-1 flex-col space-y-4 p-2 md:p-4">
+            <CardContent className="flex flex-1 flex-col p-0">
+              <div className="flex flex-1 flex-col">
+                <CardTitle ref={titleRef} className="mb-4 text-xl font-bold">
+                  {lecture.title}
+                </CardTitle>
+                <CardDescription
+                  style={{
+                    display: "-webkit-box",
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    WebkitLineClamp: clampLines,
+                  }}
+                >
+                  {Array.isArray(lecture.description)
+                    ? lecture.description.join(" ")
+                    : lecture.description}
+                </CardDescription>
+              </div>
+              <div className="mt-auto pt-4">
+                <Button className="w-full">Läs mer</Button>
+              </div>
+            </CardContent>
+          </div>
         </Card>
       </Link>
     </motion.div>

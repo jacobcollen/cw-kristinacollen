@@ -29,12 +29,12 @@ export default async function LecturePage({
         style={{ minHeight: "calc(100vh - 12rem)" }}
       >
         <Card>
-          <CardHeader>
+          <CardHeader className="p-2 md:p-6">
             <CardTitle className="text-2xl font-bold">
               {lecture.title}
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-2 md:p-6">
             <div className="relative h-64 w-full overflow-hidden rounded-md">
               <Image
                 src={lecture.imgUrl}
@@ -71,8 +71,10 @@ export default async function LecturePage({
                 </p>
               </div>
               <div>
-                <h2 className="text-xl font-semibold">För vem?</h2>
-                <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
+                <h2 className="text-xl font-semibold">
+                  För vem?
+                </h2>
+                <ul className="mt-4 list-disc space-y-2 pl-4 text-muted-foreground">
                   {lecture.bulletPoints.map((point, index) => (
                     <li key={index}>{point}</li>
                   ))}

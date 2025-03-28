@@ -23,76 +23,78 @@ export default async function BookPage({ params }: { params: { slug: string } })
     <>
       <BreadcrumbNav items={breadcrumbItems} />
       <div
-        className="container mx-auto mb-8 min-h-screen max-w-5xl"
+        className="container mx-auto mb-8 min-h-screen max-w-6xl"
         style={{ minHeight: "calc(100vh - 12rem)" }}
       >
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">{book.title}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-[auto_1fr]">
-              <div className="relative mx-auto h-fit w-full max-w-sm overflow-hidden rounded-sm">
-                <Image
-                  src={book.imgUrl}
-                  alt={book.title}
-                  width={400}
-                  height={600}
-                  className="rounded-sm"
-                  style={{ width: "auto", height: "auto" }}
-                />
-              </div>
-              <div className="space-y-6">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex flex-wrap gap-2">
-                    {[book.year, book.publisher].map((item) => (
-                      <Badge key={item} variant="secondary">
-                        {item}
-                      </Badge>
-                    ))}
-                  </div>
-                  {book.purchaseLink ? (
-                    <Button asChild>
-                      <a
-                        href={book.purchaseLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Köp boken <ExternalLink className="ml-2 h-4 w-4" />
-                      </a>
-                    </Button>
-                  ) : (
-                    <Button asChild>
-                      <ContactForm
-                        title={`Köp boken ${book.title}`}
-                        description="Kontakta mig för att köpa boken."
-                        triggerText="Köp boken"
-                      />
-                    </Button>
-                  )}
+        <Card className="border-0">
+          <div className="p-2 md:p-4 flex flex-col flex-1 space-y-6">
+            <CardHeader className="p-0 mb-4">
+              <CardTitle className="text-2xl font-bold">{book.title}</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0 flex flex-col items-center gap-6 md:flex-row md:gap-8">
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-[auto_1fr]">
+                <div className="relative mx-auto h-fit w-full max-w-sm overflow-hidden rounded-sm">
+                  <Image
+                    src={book.imgUrl}
+                    alt={book.title}
+                    width={400}
+                    height={600}
+                    className="rounded-sm"
+                    style={{ width: "auto", height: "auto" }}
+                  />
                 </div>
-                <Separator className="my-6" />
                 <div className="space-y-6">
-                  <div>
-                    <h2 className="text-xl font-semibold">Om boken</h2>
-                    <p className="text-muted-foreground">
-                      {Array.isArray(book.description)
-                        ? book.description.join(" ")
-                        : book.description}
-                    </p>
-                  </div>
-                  {book.review && (
-                    <div>
-                      <h2 className="text-xl font-semibold">Från en läsare</h2>
-                      <blockquote className="mt-2 text-muted-foreground">
-                        {book.review}
-                      </blockquote>
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <div className="flex flex-wrap gap-2">
+                      {[book.year, book.publisher].map((item) => (
+                        <Badge key={item} variant="secondary">
+                          {item}
+                        </Badge>
+                      ))}
                     </div>
-                  )}
+                    {book.purchaseLink ? (
+                      <Button asChild>
+                        <a
+                          href={book.purchaseLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Köp boken <ExternalLink className="ml-2 h-4 w-4" />
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button asChild>
+                        <ContactForm
+                          title={`Köp boken ${book.title}`}
+                          description="Kontakta mig för att köpa boken."
+                          triggerText="Köp boken"
+                        />
+                      </Button>
+                    )}
+                  </div>
+                  <Separator className="my-6" />
+                  <div className="space-y-6">
+                    <div>
+                      <h2 className="text-xl font-semibold">Om boken</h2>
+                      <p className="text-muted-foreground">
+                        {Array.isArray(book.description)
+                          ? book.description.join(" ")
+                          : book.description}
+                      </p>
+                    </div>
+                    {book.review && (
+                      <div>
+                        <h2 className="text-xl font-semibold">Från en läsare</h2>
+                        <blockquote className="text-muted-foreground">
+                          {book.review}
+                        </blockquote>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </CardContent>
+            </CardContent>
+          </div>
         </Card>
       </div>
     </>
