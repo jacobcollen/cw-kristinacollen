@@ -38,6 +38,7 @@ pnpm run db:studio
 - React 19
 - TypeScript
 - Tailwind CSS v4
+- Uploadthing (Image management) 
 - Drizzle ORM
 - Resend (transactional emails)
 - Vercel (deployment)
