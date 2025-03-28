@@ -1,7 +1,7 @@
 # Kristina Collén Website
 
 Project is built with [Create T3 App](https://create.t3.gg/) using `pnpm`.   
-Domain for live site is [kristinacollen.se](https://kristinacollen.se)
+Domain for live site is [kristinacollen.se](https://kristinacollen.se).
 
 ## Getting Started
 
