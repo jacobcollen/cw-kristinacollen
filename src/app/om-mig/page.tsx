@@ -66,7 +66,7 @@ export default function AboutMe() {
                 <Separator className="mb-4 mt-6" />
 
                 <h2 className="text-xl font-semibold">Om mig</h2>
-                <CardDescription className="mt-2">
+                <div className="mt-2">
                   <div className="space-y-4">
                     <p className="text-muted-foreground">
                       Jag är socionom, lärare och forskare i socialt arbete på
@@ -86,7 +86,7 @@ export default function AboutMe() {
                       mysdeckare.
                     </p>
                   </div>
-                </CardDescription>
+                </div>
                 <CardFooter className="mt-6 p-0">
                   <Button asChild>
                     <a

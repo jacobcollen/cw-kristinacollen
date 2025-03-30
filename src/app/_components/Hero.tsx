@@ -17,7 +17,7 @@ export default function Hero() {
                   Rosenträdgården
                 </h1>
                 <p className="mt-2 leading-7 text-muted-foreground">
-                  <span className="mr-2 text-5xl md:text-7xl font-extrabold text-purple-600">
+                  <span className="mr-2 text-5xl font-extrabold text-purple-600 md:text-7xl">
                     “
                   </span>
                   Vill du ha en stunds trevlig lättläst läsning med en klurig
@@ -36,7 +36,7 @@ export default function Hero() {
                 <img
                   src={imgUrl}
                   alt="Rosenträdgården"
-                  className="w-full rounded-sm object-cover shadow-xl shadow-slate-300 drop-shadow-xl"
+                  className="w-full rounded-sm object-cover shadow-[4.0px_8.0px_35.0px_rgba(0,0,0,0.1)] drop-shadow-2xl"
                 />
               </div>
             </CardContent>

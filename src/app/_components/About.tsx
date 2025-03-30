@@ -9,7 +9,7 @@ export default function About() {
       <div className="container max-w-7xl">
         <Card className="border-0 bg-transparent shadow-none">
           <div className="flex flex-1 flex-col p-2 md:p-4">
-            <CardContent className="flex flex-col items-center gap-12 p-0 md:flex-row md:gap-8">
+            <CardContent className="flex flex-col items-center gap-6 p-0 md:flex-row md:gap-8">
               <div className="flex-1">
                 <h1 className="text-6xl font-bold tracking-tight text-gray-900 dark:text-gray-200">
                   Kristina{" "}
