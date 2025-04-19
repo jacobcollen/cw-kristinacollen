@@ -1,106 +1,21 @@
-"use client";
+import { PageThemeWrapper } from "@/app/_components/PageThemeWrapper";
+import { getNews } from "@/server/queries";
+import { NewsFeed } from "@/app/_components/NewsFeed";
+import About from "@/app/_components/About";
+import Hero from "@/app/_components/Hero";
 
-import { useRef, useLayoutEffect, useState } from "react";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import books from "@/app/_data/books";
-import { useSearchParams } from "next/navigation";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { PageThemeWrapper } from "../_components/PageThemeWrapper";
-import BookNavbar from "../_components/BookTabs";
+export const dynamic = "force-dynamic";
 
-function BookCard({ book }: { book: any }) {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const [clampLines, setClampLines] = useState(3);
-  const totalTextAreaHeight = 120;
-  const lineHeight = 24;
-
-  useLayoutEffect(() => {
-    function recalcClamp() {
-      if (titleRef.current) {
-        const titleHeight = titleRef.current.getBoundingClientRect().height;
-        const available = totalTextAreaHeight - titleHeight - 8;
-        const lines = Math.max(Math.floor(available / lineHeight), 1);
-        setClampLines(lines);
-      }
-    }
-    recalcClamp();
-    window.addEventListener("resize", recalcClamp);
-    return () => window.removeEventListener("resize", recalcClamp);
-  }, [book.title]);
-
-  return (
-    <motion.div
-      whileHover={{ scale: 1.008 }}
-      whileTap={{ scale: 0.985 }}
-      transition={{ type: "spring", stiffness: 250, damping: 15 }}
-      className="h-full space-y-4"
-    >
-      <Link href={`/bocker/${book.slug}`} className="group block h-full">
-        <Card className="flex h-full flex-col hover:cursor-pointer">
-          <div className="flex flex-1 flex-col space-y-4 p-2 md:p-4">
-            <CardHeader className="p-0">
-              <img
-                src={book.imgUrl}
-                alt={book.title}
-                className="w-full rounded-sm object-contain"
-                style={{ aspectRatio: "3/4" }}
-              />
-            </CardHeader>
-            <CardContent className="space-y-6 p-0 flex flex-1 flex-col">
-              <div className="flex flex-1 flex-col">
-                <CardTitle ref={titleRef} className="mb-4 text-xl font-bold">
-                  {book.title}
-                </CardTitle>
-                <CardDescription
-                  style={{
-                    display: "-webkit-box",
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    WebkitLineClamp: clampLines,
-                  }}
-                >
-                  {Array.isArray(book.description)
-                    ? book.description.join(" ")
-                    : book.description}
-                </CardDescription>
-              </div>
-            </CardContent>
-            <CardFooter className="mt-auto p-0">
-              <Button className="w-full">Läs mer</Button>
-            </CardFooter>
-          </div>
-        </Card>
-      </Link>
-    </motion.div>
-  );
-}
-
-export default function BooksPage() {
-  const searchParams = useSearchParams();
-  const category = searchParams.get("category");
-  const filteredBooks = category
-    ? books.filter((book) => book.category === category)
-    : books;
+export default async function HomePage() {
+  const news = await getNews();
 
   return (
     <PageThemeWrapper>
-      <div className="container mx-auto mb-8 max-w-7xl">
-        <BookNavbar title={category || "Alla böcker"} />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredBooks.map((book) => (
-            <BookCard key={book.id} book={book} />
-          ))}
-        </div>
-      </div>
+      <main>
+        <About />
+        <NewsFeed news={news} />
+        <Hero />
+      </main>
     </PageThemeWrapper>
   );
 }

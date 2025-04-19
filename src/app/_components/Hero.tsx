@@ -16,7 +16,7 @@ export default function Hero() {
                 <h1 className="font-bold tracking-tight text-gray-700 dark:text-gray-200">
                   Rosenträdgården
                 </h1>
-                <p className="mt-2 leading-7 text-muted-foreground">
+                <p className="py-2 leading-7 text-muted-foreground">
                   <span className="mr-2 text-5xl font-extrabold text-purple-600 md:text-7xl">
                     “
                   </span>
@@ -26,7 +26,7 @@ export default function Hero() {
                   Historien ringlar sig fram till en oväntad upplösning. Ser
                   fram emot en fortsättning!"
                 </p>
-                <div className="mt-4">
+                <div className="py-4">
                   <Link href="/bocker/rosentradgarden">
                     <Button>Läs mer</Button>
                   </Link>

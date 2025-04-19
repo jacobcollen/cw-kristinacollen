@@ -12,9 +12,9 @@ export default async function HomePage() {
   return (
     <PageThemeWrapper>
       <main>
-        <Hero />
-        <NewsFeed news={news} />
         <About />
+        <NewsFeed news={news} />
+        <Hero />
       </main>
     </PageThemeWrapper>
   );
